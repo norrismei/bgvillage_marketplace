@@ -1,6 +1,6 @@
 """CRUD operations"""
 
-from model import db, User, Game, connect_to_db
+from model import db, User, Game, Mechanic, connect_to_db
 
 
 def create_user(username, fname, lname, email, password, birthdate=None):
@@ -31,6 +31,14 @@ def create_game(name, description=None, publish_year=None, min_age=None,
 
     return game
 
+
+def create_mechanic(name, atlas_id=None):
+    """Create and return a new gaming mechanic"""
+
+    mechanic = Mechanic(name=name, atlas_id=atlas_id)
+
+    db.session.add(mechanic)
+    db.session.commit()
 
 if __name__ == '__main__':
     from server import app

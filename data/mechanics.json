@@ -1,0 +1,507 @@
+[
+  {
+    "id": "n1GtBt35Rd",
+    "name": "Acting",
+    "url": "https://www.boardgameatlas.com/mechanic/n1GtBt35Rd/acting"
+  },
+  {
+    "id": "PGjmKGi26h",
+    "name": "Action / Movement Programming",
+    "url": "https://www.boardgameatlas.com/mechanic/PGjmKGi26h/action--movement-programming"
+  },
+  {
+    "id": "oeg6wN9Eoc",
+    "name": "Action Point Allowance System",
+    "url": "https://www.boardgameatlas.com/mechanic/oeg6wN9Eoc/action-point-allowance-system"
+  },
+  {
+    "id": "ckCp1oTVMy",
+    "name": "Action Queue",
+    "url": "https://www.boardgameatlas.com/mechanic/ckCp1oTVMy/action-queue"
+  },
+  {
+    "id": "Bc7R8pLoGk",
+    "name": "Action Selection",
+    "url": "https://www.boardgameatlas.com/mechanic/Bc7R8pLoGk/action-selection"
+  },
+  {
+    "id": "05zCZoLvQJ",
+    "name": "Area Control",
+    "url": "https://www.boardgameatlas.com/mechanic/05zCZoLvQJ/area-control"
+  },
+  {
+    "id": "3te2oybNR4",
+    "name": "Area Enclosure",
+    "url": "https://www.boardgameatlas.com/mechanic/3te2oybNR4/area-enclosure"
+  },
+  {
+    "id": "9NBcz45nN7",
+    "name": "Area Majority/ Influence",
+    "url": "https://www.boardgameatlas.com/mechanic/9NBcz45nN7/area-majority-influence"
+  },
+  {
+    "id": "bgGxE0pI2B",
+    "name": "Area Movement",
+    "url": "https://www.boardgameatlas.com/mechanic/bgGxE0pI2B/area-movement"
+  },
+  {
+    "id": "AZxlPpi5oq",
+    "name": "Auction",
+    "url": "https://www.boardgameatlas.com/mechanic/AZxlPpi5oq/auction"
+  },
+  {
+    "id": "1382oBW7iB",
+    "name": "Bag Building",
+    "url": "https://www.boardgameatlas.com/mechanic/1382oBW7iB/bag-building"
+  },
+  {
+    "id": "3tuJiW3pps",
+    "name": "Betting",
+    "url": "https://www.boardgameatlas.com/mechanic/3tuJiW3pps/betting"
+  },
+  {
+    "id": "ZX3hYcF9H7",
+    "name": "Bluffing",
+    "url": "https://www.boardgameatlas.com/mechanic/ZX3hYcF9H7/bluffing"
+  },
+  {
+    "id": "xuphiSlrxI",
+    "name": "Campaign",
+    "url": "https://www.boardgameatlas.com/mechanic/xuphiSlrxI/campaign"
+  },
+  {
+    "id": "iWODHwRGuU",
+    "name": "Card Drafting",
+    "url": "https://www.boardgameatlas.com/mechanic/iWODHwRGuU/card-drafting"
+  },
+  {
+    "id": "ngCSHHk0H2",
+    "name": "Card Placement",
+    "url": "https://www.boardgameatlas.com/mechanic/ngCSHHk0H2/card-placement"
+  },
+  {
+    "id": "Gan96fffLL",
+    "name": "Chit-Pull System",
+    "url": "https://www.boardgameatlas.com/mechanic/Gan96fffLL/chitpull-system"
+  },
+  {
+    "id": "IcofZxFwqw",
+    "name": "Command Cards",
+    "url": "https://www.boardgameatlas.com/mechanic/IcofZxFwqw/command-cards"
+  },
+  {
+    "id": "i8pEFk75OI",
+    "name": "Commodity Speculation",
+    "url": "https://www.boardgameatlas.com/mechanic/i8pEFk75OI/commodity-speculation"
+  },
+  {
+    "id": "0ez69aUfuJ",
+    "name": "Communication Limits",
+    "url": "https://www.boardgameatlas.com/mechanic/0ez69aUfuJ/communication-limits"
+  },
+  {
+    "id": "hwyCo1W0hi",
+    "name": "Conversation",
+    "url": "https://www.boardgameatlas.com/mechanic/hwyCo1W0hi/conversation"
+  },
+  {
+    "id": "9mNukNBxfZ",
+    "name": "Cooperative Play",
+    "url": "https://www.boardgameatlas.com/mechanic/9mNukNBxfZ/cooperative-play"
+  },
+  {
+    "id": "xVDf5dmJts",
+    "name": "Crayon Rail System",
+    "url": "https://www.boardgameatlas.com/mechanic/xVDf5dmJts/crayon-rail-system"
+  },
+  {
+    "id": "c9CVBGW0WM",
+    "name": "Creativite/Creative Thinking",
+    "url": "https://www.boardgameatlas.com/mechanic/c9CVBGW0WM/creativitecreative-thinking"
+  },
+  {
+    "id": "J6TWltoYOF",
+    "name": "Cube tower",
+    "url": "https://www.boardgameatlas.com/mechanic/J6TWltoYOF/cube-tower"
+  },
+  {
+    "id": "9zM9zB4fHY",
+    "name": "Deception",
+    "url": "https://www.boardgameatlas.com/mechanic/9zM9zB4fHY/deception"
+  },
+  {
+    "id": "vZsDDAdOoe",
+    "name": "Deck Building",
+    "url": "https://www.boardgameatlas.com/mechanic/vZsDDAdOoe/deck-building"
+  },
+  {
+    "id": "VQQsdFilIf",
+    "name": "Deck Constructing",
+    "url": "https://www.boardgameatlas.com/mechanic/VQQsdFilIf/deck-constructing"
+  },
+  {
+    "id": "GsNGxZFNCK",
+    "name": "Deduction",
+    "url": "https://www.boardgameatlas.com/mechanic/GsNGxZFNCK/deduction"
+  },
+  {
+    "id": "5kvyChnWuO",
+    "name": "Dexterity",
+    "url": "https://www.boardgameatlas.com/mechanic/5kvyChnWuO/dexterity"
+  },
+  {
+    "id": "lVSHu9efHv",
+    "name": "Dice Building",
+    "url": "https://www.boardgameatlas.com/mechanic/lVSHu9efHv/dice-building"
+  },
+  {
+    "id": "zw4KMn5rcD",
+    "name": "Dice Movement",
+    "url": "https://www.boardgameatlas.com/mechanic/zw4KMn5rcD/dice-movement"
+  },
+  {
+    "id": "R0bGq4cAl4",
+    "name": "Dice Rolling",
+    "url": "https://www.boardgameatlas.com/mechanic/R0bGq4cAl4/dice-rolling"
+  },
+  {
+    "id": "wV5peB05xs",
+    "name": "Drafting",
+    "url": "https://www.boardgameatlas.com/mechanic/wV5peB05xs/drafting"
+  },
+  {
+    "id": "KfTS5BwIsu",
+    "name": "Drawing",
+    "url": "https://www.boardgameatlas.com/mechanic/KfTS5BwIsu/drawing"
+  },
+  {
+    "id": "OSJ0QgXnl7",
+    "name": "Dutch Auction",
+    "url": "https://www.boardgameatlas.com/mechanic/OSJ0QgXnl7/dutch-auction"
+  },
+  {
+    "id": "yu3eas6v7A",
+    "name": "Engine Building",
+    "url": "https://www.boardgameatlas.com/mechanic/yu3eas6v7A/engine-building"
+  },
+  {
+    "id": "S0O9ucexPS",
+    "name": "Flicking",
+    "url": "https://www.boardgameatlas.com/mechanic/S0O9ucexPS/flicking"
+  },
+  {
+    "id": "qu5BcGjAzk",
+    "name": "Grid Movement",
+    "url": "https://www.boardgameatlas.com/mechanic/qu5BcGjAzk/grid-movement"
+  },
+  {
+    "id": "WPytek5P8l",
+    "name": "Hand Management",
+    "url": "https://www.boardgameatlas.com/mechanic/WPytek5P8l/hand-management"
+  },
+  {
+    "id": "i3xnwJ7VPV",
+    "name": "Hand-Eye Coordination",
+    "url": "https://www.boardgameatlas.com/mechanic/i3xnwJ7VPV/handeye-coordination"
+  },
+  {
+    "id": "6CyVyXRn1C",
+    "name": "Hex and Counter",
+    "url": "https://www.boardgameatlas.com/mechanic/6CyVyXRn1C/hex-and-counter"
+  },
+  {
+    "id": "BeD8NYAaSU",
+    "name": "Hexagon Grid",
+    "url": "https://www.boardgameatlas.com/mechanic/BeD8NYAaSU/hexagon-grid"
+  },
+  {
+    "id": "aQZ40lKv8O",
+    "name": "Hidden Movement",
+    "url": "https://www.boardgameatlas.com/mechanic/aQZ40lKv8O/hidden-movement"
+  },
+  {
+    "id": "dITGE93SCS",
+    "name": "Hidden Objective",
+    "url": "https://www.boardgameatlas.com/mechanic/dITGE93SCS/hidden-objective"
+  },
+  {
+    "id": "Voqy2dgrIM",
+    "name": "Hidden Traitor",
+    "url": "https://www.boardgameatlas.com/mechanic/Voqy2dgrIM/hidden-traitor"
+  },
+  {
+    "id": "uEUdAVKex3",
+    "name": "I Split, You Take",
+    "url": "https://www.boardgameatlas.com/mechanic/uEUdAVKex3/i-split-you-take"
+  },
+  {
+    "id": "DwmsVEvNVd",
+    "name": "Legacy",
+    "url": "https://www.boardgameatlas.com/mechanic/DwmsVEvNVd/legacy"
+  },
+  {
+    "id": "MaXzmoZUoX",
+    "name": "Line Drawing",
+    "url": "https://www.boardgameatlas.com/mechanic/MaXzmoZUoX/line-drawing"
+  },
+  {
+    "id": "ar56ACXDNe",
+    "name": "Mancala",
+    "url": "https://www.boardgameatlas.com/mechanic/ar56ACXDNe/mancala"
+  },
+  {
+    "id": "wPcKOr57ig",
+    "name": "Market",
+    "url": "https://www.boardgameatlas.com/mechanic/wPcKOr57ig/market"
+  },
+  {
+    "id": "r6yIFvyXDD",
+    "name": "Memory",
+    "url": "https://www.boardgameatlas.com/mechanic/r6yIFvyXDD/memory"
+  },
+  {
+    "id": "U3zhCQH7Et",
+    "name": "Modular Board",
+    "url": "https://www.boardgameatlas.com/mechanic/U3zhCQH7Et/modular-board"
+  },
+  {
+    "id": "gcltnDjSRQ",
+    "name": "Narrative Choice",
+    "url": "https://www.boardgameatlas.com/mechanic/gcltnDjSRQ/narrative-choice"
+  },
+  {
+    "id": "jMwUJLemr6",
+    "name": "Negotiation",
+    "url": "https://www.boardgameatlas.com/mechanic/jMwUJLemr6/negotiation"
+  },
+  {
+    "id": "ohABM4GjbC",
+    "name": "Network and Route Building",
+    "url": "https://www.boardgameatlas.com/mechanic/ohABM4GjbC/network-and-route-building"
+  },
+  {
+    "id": "qxXud0DODh",
+    "name": "Once per game ability",
+    "url": "https://www.boardgameatlas.com/mechanic/qxXud0DODh/once-per-game-ability"
+  },
+  {
+    "id": "Pn9PAvCVrW",
+    "name": "Order Fulfillment",
+    "url": "https://www.boardgameatlas.com/mechanic/Pn9PAvCVrW/order-fulfillment"
+  },
+  {
+    "id": "UHdPUeuqyZ",
+    "name": "Paper and Pencil",
+    "url": "https://www.boardgameatlas.com/mechanic/UHdPUeuqyZ/paper-and-pencil"
+  },
+  {
+    "id": "GNtouC8NLm",
+    "name": "Partnerships",
+    "url": "https://www.boardgameatlas.com/mechanic/GNtouC8NLm/partnerships"
+  },
+  {
+    "id": "9YdRn9J9oZ",
+    "name": "Pattern Building",
+    "url": "https://www.boardgameatlas.com/mechanic/9YdRn9J9oZ/pattern-building"
+  },
+  {
+    "id": "uZJS07nXF5",
+    "name": "Pattern Recognition",
+    "url": "https://www.boardgameatlas.com/mechanic/uZJS07nXF5/pattern-recognition"
+  },
+  {
+    "id": "BbTMRkwL0b",
+    "name": "Pick-up and Deliver",
+    "url": "https://www.boardgameatlas.com/mechanic/BbTMRkwL0b/pickup-and-deliver"
+  },
+  {
+    "id": "BGrhzIN69D",
+    "name": "Player Elimination",
+    "url": "https://www.boardgameatlas.com/mechanic/BGrhzIN69D/player-elimination"
+  },
+  {
+    "id": "MEAoOygZsA",
+    "name": "Point to Point Movement",
+    "url": "https://www.boardgameatlas.com/mechanic/MEAoOygZsA/point-to-point-movement"
+  },
+  {
+    "id": "ea1eaPBQn8",
+    "name": "Pool Building",
+    "url": "https://www.boardgameatlas.com/mechanic/ea1eaPBQn8/pool-building"
+  },
+  {
+    "id": "hmipYN1R1I",
+    "name": "Press Your Luck",
+    "url": "https://www.boardgameatlas.com/mechanic/hmipYN1R1I/press-your-luck"
+  },
+  {
+    "id": "v6fd74CBAb",
+    "name": "Race",
+    "url": "https://www.boardgameatlas.com/mechanic/v6fd74CBAb/race"
+  },
+  {
+    "id": "E9VKQ8uMSP",
+    "name": "Real Time",
+    "url": "https://www.boardgameatlas.com/mechanic/E9VKQ8uMSP/real-time"
+  },
+  {
+    "id": "Rt6V388y6M",
+    "name": "Resource Gathering",
+    "url": "https://www.boardgameatlas.com/mechanic/Rt6V388y6M/resource-gathering"
+  },
+  {
+    "id": "j7x8jY4ay2",
+    "name": "Rock-Paper-Scissors",
+    "url": "https://www.boardgameatlas.com/mechanic/j7x8jY4ay2/rockpaperscissors"
+  },
+  {
+    "id": "EVeAdboGUA",
+    "name": "Role Playing",
+    "url": "https://www.boardgameatlas.com/mechanic/EVeAdboGUA/role-playing"
+  },
+  {
+    "id": "gRlslORtpI",
+    "name": "Role Selection",
+    "url": "https://www.boardgameatlas.com/mechanic/gRlslORtpI/role-selection"
+  },
+  {
+    "id": "mGBzR68m8Z",
+    "name": "Roll / Spin and Move",
+    "url": "https://www.boardgameatlas.com/mechanic/mGBzR68m8Z/roll--spin-and-move"
+  },
+  {
+    "id": "zIPRS41oiN",
+    "name": "Roll and Write",
+    "url": "https://www.boardgameatlas.com/mechanic/zIPRS41oiN/roll-and-write"
+  },
+  {
+    "id": "FA6HjbhdNW",
+    "name": "Rondel",
+    "url": "https://www.boardgameatlas.com/mechanic/FA6HjbhdNW/rondel"
+  },
+  {
+    "id": "RwgEONzIzc",
+    "name": "Secret Unit Deployment",
+    "url": "https://www.boardgameatlas.com/mechanic/RwgEONzIzc/secret-unit-deployment"
+  },
+  {
+    "id": "lA3KUtVFCy",
+    "name": "Set Collection",
+    "url": "https://www.boardgameatlas.com/mechanic/lA3KUtVFCy/set-collection"
+  },
+  {
+    "id": "vBsK2u85w8",
+    "name": "Shedding",
+    "url": "https://www.boardgameatlas.com/mechanic/vBsK2u85w8/shedding"
+  },
+  {
+    "id": "eRe1jJCBFe",
+    "name": "Simulation",
+    "url": "https://www.boardgameatlas.com/mechanic/eRe1jJCBFe/simulation"
+  },
+  {
+    "id": "DEvPj5twid",
+    "name": "Simultaneous Play",
+    "url": "https://www.boardgameatlas.com/mechanic/DEvPj5twid/simultaneous-play"
+  },
+  {
+    "id": "za4PP1LH00",
+    "name": "Simultaneous action selection",
+    "url": "https://www.boardgameatlas.com/mechanic/za4PP1LH00/simultaneous-action-selection"
+  },
+  {
+    "id": "kuRNhFADjS",
+    "name": "Skirmish",
+    "url": "https://www.boardgameatlas.com/mechanic/kuRNhFADjS/skirmish"
+  },
+  {
+    "id": "x3wVCq1HEP",
+    "name": "Social Deduction",
+    "url": "https://www.boardgameatlas.com/mechanic/x3wVCq1HEP/social-deduction"
+  },
+  {
+    "id": "4BG1XpbOU3",
+    "name": "Stealing",
+    "url": "https://www.boardgameatlas.com/mechanic/4BG1XpbOU3/stealing"
+  },
+  {
+    "id": "jbLrZb1xIb",
+    "name": "Stock Holding",
+    "url": "https://www.boardgameatlas.com/mechanic/jbLrZb1xIb/stock-holding"
+  },
+  {
+    "id": "GUoWg3Mfh5",
+    "name": "Storytelling",
+    "url": "https://www.boardgameatlas.com/mechanic/GUoWg3Mfh5/storytelling"
+  },
+  {
+    "id": "u9IJEE1QBN",
+    "name": "Tableau Building",
+    "url": "https://www.boardgameatlas.com/mechanic/u9IJEE1QBN/tableau-building"
+  },
+  {
+    "id": "T8JEFYwoqy",
+    "name": "Take That",
+    "url": "https://www.boardgameatlas.com/mechanic/T8JEFYwoqy/take-that"
+  },
+  {
+    "id": "9jnCsVuRat",
+    "name": "Teams",
+    "url": "https://www.boardgameatlas.com/mechanic/9jnCsVuRat/teams"
+  },
+  {
+    "id": "8PN2HE86wg",
+    "name": "Tile Placement",
+    "url": "https://www.boardgameatlas.com/mechanic/8PN2HE86wg/tile-placement"
+  },
+  {
+    "id": "cXd5KaXXZo",
+    "name": "Time Track",
+    "url": "https://www.boardgameatlas.com/mechanic/cXd5KaXXZo/time-track"
+  },
+  {
+    "id": "wEBvff5T5c",
+    "name": "Tower Defense",
+    "url": "https://www.boardgameatlas.com/mechanic/wEBvff5T5c/tower-defense"
+  },
+  {
+    "id": "AVY6EvSQTP",
+    "name": "Trading",
+    "url": "https://www.boardgameatlas.com/mechanic/AVY6EvSQTP/trading"
+  },
+  {
+    "id": "tyTj0kxoRc",
+    "name": "Traitor",
+    "url": "https://www.boardgameatlas.com/mechanic/tyTj0kxoRc/traitor"
+  },
+  {
+    "id": "3GSQl800lk",
+    "name": "Trick-taking",
+    "url": "https://www.boardgameatlas.com/mechanic/3GSQl800lk/tricktaking"
+  },
+  {
+    "id": "zzsE4jtI1b",
+    "name": "Variable Phase Order",
+    "url": "https://www.boardgameatlas.com/mechanic/zzsE4jtI1b/variable-phase-order"
+  },
+  {
+    "id": "XM2FYZmBHH",
+    "name": "Variable Player Powers",
+    "url": "https://www.boardgameatlas.com/mechanic/XM2FYZmBHH/variable-player-powers"
+  },
+  {
+    "id": "JYYdBW6UCE",
+    "name": "Voting",
+    "url": "https://www.boardgameatlas.com/mechanic/JYYdBW6UCE/voting"
+  },
+  {
+    "id": "fBOTEBUAmV",
+    "name": "Worker Placement",
+    "url": "https://www.boardgameatlas.com/mechanic/fBOTEBUAmV/worker-placement"
+  },
+  {
+    "id": "B30dz3Ljjx",
+    "name": "Worker Placement with Dice Workers",
+    "url": "https://www.boardgameatlas.com/mechanic/B30dz3Ljjx/worker-placement-with-dice-workers"
+  }
+]

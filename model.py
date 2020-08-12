@@ -59,7 +59,24 @@ class Game(db.Model):
     def __repr__(self):
         """Show human-readable info about game"""
 
-        return f"<Game id={self.id} name={self.username}>"
+        return f"<Game id={self.id} name={self.name}>"
+
+
+class Mechanic(db.Model):
+    """A gaming mechanic"""
+
+    __tablename__ = "mechanics"
+
+    id = db.Column(db.Integer,
+                   autoincrement=True,
+                   primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    atlas_id = db.Column(db.String, unique=True)
+
+    def __repr__(self):
+        """Show human-readable mechanic"""
+
+        return f"<Mechanic id={self.id} name={self.name}>"
 
 
 if __name__ == '__main__':
