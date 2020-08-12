@@ -1,9 +1,10 @@
 """CRUD operations"""
 
-from model import db, User, connect_to_db
+from model import db, User, Game, connect_to_db
+
 
 def create_user(username, fname, lname, email, password, birthdate=None):
-    """Create and return a new user."""
+    """Create and return a new user"""
 
     user = User(username=username, fname=fname, lname=lname,
                 email=email, password=password, birthdate=birthdate)
@@ -12,6 +13,24 @@ def create_user(username, fname, lname, email, password, birthdate=None):
     db.session.commit()
 
     return user
+
+
+def create_game(name, description=None, publish_year=None, min_age=None,
+                min_players=None, max_players=None, 
+                min_playtime=None, max_playtime=None,
+                image_url=None, msrp=None):
+    """Create and return a new game"""
+
+    game = Game(name=name, description=description, publish_year=publish_year, 
+                min_age=min_age, min_players=min_players, 
+                max_players=max_players, min_playtime=min_playtime, 
+                max_playtime=max_playtime, image_url=image_url, msrp=msrp)
+
+    db.session.add(game)
+    db.session.commit()
+
+    return game
+
 
 if __name__ == '__main__':
     from server import app

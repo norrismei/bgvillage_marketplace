@@ -37,6 +37,31 @@ class User(db.Model):
         return f"<User id={self.id} username={self.username}>"
 
 
+class Game(db.Model):
+    """A game entity"""
+
+    __tablename__ = "games"
+
+    id = db.Column(db.Integer,
+                   autoincrement=True,
+                   primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    description = db.Column(db.String)
+    publish_year = db.Column(db.Integer)
+    min_age = db.Column(db.Integer)
+    min_players = db.Column(db.Integer)
+    max_players = db.Column(db.Integer)
+    min_playtime = db.Column(db.Integer)
+    max_playtime = db.Column(db.Integer)
+    image_url = db.Column(db.String)
+    msrp = db.Column(db.Float)
+
+    def __repr__(self):
+        """Show human-readable info about game"""
+
+        return f"<Game id={self.id} name={self.username}>"
+
+
 if __name__ == '__main__':
     from server import app
 

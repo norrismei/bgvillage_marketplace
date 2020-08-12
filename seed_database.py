@@ -29,4 +29,23 @@ with open('data/users.json') as f:
         birthdate = datetime.strptime(birthdate_str, birthdate_format)
 
         crud.create_user(username, fname, lname, email, password, birthdate)
+
+with open('data/games.json') as f:
+    game_data = json.loads(f.read())
+
+    for game in game_data:
+        name = game["name"]
+        description = game["description"]
+        publish_year = game["year_published"]
+        min_age = game["min_age"]
+        min_players = game["min_players"]
+        max_players = game["max_players"]
+        min_playtime = game["min_playtime"]
+        max_playtime = game["max_playtime"]
+        image_url = game["image_url"]
+        msrp = game["msrp"]
+
+        crud.create_game(name, description, publish_year, min_age,
+                        min_players, max_players, min_playtime, max_playtime,
+                        image_url, msrp)
  
