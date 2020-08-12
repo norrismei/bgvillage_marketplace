@@ -57,6 +57,7 @@ class Game(db.Model):
     msrp = db.Column(db.Float)
 
     game_mech = db.relationship('GameMechanic', backref='games')
+    game_cat = db.relationship('GameCategory', backref='games')
 
     def __repr__(self):
         """Show human-readable info about game"""
@@ -102,6 +103,46 @@ class GameMechanic(db.Model):
 
         return f"<GameMechanic id={self.id} "\
                f"game={self.game.name} mech={self.mech.name}>"
+
+
+class Category(db.Model):
+    """A gaming category"""
+
+    __tablename__ = "categories"
+
+    id = db.Column(db.Integer,
+                   autoincrement=True,
+                   primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    atlas_id = db.Column(db.String, unique=True)
+
+    game_cat = db.relationship('GameCategory', backref='categories')
+
+    def __repr__(self):
+        """Show human-readable category"""
+
+        return f"<Category id={self.id} name={self.name}>"
+
+
+class GameCategory(db.Model):
+    """Abstract: an instance of a game tagged with a category"""
+
+    __tablename__ = "games_categories"
+
+    id = db.Column(db.Integer,
+                   autoincrement=True,
+                   primary_key=True)
+    game_id = db.Column(db.Integer, db.ForeignKey("games.id"))
+    category_id = db.Column(db.Integer, db.ForeignKey("categories.id"))
+
+    cat = db.relationship('Category', backref='games_categories')
+    game = db.relationship('Game', backref='games_categories')
+
+    def __repr__(self):
+        """Show human-readable GameMechanic instance"""
+
+        return f"<GameCategory id={self.id} "\
+               f"game={self.game.name} cat={self.cat.name}>"
 
 
 if __name__ == '__main__':

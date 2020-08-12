@@ -41,6 +41,15 @@ with open('data/mechanics.json') as f:
 
         crud.create_mechanic(name, atlas_id)
 
+with open('data/categories.json') as f:
+    category_data = json.loads(f.read())
+
+    for category in category_data:
+        name = category["name"]
+        atlas_id = category["id"]
+
+        crud.create_category(name, atlas_id)
+
 with open('data/games.json') as f:
     game_data = json.loads(f.read())
 
@@ -74,6 +83,23 @@ with open('data/games.json') as f:
                     mech = model.db.session.query(model.Mechanic).filter_by(
                            atlas_id = atlas_id).first()
                     crud.create_game_mechanic(new_game.id, mech.id)
+                except:
+                    continue
+
+        # Create GameCategory objects for game's categories
+        # Get a list of dictionaries containing category atlas_id's
+        categories_list = game["categories"]
+
+        # Iterate through the list, as long as it's not empty
+        if len(categories_list) > 0:
+            for category in categories_list:
+                atlas_id = category["id"]
+                # Try to match the atlas_id with what's in db to get cat id.
+                # If can't find a match, skip it.
+                try:
+                    cat = model.db.session.query(model.Category).filter_by(
+                           atlas_id = atlas_id).first()
+                    crud.create_game_category(new_game.id, cat.id)
                 except:
                     continue
                 

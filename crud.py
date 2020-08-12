@@ -1,6 +1,7 @@
 """CRUD operations"""
 
-from model import db, User, Game, Mechanic, GameMechanic, connect_to_db
+from model import (db, User, Game, Mechanic, GameMechanic, Category,
+                   GameCategory, connect_to_db)
 
 
 def create_user(username, fname, lname, email, password, birthdate=None):
@@ -47,6 +48,24 @@ def create_game_mechanic(game_id, mechanic_id):
     game_mechanic = GameMechanic(game_id=game_id, mechanic_id=mechanic_id)
 
     db.session.add(game_mechanic)
+    db.session.commit()
+
+
+def create_category(name, atlas_id=None):
+    """Create and return a new gaming category"""
+
+    category = Category(name=name, atlas_id=atlas_id)
+
+    db.session.add(category)
+    db.session.commit()
+
+
+def create_game_category(game_id, category_id):
+    """Create and return a new game tagged with category instance"""
+
+    game_category = GameCategory(game_id=game_id, category_id=category_id)
+
+    db.session.add(game_category)
     db.session.commit()
 
 
