@@ -1,0 +1,42 @@
+[
+    {
+        "username": "norrism3",
+        "fname": "Norris",
+        "lname": "Mei",
+        "email": "norrismei3@gmail.com",
+        "password": "sagrada",
+        "birthdate": "Feb 21, 1989"
+    },
+    {
+        "username": "marisacorn",
+        "fname": "Marisa",
+        "lname": "Gloor",
+        "email": "marisa@hackbrightacademy.com",
+        "password": "pictionary",
+        "birthdate": "May 15, 1988"
+    },
+    {
+        "username": "katicorn",
+        "fname": "Kat",
+        "lname": "Huber-Juma",
+        "email": "kat@hackbrightacademy.com",
+        "password": "wingspan",
+        "birthdate": "Jul 20, 1986"
+    },
+    {
+        "username": "andrewcorn",
+        "fname": "Andrew",
+        "lname": "Blum",
+        "email": "andrew@hackbrightacademy.com",
+        "password": "concept",
+        "birthdate": "Sep 5, 1987"
+    },
+    {
+        "username": "twang88",
+        "fname": "Tiffany",
+        "lname": "Wang",
+        "email": "t.wang.jp@gmail.com",
+        "password": "morels",
+        "birthdate": "Feb 9, 1988"
+    }
+]
