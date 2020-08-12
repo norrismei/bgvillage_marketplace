@@ -1,7 +1,8 @@
 """CRUD operations"""
 
 from model import (db, User, Game, Mechanic, GameMechanic, Category,
-                   GameCategory, Publisher, GamePublisher, connect_to_db)
+                   GameCategory, Publisher, GamePublisher, Designer,
+                   GameDesigner, connect_to_db)
 
 
 def create_user(username, fname, lname, email, password, birthdate=None):
@@ -98,6 +99,28 @@ def create_game_publisher(game_id, publisher_id):
 
     return game_publisher
 
+
+def create_designer(name):
+    """Create and return a new game designer"""
+
+    designer = Designer(name=name)
+
+    db.session.add(designer)
+    db.session.commit()
+
+    return designer
+
+
+def create_game_designer(game_id, designer_id):
+    """Create and return a new game tagged with designer instance"""
+
+    game_designer = GameDesigner(game_id=game_id, designer_id=designer_id)
+
+    db.session.add(game_designer)
+    db.session.commit()
+
+    return game_designer
+    
 
 if __name__ == '__main__':
     from server import app

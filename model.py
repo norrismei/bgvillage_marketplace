@@ -183,6 +183,43 @@ class GamePublisher(db.Model):
                f"game={self.game.name} pub={self.pub.name}>"
 
 
+class Designer(db.Model):
+    """A game designer"""
+
+    __tablename__ = "designers"
+
+    id = db.Column(db.Integer,
+                   autoincrement=True,
+                   primary_key=True)
+    name = db.Column(db.String, nullable=False)
+
+    def __repr__(self):
+        """Show human-readable designer"""
+
+        return f"<Designer id={self.id} name={self.name}>"
+
+
+class GameDesigner(db.Model):
+    """Abstract: an instance of a game tagged with a designer"""
+
+    __tablename__ = "games_designers"
+
+    id = db.Column(db.Integer,
+                   autoincrement=True,
+                   primary_key=True)
+    game_id = db.Column(db.Integer, db.ForeignKey("games.id"))
+    designer_id = db.Column(db.Integer, db.ForeignKey("designers.id"))
+
+    designer = db.relationship('Designer', backref='games_designers')
+    game = db.relationship('Game', backref='games_designers')
+
+    def __repr__(self):
+        """Show human-readable GameDesigner instance"""
+
+        return f"<GameDesigner id={self.id} "\
+               f"game={self.game.name} pub={self.designer.name}>"
+
+
 if __name__ == '__main__':
     from server import app
 

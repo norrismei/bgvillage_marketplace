@@ -120,6 +120,24 @@ with open('data/games.json') as f:
                     new_pub = crud.create_publisher(publisher)
                     crud.create_game_publisher(new_game.id, new_pub.id)
 
+        # Create Designers objects for game's designers
+        # Get a list of designers
+        designers_list = game["designers"]
+
+        # Iterate through the list, as long as it's not empty
+        if len(designers_list) > 0:
+            for designer in designers_list:
+                designer = designer.strip()
+                # See if designer already exists in db
+                existing_designer = model.Designer.query.filter_by(
+                                    name = designer).first()
+                if existing_designer:
+                    crud.create_game_designer(new_game.id, 
+                                              existing_designer.id)
+                else:
+                    new_designer = crud.create_designer(designer)
+                    crud.create_game_designer(new_game.id, new_designer.id)
+
 
 
 
