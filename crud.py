@@ -1,7 +1,7 @@
 """CRUD operations"""
 
 from model import (db, User, Game, Mechanic, GameMechanic, Category,
-                   GameCategory, connect_to_db)
+                   GameCategory, Publisher, GamePublisher, connect_to_db)
 
 
 def create_user(username, fname, lname, email, password, birthdate=None):
@@ -41,6 +41,8 @@ def create_mechanic(name, atlas_id=None):
     db.session.add(mechanic)
     db.session.commit()
 
+    return mechanic
+
 
 def create_game_mechanic(game_id, mechanic_id):
     """Create and return a new game tagged with mechanic instance"""
@@ -49,6 +51,8 @@ def create_game_mechanic(game_id, mechanic_id):
 
     db.session.add(game_mechanic)
     db.session.commit()
+
+    return game_mechanic
 
 
 def create_category(name, atlas_id=None):
@@ -59,6 +63,8 @@ def create_category(name, atlas_id=None):
     db.session.add(category)
     db.session.commit()
 
+    return category
+
 
 def create_game_category(game_id, category_id):
     """Create and return a new game tagged with category instance"""
@@ -67,6 +73,30 @@ def create_game_category(game_id, category_id):
 
     db.session.add(game_category)
     db.session.commit()
+
+    return game_category
+
+
+def create_publisher(name):
+    """Create and return a new gaming category"""
+
+    publisher = Publisher(name=name)
+
+    db.session.add(publisher)
+    db.session.commit()
+
+    return publisher
+
+
+def create_game_publisher(game_id, publisher_id):
+    """Create and return a new game tagged with publisher instance"""
+
+    game_publisher = GamePublisher(game_id=game_id, publisher_id=publisher_id)
+
+    db.session.add(game_publisher)
+    db.session.commit()
+
+    return game_publisher
 
 
 if __name__ == '__main__':

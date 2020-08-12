@@ -58,6 +58,7 @@ class Game(db.Model):
 
     game_mech = db.relationship('GameMechanic', backref='games')
     game_cat = db.relationship('GameCategory', backref='games')
+    game_pub = db.relationship('GamePublisher', backref='games')
 
     def __repr__(self):
         """Show human-readable info about game"""
@@ -143,6 +144,43 @@ class GameCategory(db.Model):
 
         return f"<GameCategory id={self.id} "\
                f"game={self.game.name} cat={self.cat.name}>"
+
+
+class Publisher(db.Model):
+    """A game publisher"""
+
+    __tablename__ = "publishers"
+
+    id = db.Column(db.Integer,
+                   autoincrement=True,
+                   primary_key=True)
+    name = db.Column(db.String, nullable=False)
+
+    def __repr__(self):
+        """Show human-readable publisher"""
+
+        return f"<Publisher id={self.id} name={self.name}>"
+
+
+class GamePublisher(db.Model):
+    """Abstract: an instance of a game tagged with a publisher"""
+
+    __tablename__ = "games_publishers"
+
+    id = db.Column(db.Integer,
+                   autoincrement=True,
+                   primary_key=True)
+    game_id = db.Column(db.Integer, db.ForeignKey("games.id"))
+    publisher_id = db.Column(db.Integer, db.ForeignKey("publishers.id"))
+
+    pub = db.relationship('Publisher', backref='games_publishers')
+    game = db.relationship('Game', backref='games_publishers')
+
+    def __repr__(self):
+        """Show human-readable GamePublisher instance"""
+
+        return f"<GamePublisher id={self.id} "\
+               f"game={self.game.name} pub={self.pub.name}>"
 
 
 if __name__ == '__main__':

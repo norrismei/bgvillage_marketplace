@@ -102,7 +102,25 @@ with open('data/games.json') as f:
                     crud.create_game_category(new_game.id, cat.id)
                 except:
                     continue
-                
+        
+        # Create Publisher objects for game's publishers
+        # Get a list of publishers
+        publishers_list = game["publishers"]
+
+        # Iterate through the list, as long as it's not empty
+        if len(publishers_list) > 0:
+            for publisher in publishers_list:
+                publisher = publisher.strip()
+                # See if publisher already exists in db
+                existing_pub = model.Publisher.query.filter_by(
+                               name = publisher).first()
+                if existing_pub:
+                    crud.create_game_publisher(new_game.id, existing_pub.id)
+                else:
+                    new_pub = crud.create_publisher(publisher)
+                    crud.create_game_publisher(new_game.id, new_pub.id)
+
+
 
 
 
