@@ -56,6 +56,8 @@ class Game(db.Model):
     image_url = db.Column(db.String)
     msrp = db.Column(db.Float)
 
+    game_mech = db.relationship('GameMechanic', backref='games')
+
     def __repr__(self):
         """Show human-readable info about game"""
 
@@ -73,10 +75,33 @@ class Mechanic(db.Model):
     name = db.Column(db.String, nullable=False)
     atlas_id = db.Column(db.String, unique=True)
 
+    game_mech = db.relationship('GameMechanic', backref='mechanics')
+
     def __repr__(self):
         """Show human-readable mechanic"""
 
         return f"<Mechanic id={self.id} name={self.name}>"
+
+
+class GameMechanic(db.Model):
+    """Abstract: an instance of a game tagged with a mechanic"""
+
+    __tablename__ = "games_mechanics"
+
+    id = db.Column(db.Integer,
+                   autoincrement=True,
+                   primary_key=True)
+    game_id = db.Column(db.Integer, db.ForeignKey("games.id"))
+    mechanic_id = db.Column(db.Integer, db.ForeignKey("mechanics.id"))
+
+    mech = db.relationship('Mechanic', backref='games_mechanics')
+    game = db.relationship('Game', backref='games_mechanics')
+
+    def __repr__(self):
+        """Show human-readable GameMechanic instance"""
+
+        return f"<GameMechanic id={self.id} "\
+               f"game={self.game.name} mech={self.mech.name}>"
 
 
 if __name__ == '__main__':

@@ -8,6 +8,8 @@ import crud
 import model
 import server
 
+from flask_sqlalchemy import SQLAlchemy
+
 os.system('dropdb bgvillage')
 os.system('createdb bgvillage')
 
@@ -52,11 +54,30 @@ with open('data/games.json') as f:
         min_playtime = game["min_playtime"]
         max_playtime = game["max_playtime"]
         image_url = game["image_url"]
-        msrp = game["msrp"]
+        msrp = float(game["msrp"])
 
-        crud.create_game(name, description, publish_year, min_age,
+        new_game = crud.create_game(name, description, publish_year, min_age,
                         min_players, max_players, min_playtime, max_playtime,
-                        image_url, msrp)
+                        image_url, msrp) 
+
+        # Create GameMechanic objects for game's mechanics
+        # Get a list of dictionaries containing mechanic atlas_id's
+        mechanics_list = game["mechanics"]
+
+        # Iterate through the list, as long as it's not empty
+        if len(mechanics_list) > 0:
+            for mechanic in mechanics_list:
+                atlas_id = mechanic["id"]
+                # Try to match the atlas_id with what's in db to get mech id.
+                # If can't find a match, skip it.
+                try:
+                    mech = model.db.session.query(model.Mechanic).filter_by(
+                           atlas_id = atlas_id).first()
+                    crud.create_game_mechanic(new_game.id, mech.id)
+                except:
+                    continue
+                
+
 
 
  
