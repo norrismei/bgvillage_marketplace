@@ -2,6 +2,7 @@
 
 import os
 import json
+from random import choice
 from datetime import datetime
 
 import crud
@@ -16,6 +17,8 @@ os.system('createdb bgvillage')
 model.connect_to_db(server.app)
 model.db.create_all()
 
+# Create empty list to hold new user objects
+users_list = []
 with open('data/users.json') as f:
     user_data = json.loads(f.read())
 
@@ -30,7 +33,9 @@ with open('data/users.json') as f:
         birthdate_format = "%b %d, %Y"
         birthdate = datetime.strptime(birthdate_str, birthdate_format)
 
-        crud.create_user(username, fname, lname, email, password, birthdate)
+        new_user = crud.create_user(username, fname, lname, email, 
+                                    password, birthdate)
+        users_list.append(new_user)
 
 with open('data/mechanics.json') as f:
     mechanic_data = json.loads(f.read())
@@ -50,6 +55,8 @@ with open('data/categories.json') as f:
 
         crud.create_category(name, atlas_id)
 
+# Create empty list to hold new game objects
+games_list = []
 with open('data/games.json') as f:
     game_data = json.loads(f.read())
 
@@ -68,6 +75,7 @@ with open('data/games.json') as f:
         new_game = crud.create_game(name, description, publish_year, min_age,
                         min_players, max_players, min_playtime, max_playtime,
                         image_url, msrp) 
+        games_list.append(new_game)
 
         # Create GameMechanic objects for game's mechanics
         # Get a list of dictionaries containing mechanic atlas_id's
@@ -156,6 +164,12 @@ with open('data/games.json') as f:
                     new_artist = crud.create_artist(artist)
                     crud.create_game_artist(new_game.id, new_artist.id)
 
+# Using users_list and games_list, choose 3 random games for each user
+# to seed the user_games table
+for user in users_list:
+    for game in range(3):
+        random_game = choice(games_list)
+        crud.create_user_game(user.id, random_game.id)
 
 
 

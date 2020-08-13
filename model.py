@@ -68,6 +68,28 @@ class Game(db.Model):
         return f"<Game id={self.id} name={self.name}>"
 
 
+class UserGame(db.Model):
+    """A physical instance of a game owned by user"""
+
+    __tablename__ = "user_games"
+
+    id = db.Column(db.Integer,
+                   autoincrement=True,
+                   primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    game_id = db.Column(db.Integer, db.ForeignKey("games.id"))
+    own = db.Column(db.Boolean, default=True)
+
+    user = db.relationship('User', backref='user_games')
+    game = db.relationship('Game', backref='user_games')
+
+    def __repr__(self):
+        """Show human-readable UserGame instance"""
+
+        return f"<UserGame id={self.id} "\
+               f"user={self.user.name} game={self.game.name}>"
+
+
 class Mechanic(db.Model):
     """A gaming mechanic"""
 
