@@ -2,7 +2,7 @@
 
 from model import (db, User, Game, Mechanic, GameMechanic, Category,
                    GameCategory, Publisher, GamePublisher, Designer,
-                   GameDesigner, connect_to_db)
+                   GameDesigner, Artist, GameArtist, connect_to_db)
 
 
 def create_user(username, fname, lname, email, password, birthdate=None):
@@ -120,7 +120,29 @@ def create_game_designer(game_id, designer_id):
     db.session.commit()
 
     return game_designer
-    
+
+
+def create_artist(name):
+    """Create and return a new game artist"""
+
+    artist = Artist(name=name)
+
+    db.session.add(artist)
+    db.session.commit()
+
+    return artist
+
+
+def create_game_artist(game_id, artist_id):
+    """Create and return a new game tagged with artist instance"""
+
+    game_artist = GameArtist(game_id=game_id, artist_id=artist_id)
+
+    db.session.add(game_artist)
+    db.session.commit()
+
+    return game_artist
+
 
 if __name__ == '__main__':
     from server import app

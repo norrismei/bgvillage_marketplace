@@ -59,6 +59,8 @@ class Game(db.Model):
     game_mech = db.relationship('GameMechanic', backref='games')
     game_cat = db.relationship('GameCategory', backref='games')
     game_pub = db.relationship('GamePublisher', backref='games')
+    game_design = db.relationship('GameDesigner', backref='games')
+    game_art = db.relationship('GameArtist', backref='games')
 
     def __repr__(self):
         """Show human-readable info about game"""
@@ -217,7 +219,44 @@ class GameDesigner(db.Model):
         """Show human-readable GameDesigner instance"""
 
         return f"<GameDesigner id={self.id} "\
-               f"game={self.game.name} pub={self.designer.name}>"
+               f"game={self.game.name} design={self.designer.name}>"
+
+
+class Artist(db.Model):
+    """A game artist"""
+
+    __tablename__ = "artists"
+
+    id = db.Column(db.Integer,
+                   autoincrement=True,
+                   primary_key=True)
+    name = db.Column(db.String, nullable=False)
+
+    def __repr__(self):
+        """Show human-readable artist"""
+
+        return f"<Artist id={self.id} name={self.name}>"
+
+
+class GameArtist(db.Model):
+    """Abstract: an instance of a game tagged with a artist"""
+
+    __tablename__ = "games_artists"
+
+    id = db.Column(db.Integer,
+                   autoincrement=True,
+                   primary_key=True)
+    game_id = db.Column(db.Integer, db.ForeignKey("games.id"))
+    artist_id = db.Column(db.Integer, db.ForeignKey("artists.id"))
+
+    artist = db.relationship('Artist', backref='games_artists')
+    game = db.relationship('Game', backref='games_artists')
+
+    def __repr__(self):
+        """Show human-readable GameArtist instance"""
+
+        return f"<GameArtist id={self.id} "\
+               f"game={self.game.name} art={self.artist.name}>"
 
 
 if __name__ == '__main__':
