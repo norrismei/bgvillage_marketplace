@@ -171,6 +171,16 @@ for user in users_list:
         random_game = choice(games_list)
         crud.create_user_game(user.id, random_game.id)
 
+# Using users_list and games_list, choose 3 random games for each user
+# to seed the wanted_games table
+for user in users_list:
+    for game in range(3):
+        random_game = choice(games_list)
+        want_level = ["must have", "love to have", "like to have", 
+                      "thinking about it"]
+        random_want_level = choice(want_level)
+        crud.create_wanted_game(user.id, random_game.id, random_want_level)
+
 
 
 

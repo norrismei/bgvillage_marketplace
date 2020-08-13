@@ -31,6 +31,9 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     birthdate = db.Column(db.Date)
 
+    user_game = db.relationship('UserGame', backref='users')
+    wanted_game = db.relationship('WantedGame', backref='users')
+
     def __repr__(self):
         """Show human-readable info about user"""
 
@@ -56,6 +59,8 @@ class Game(db.Model):
     image_url = db.Column(db.String)
     msrp = db.Column(db.Float)
 
+    user_game = db.relationship('UserGame', backref='games')
+    wanted_game = db.relationship('WantedGame', backref='games')
     game_mech = db.relationship('GameMechanic', backref='games')
     game_cat = db.relationship('GameCategory', backref='games')
     game_pub = db.relationship('GamePublisher', backref='games')
@@ -87,6 +92,29 @@ class UserGame(db.Model):
         """Show human-readable UserGame instance"""
 
         return f"<UserGame id={self.id} "\
+               f"user={self.user.name} game={self.game.name}>"
+
+
+class WantedGame(db.Model):
+    """A physical instance of a game wanted by user"""
+
+    __tablename__ = "wanted_games"
+
+    id = db.Column(db.Integer,
+                   autoincrement=True,
+                   primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    game_id = db.Column(db.Integer, db.ForeignKey("games.id"))
+    want_level = db.Column(db.String, nullable=False)
+    comment = db.Column(db.String)
+
+    user = db.relationship('User', backref='wanted_games')
+    game = db.relationship('Game', backref='wanted_games')
+
+    def __repr__(self):
+        """Show human-readable WantedGame instance"""
+
+        return f"<WantedGame id={self.id} "\
                f"user={self.user.name} game={self.game.name}>"
 
 
