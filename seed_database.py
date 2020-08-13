@@ -2,7 +2,7 @@
 
 import os
 import json
-from random import choice
+from random import choice, randint
 from datetime import datetime
 
 import crud
@@ -180,6 +180,24 @@ for user in users_list:
                       "thinking about it"]
         random_want_level = choice(want_level)
         crud.create_wanted_game(user.id, random_game.id, random_want_level)
+
+
+# Using users_list and games_list, choose 3 random games for each user
+# to randomly rate to seed the ratings table. User cannot rate a game more
+# than once.
+for user in users_list:
+    rated_games = []
+    # Until three unique games have been generated, randomly choose game
+    # and check if it's unique. If unique, assign random rating and create
+    # Rating object. Append to 
+    while len(rated_games) != 3:
+        random_game = choice(games_list)
+        if random_game not in rated_games:
+            random_rating = randint(0, 100)
+            crud.create_rating(user.id, random_game.id, 
+                                               random_rating)
+            rated_games.append(random_game)
+
 
 
 

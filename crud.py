@@ -1,8 +1,9 @@
 """CRUD operations"""
 
-from model import (db, User, Game, UserGame, WantedGame, Mechanic, GameMechanic, 
-                   Category, GameCategory, Publisher, GamePublisher, Designer,
-                   GameDesigner, Artist, GameArtist, connect_to_db)
+from model import (db, User, Game, UserGame, WantedGame, Rating, Mechanic, 
+                   GameMechanic, Category, GameCategory, Publisher, 
+                   GamePublisher, Designer, GameDesigner, Artist, GameArtist, 
+                   connect_to_db)
 
 
 def create_user(username, fname, lname, email, password, birthdate=None):
@@ -55,6 +56,18 @@ def create_wanted_game(user_id, game_id, want_level, comment=None):
     db.session.commit()
 
     return wanted_game
+
+
+def create_rating(user_id, game_id, rating, comment=None):
+    """Create and return a game rating"""
+
+    rating = Rating(user_id=user_id, game_id=game_id,
+                    rating=rating, comment=comment)
+
+    db.session.add(rating)
+    db.session.commit()
+
+    return rating
 
 
 def create_mechanic(name, atlas_id=None):
