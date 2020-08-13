@@ -90,10 +90,33 @@ class UserGame(db.Model):
     user = db.relationship('User', backref='user_games')
     game = db.relationship('Game', backref='user_games')
 
+    # Because of the one-one relationship between UserGame and ListedGame,
+    # set uselist to False
+    listing = db.relationship('ListedGame', uselist=False)
+
     def __repr__(self):
         """Show human-readable UserGame instance"""
 
         return f"<UserGame id={self.id} "\
+               f"user={self.user.username} game={self.game.name}>"
+
+
+class ListedGame(db.Model):
+    """Subset of user_games that user wants to sell"""
+
+    __tablename__ = "listed_games"
+
+    id = db.Column(db.Integer, 
+                   db.ForeignKey('user_games.id'), 
+                   primary_key=True)
+    condition = db.Column(db.String, nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    comment = db.Column(db.Text)
+
+    def __repr__(self):
+        """Show human-readable listed_game"""
+
+        return f"<ListedGame id={self.id} "\
                f"user={self.user.username} game={self.game.name}>"
 
 

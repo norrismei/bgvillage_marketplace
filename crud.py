@@ -1,7 +1,7 @@
 """CRUD operations"""
 
-from model import (db, User, Game, UserGame, WantedGame, Rating, Mechanic, 
-                   GameMechanic, Category, GameCategory, Publisher, 
+from model import (db, User, Game, UserGame, ListedGame, WantedGame, Rating, 
+                   Mechanic, GameMechanic, Category, GameCategory, Publisher, 
                    GamePublisher, Designer, GameDesigner, Artist, GameArtist, 
                    connect_to_db)
 
@@ -44,6 +44,18 @@ def create_user_game(user_id, game_id, own=True):
     db.session.commit()
 
     return user_game
+
+
+def create_listed_game(user_games_id, condition, price, comment=None):
+    """Takes ID of existing UserGame object and creates ListedGame object"""
+
+    listed_game = ListedGame(id=user_games_id, condition=condition,
+                             price=price, comment=comment)
+
+    db.session.add(listed_game)
+    db.session.commit()
+
+    return listed_game
 
 
 def create_wanted_game(user_id, game_id, want_level, comment=None):
