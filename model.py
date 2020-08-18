@@ -92,7 +92,7 @@ class UserGame(db.Model):
 
     # Because of the one-one relationship between UserGame and ListedGame,
     # set uselist to False
-    listing = db.relationship('ListedGame', uselist=False)
+    listing = db.relationship('ListedGame', uselist=False, backref="user_games")
 
     def __repr__(self):
         """Show human-readable UserGame instance"""
@@ -112,6 +112,8 @@ class ListedGame(db.Model):
     condition = db.Column(db.String, nullable=False)
     price = db.Column(db.Float, nullable=False)
     comment = db.Column(db.Text)
+
+    user_game = db.relationship('UserGame', backref='listed_games')
 
     def __repr__(self):
         """Show human-readable listed_game"""
