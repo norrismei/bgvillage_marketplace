@@ -13,13 +13,30 @@ app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def catch_all(path):
-    """View application's homepage. Catches anything that isn't defined route"""
+# @app.route('/', defaults={'path': ''})
+# @app.route('/<path:path>')
+# def catch_all(path):
+#     """View application's homepage. Catches anything that isn't defined route"""
 
-    return render_template('root.html')
+#     return render_template('root.html')
 
+@app.route('/')
+def show_homepage():
+    """View homepage"""
+
+    return render_template('homepage.html')
+
+@app.route('/users/<username>')
+def show_user_page(username):
+    """View user's personal page"""
+
+    return render_template('user_page.html', username=username)
+
+@app.route('/games')
+def show_all_games():
+    """View all games from database"""
+
+    return render_template('all_games.html')
 
 @app.route('/api/own_games.json')
 def show_user_own_games():
@@ -34,7 +51,12 @@ def show_user_own_games():
         results.append(
             {
             "key": own_game.id,
-            "name": own_game.game.name
+            "name": own_game.game.name,
+            "min_players": own_game.game.min_players,
+            "max_players": own_game.game.max_players,
+            "min_playtime": own_game.game.min_playtime,
+            "max_playtime": own_game.game.max_playtime,
+            "image_url": own_game.game.image_url
             }
         )
 
@@ -55,7 +77,11 @@ def show_user_sell_games():
         results.append(
             {
             "key": listed_game.id,
-            "name": listed_game.user_game.game.name
+            "name": listed_game.user_game.game.name,
+            "condition": listed_game.condition,
+            "price": listed_game.price,
+            "comment": listed_game.comment,
+            "image_url": listed_game.user_game.game.image_url
             }
         )
 
@@ -75,7 +101,12 @@ def show_user_want_games():
         results.append(
             {
             "key": wanted_game.id,
-            "name": wanted_game.game.name
+            "name": wanted_game.game.name,
+            "min_players": wanted_game.game.min_players,
+            "max_players": wanted_game.game.max_players,
+            "min_playtime": wanted_game.game.min_playtime,
+            "max_players": wanted_game.game.max_players,
+            "image_url": wanted_game.game.image_url
             }
         )
 

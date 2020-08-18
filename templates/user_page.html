@@ -6,4 +6,17 @@
 
 {% block body %}
 
+<h1>{{ username }}'s Home</h1>
+
+<section>
+  <h2>Board Game Shelf</h2>
+  <button id="own-button">Own</button>
+  <button id="sell-button">Sell</button>
+  <button id="wishlist-button">Wishlist</button>
+  <div>
+    <table id="games-table"></table>
+  </div>
+</section>
+
+<script src="/static/js/userPage.js"></script>
 {% endblock %}
