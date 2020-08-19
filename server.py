@@ -38,6 +38,31 @@ def show_all_games():
 
     return render_template('all_games.html')
 
+@app.route('/api/games.json')
+def return_all_games():
+    """Return all games from database"""
+
+    all_games = model.db.session.query(model.Game).all()
+
+    results = []
+
+    for game in all_games:
+        primary_publisher = model.db.session.query(model.GamePublisher).join(
+              model.Publisher).filter(model.GamePublisher.game_id == 
+              game.id).first()
+
+        results.append(
+            {
+            "key": game.id,
+            "name": game.name,
+            "min_players": game.min_players,
+            "max_players": game.max_players,
+            "publisher": primary_publisher.pub.name,
+            "image_url": game.image_url
+            })
+
+    return jsonify(results)
+
 @app.route('/api/own_games.json')
 def show_user_own_games():
     """Return JSON for list of user's owned games"""
