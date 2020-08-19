@@ -33,7 +33,6 @@ class User(db.Model):
 
     user_game = db.relationship('UserGame', backref='users')
     wanted_game = db.relationship('WantedGame', backref='users')
-    rating = db.relationship('Rating', backref='users')
 
     def __repr__(self):
         """Show human-readable info about user"""
@@ -62,7 +61,6 @@ class Game(db.Model):
 
     user_game = db.relationship('UserGame', backref='games')
     wanted_game = db.relationship('WantedGame', backref='games')
-    rating = db.relationship('Rating', backref='games')
     game_mech = db.relationship('GameMechanic', backref='games')
     game_cat = db.relationship('GameCategory', backref='games')
     game_pub = db.relationship('GamePublisher', backref='games')
@@ -132,8 +130,6 @@ class WantedGame(db.Model):
                    primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     game_id = db.Column(db.Integer, db.ForeignKey("games.id"))
-    want_level = db.Column(db.String, nullable=False)
-    comment = db.Column(db.String)
 
     user = db.relationship('User', backref='wanted_games')
     game = db.relationship('Game', backref='wanted_games')
@@ -144,28 +140,28 @@ class WantedGame(db.Model):
         return f"<WantedGame id={self.id} "\
                f"user={self.user.username} game={self.game.name}>"
 
+####Removed Rating class####
+# class Rating(db.Model):
+#     """A rating of game by user"""
 
-class Rating(db.Model):
-    """A rating of game by user"""
+#     __tablename__ = "ratings"
 
-    __tablename__ = "ratings"
+#     id = db.Column(db.Integer,
+#                    autoincrement=True,
+#                    primary_key=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+#     game_id = db.Column(db.Integer, db.ForeignKey("games.id"))
+#     rating = db.Column(db.Integer, nullable=False)
+#     comment = db.Column(db.String)
 
-    id = db.Column(db.Integer,
-                   autoincrement=True,
-                   primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    game_id = db.Column(db.Integer, db.ForeignKey("games.id"))
-    rating = db.Column(db.Integer, nullable=False)
-    comment = db.Column(db.String)
+#     user = db.relationship('User', backref='ratings')
+#     game = db.relationship('Game', backref='ratings')
 
-    user = db.relationship('User', backref='ratings')
-    game = db.relationship('Game', backref='ratings')
+#     def __repr__(self):
+#         """Show human-readable rating"""
 
-    def __repr__(self):
-        """Show human-readable rating"""
-
-        return f"<Rating id={self.id} "\
-               f"game={self.game.name} rating={self.rating}>"
+#         return f"<Rating id={self.id} "\
+#                f"game={self.game.name} rating={self.rating}>"
 
 
 class Mechanic(db.Model):

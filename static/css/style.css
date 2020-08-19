@@ -1,0 +1,18 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.add-dropdown-content {
+    display: none;
+    position: absolute;
+    overflow: auto;
+}
+
+.add-dropdown-content div:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}

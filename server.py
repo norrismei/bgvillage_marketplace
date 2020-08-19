@@ -44,8 +44,14 @@ def add_game_to_database():
 
     game_id_str = request.form.get("game_id")
     game_id = int(game_id_str)
+    add_type = request.form.get("add_type")
 
-    added_game = crud.create_user_game(1, game_id)
+    added_game = False
+    if add_type == "own":
+        # Will need to replace 1 with username
+        added_game = crud.create_user_game(1, game_id)
+    elif add_type == "wishlist":
+        added_game = crud.create_wanted_game(1, game_id)
 
     if added_game:
         return "Game was successfully added"

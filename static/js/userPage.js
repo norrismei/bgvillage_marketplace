@@ -1,9 +1,63 @@
 "use strict";
 
+// Load Own games view on first load of the page
+
+$('#above-games-table').html(
+    '<a href="/games">Search for games to add</a>'
+);
+
 const gamesTable = $('#games-table');
 
-// Load the gamesTable on first load of the page
 gamesTable.html(
+        `<th>Sell</th>
+         <th>Image</th>
+         <th>Name</th>
+         <th>Players</th>
+         <th>Playtime</th>
+         <th>Remove</th>`
+    );
+    $.get('/api/own_games.json', (response) => {
+        for (const game of response) {
+            let players = [];
+            if (game.min_players) {
+                players = `${game.min_players}`;
+                if (game.max_players && 
+                    game.max_players != game.min_players) {
+                    players = `${game.min_players}-${game.max_players}`
+                };
+            };
+            let playtime = [];
+            if (game.min_playtime) {
+                playtime = `${game.min_playtime} mins`;
+                if (game.max_playtime && 
+                    game.max_playtime != game.min_playtime) {
+                    playtime = `${game.min_playtime}-${game.max_playtime} mins`
+                };
+            };
+            gamesTable.append(
+                `<tr>
+                    <td></td>
+                    <td><img src=${game.image_url} height="50" /></td>
+                    <td>${game.name}</td>
+                    <td>${players}</td>
+                    <td>${playtime}</td>
+                    <td>
+                        <button class="remove-game" 
+                                data-user-game-id=${game.key}>
+                            Remove
+                        </button>
+                    </td>
+                </tr>`
+            );
+        };
+    });
+
+// Show the user's own games upon clicking on Own button
+$('#own-button').on('click', () => {
+    $('#above-games-table').html(
+        '<a href="/games">Search for games to add</a>'
+    );
+    gamesTable.html(
         `<th>Sell</th>
          <th>Image</th>
          <th>Name</th>
@@ -38,44 +92,14 @@ gamesTable.html(
             );
         };
     });
-
-// Show the user's own games upon clicking on Own button
-$('#own-button').on('click', () => {
-    gamesTable.html(
-        `<th>Sell</th>
-         <th>Image</th>
-         <th>Name</th>
-         <th>Players</th>
-         <th>Playtime</th>
-         <th>Remove</th>`
-    );
-    $.get('/api/own_games.json', (response) => {
-        for (const game of response) {
-            let playtime = null;
-            if (game.min_playtime) {
-                playtime = `${game.min_playtime} mins`;
-                if (game.max_playtime && 
-                    game.max_playtime != game.min_playtime) {
-                    playtime = `${game.min_playtime}-${game.max_playtime} mins`
-                };
-            };
-            gamesTable.append(
-                `<tr>
-                    <td></td>
-                    <td><img src=${game.image_url} height="50" /></td>
-                    <td>${game.name}</td>
-                    <td>${game.min_players}-${game.max_players}</td>
-                    <td>${playtime}</td>
-                    <td></td>
-                </tr>`
-            );
-        };
-    });
 });
 
 
 // Show the games that the user is selling upon clicking on Sell button
 $('#sell-button').on('click', () => {
+    $('#above-games-table').html(
+        'Options of games to sell here'
+    );
     gamesTable.html(
         `<th>Image</th>
          <th>Name</th>
@@ -102,6 +126,9 @@ $('#sell-button').on('click', () => {
 
 // Show the user's wishlist upon clicking on Wishlist button
 $('#wishlist-button').on('click', () => {
+    $('#above-games-table').html(
+        '<a href="/games">Search for games to add</a>'
+    );
     gamesTable.html(
         `<th>Image</th>
          <th>Name</th>
@@ -136,9 +163,9 @@ $('#wishlist-button').on('click', () => {
 // the parent element and move the button selector to second parameter of .on()
 // method.
 $('#games-table').on('click', 'button', (event) => {
-    const addButton = $(event.target);
-    const addButtonId = addButton.attr('data-user-game-id');
-    $.post('/api/remove-game', {'user_game_id': addButtonId}, (res) => {
-        addButton.closest('tr').remove();
+    const removeButton = $(event.target);
+    const removeButtonId = removeButton.attr('data-user-game-id');
+    $.post('/api/remove-game', {'user_game_id': removeButtonId}, (res) => {
+        removeButton.closest('tr').remove();
     });
 })
