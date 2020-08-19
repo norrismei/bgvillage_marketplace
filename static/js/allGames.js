@@ -18,7 +18,8 @@ $.get('/api/games.json', (response) => {
         $('#games-results').append(
             `<tr>
                 <td>
-                    <button class="add-game" id="${game.key}">
+                    <button class="add-game" 
+                            data-game-id="${game.key}">
                         Add Game
                     </button>
                 </td>
@@ -37,7 +38,7 @@ $.get('/api/games.json', (response) => {
 // method.
 $('#games-results').on('click', 'button', (event) => {
     const addButton = $(event.target);
-    const addButtonId = addButton.attr('id');
+    const addButtonId = addButton.attr('data-game-id');
     $.post('/api/add-game', {'game_id': addButtonId}, (res) => {
         alert(res);
     });

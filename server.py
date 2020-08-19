@@ -30,10 +30,7 @@ def show_homepage():
 def show_user_page(username):
     """View user's personal page"""
 
-    user_games = model.db.session.query(model.UserGame).join(model.User).filter(
-                model.User.username==username).all()
-
-    return render_template('user_page.html', username=username, games=user_games)
+    return render_template('user_page.html', username=username)
 
 @app.route('/games')
 def show_all_games():
@@ -55,7 +52,19 @@ def add_game_to_database():
     else:
         return "A problem has occurred"
 
-    
+@app.route('/api/remove-game', methods=['POST'])
+def change_own_to_false():
+    """Changes own Boolean to false on UserGames table"""
+
+    user_game_id_str = request.form.get("user_game_id")
+    user_game_id = int(user_game_id_str)
+
+    removed_game = crud.update_user_game_to_false(user_game_id)
+
+    if removed_game:
+        return "Game was successfully removed"
+    else:
+        return "A problem has occurred"
 
 
 @app.route('/api/games.json')
@@ -88,7 +97,7 @@ def show_user_own_games():
     """Return JSON for list of user's owned games"""
 
     own_games = model.db.session.query(model.UserGame).join(model.User).filter(
-                model.User.username=="norrism3").all()
+                model.User.username=="norrism3", model.UserGame.own==True).all()
 
     results = []
 

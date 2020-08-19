@@ -46,6 +46,16 @@ def create_user_game(user_id, game_id, own=True):
     return user_game
 
 
+def update_user_game_to_false(id):
+    """Finds UserGame by id and updates Own boolean to false"""
+
+    user_game = UserGame.query.get(id)
+    user_game.own = False
+    db.session.commit()
+
+    return user_game
+
+
 def create_listed_game(user_games_id, condition, price, comment=None):
     """Takes ID of existing UserGame object and creates ListedGame object"""
 

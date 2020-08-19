@@ -28,7 +28,12 @@ gamesTable.html(
                     <td>${game.name}</td>
                     <td>${game.min_players}-${game.max_players}</td>
                     <td>${playtime}</td>
-                    <td></td>
+                    <td>
+                        <button class="remove-game" 
+                                data-user-game-id=${game.key}>
+                            Remove
+                        </button>
+                    </td>
                 </tr>`
             );
         };
@@ -125,3 +130,15 @@ $('#wishlist-button').on('click', () => {
         };
     });
 });
+
+// An example of event delegation. If we selected the buttons, which are
+// dynamically produced, the event handler won't bind to them. Instead, select
+// the parent element and move the button selector to second parameter of .on()
+// method.
+$('#games-table').on('click', 'button', (event) => {
+    const addButton = $(event.target);
+    const addButtonId = addButton.attr('data-user-game-id');
+    $.post('/api/remove-game', {'user_game_id': addButtonId}, (res) => {
+        addButton.closest('tr').remove();
+    });
+})
