@@ -2,6 +2,38 @@
 
 const gamesTable = $('#games-table');
 
+// Load the gamesTable on first load of the page
+gamesTable.html(
+        `<th>Sell</th>
+         <th>Image</th>
+         <th>Name</th>
+         <th>Players</th>
+         <th>Playtime</th>
+         <th>Remove</th>`
+    );
+    $.get('/api/own_games.json', (response) => {
+        for (const game of response) {
+            let playtime = null;
+            if (game.min_playtime) {
+                playtime = `${game.min_playtime} mins`;
+                if (game.max_playtime && 
+                    game.max_playtime != game.min_playtime) {
+                    playtime = `${game.min_playtime}-${game.max_playtime} mins`
+                };
+            };
+            gamesTable.append(
+                `<tr>
+                    <td></td>
+                    <td><img src=${game.image_url} height="50" /></td>
+                    <td>${game.name}</td>
+                    <td>${game.min_players}-${game.max_players}</td>
+                    <td>${playtime}</td>
+                    <td></td>
+                </tr>`
+            );
+        };
+    });
+
 // Show the user's own games upon clicking on Own button
 $('#own-button').on('click', () => {
     gamesTable.html(

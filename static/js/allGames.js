@@ -17,7 +17,11 @@ $.get('/api/games.json', (response) => {
             };
         $('#games-results').append(
             `<tr>
-                <td><button class="add-game">Add Game</button></td>
+                <td>
+                    <button class="add-game" id="${game.key}">
+                        Add Game
+                    </button>
+                </td>
                 <td><img src=${game.image_url} height="50" /></td>
                 <td>${game.name}</td>
                 <td>${players}</td>
@@ -26,3 +30,15 @@ $.get('/api/games.json', (response) => {
         );
     };
   });
+
+// An example of event delegation. If we selected the buttons, which are
+// dynamically produced, the event handler won't bind to them. Instead, select
+// the parent element and move the button selector to second parameter of .on()
+// method.
+$('#games-results').on('click', 'button', (event) => {
+    const addButton = $(event.target);
+    const addButtonId = addButton.attr('id');
+    $.post('/api/add-game', {'game_id': addButtonId}, (res) => {
+        alert(res);
+    });
+})

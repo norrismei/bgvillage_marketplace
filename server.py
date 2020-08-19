@@ -30,13 +30,33 @@ def show_homepage():
 def show_user_page(username):
     """View user's personal page"""
 
-    return render_template('user_page.html', username=username)
+    user_games = model.db.session.query(model.UserGame).join(model.User).filter(
+                model.User.username==username).all()
+
+    return render_template('user_page.html', username=username, games=user_games)
 
 @app.route('/games')
 def show_all_games():
     """View all games from database"""
 
     return render_template('all_games.html')
+
+@app.route('/api/add-game', methods=['POST'])
+def add_game_to_database():
+    """Add a UserGame"""
+
+    game_id_str = request.form.get("game_id")
+    game_id = int(game_id_str)
+
+    added_game = crud.create_user_game(1, game_id)
+
+    if added_game:
+        return "Game was successfully added"
+    else:
+        return "A problem has occurred"
+
+    
+
 
 @app.route('/api/games.json')
 def return_all_games():
