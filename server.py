@@ -62,10 +62,15 @@ def add_game_to_database():
 def change_own_to_false():
     """Changes own Boolean to false on UserGames table"""
 
-    user_game_id_str = request.form.get("user_game_id")
-    user_game_id = int(user_game_id_str)
+    game_id_str = request.form.get("user_game_id")
+    game_id = int(game_id_str)
+    remove_type = request.form.get("remove_type")
 
-    removed_game = crud.update_user_game_to_false(user_game_id)
+    removed_game = False
+    if remove_type == "own":
+        removed_game = crud.update_user_game_to_false(game_id)
+    elif remove_type == "wishlist":
+        removed_game = crud.delete_wanted_game(game_id)
 
     if removed_game:
         return "Game was successfully removed"

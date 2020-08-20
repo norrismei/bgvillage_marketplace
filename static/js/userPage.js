@@ -42,8 +42,8 @@ gamesTable.html(
                     <td>${players}</td>
                     <td>${playtime}</td>
                     <td>
-                        <button class="remove-game" 
-                                data-user-game-id=${game.key}>
+                        <button class="remove from-own" 
+                                data-game-id=${game.key}>
                             Remove
                         </button>
                     </td>
@@ -67,7 +67,15 @@ $('#own-button').on('click', () => {
     );
     $.get('/api/own_games.json', (response) => {
         for (const game of response) {
-            let playtime = null;
+            let players = [];
+            if (game.min_players) {
+                players = `${game.min_players}`;
+                if (game.max_players && 
+                    game.max_players != game.min_players) {
+                    players = `${game.min_players}-${game.max_players}`
+                };
+            };
+            let playtime = [];
             if (game.min_playtime) {
                 playtime = `${game.min_playtime} mins`;
                 if (game.max_playtime && 
@@ -80,11 +88,11 @@ $('#own-button').on('click', () => {
                     <td></td>
                     <td><img src=${game.image_url} height="50" /></td>
                     <td>${game.name}</td>
-                    <td>${game.min_players}-${game.max_players}</td>
+                    <td>${players}</td>
                     <td>${playtime}</td>
                     <td>
-                        <button class="remove-game" 
-                                data-user-game-id=${game.key}>
+                        <button class="remove from-own" 
+                                data-game-id=${game.key}>
                             Remove
                         </button>
                     </td>
@@ -110,13 +118,17 @@ $('#sell-button').on('click', () => {
     );
     $.get('/api/listed_games.json', (response) => {
         for (const game of response) {
+            let comment = []
+            if (game.comment) {
+                comment = game.comment
+            }
             gamesTable.append(
                 `<tr>
                     <td width="20%"><img src=${game.image_url} height="50"/></td>
                     <td>${game.name}</td>
                     <td>${game.condition}</td>
                     <td>${game.price}</td>
-                    <td>${game.comment}</td>
+                    <td>${comment}</td>
                     <td></td>
                 </tr>`
             );
@@ -138,7 +150,15 @@ $('#wishlist-button').on('click', () => {
     )
     $.get('/api/wanted_games.json', (response) => {
         for (const game of response) {
-            let playtime = null;
+            let players = [];
+            if (game.min_players) {
+                players = `${game.min_players}`;
+                if (game.max_players && 
+                    game.max_players != game.min_players) {
+                    players = `${game.min_players}-${game.max_players}`
+                };
+            };
+            let playtime = [];
             if (game.min_playtime) {
                 playtime = `${game.min_playtime} mins`;
                 if (game.max_playtime) {
@@ -149,9 +169,14 @@ $('#wishlist-button').on('click', () => {
                 `<tr>
                     <td><img src=${game.image_url} height="50" /></td>
                     <td>${game.name}</td>
-                    <td>${game.min_players}-${game.max_players}</td>
+                    <td>${players}</td>
                     <td>${playtime}</td>
-                    <td></td>
+                    <td>
+                        <button class="remove from-wishlist" 
+                                data-game-id=${game.key}>
+                            Remove
+                        </button>
+                    </td>
                 </tr>`
             );
         };
@@ -162,10 +187,20 @@ $('#wishlist-button').on('click', () => {
 // dynamically produced, the event handler won't bind to them. Instead, select
 // the parent element and move the button selector to second parameter of .on()
 // method.
-$('#games-table').on('click', 'button', (event) => {
+$('#games-table').on('click', 'button.remove', (event) => {
     const removeButton = $(event.target);
-    const removeButtonId = removeButton.attr('data-user-game-id');
-    $.post('/api/remove-game', {'user_game_id': removeButtonId}, (res) => {
+    const removeButtonId = removeButton.attr('data-game-id');
+    if (removeButton.hasClass('from-own')) {
+        $.post('/api/remove-game', {'user_game_id': removeButtonId,
+                                    'remove_type': 'own'}, (res) => {
         removeButton.closest('tr').remove();
-    });
+        });
+    };
+    if (removeButton.hasClass('from-wishlist')) {
+        $.post('/api/remove-game', {'user_game_id': removeButtonId,
+                                    'remove_type': 'wishlist'}, (res) => {
+        removeButton.closest('tr').remove();
+        });
+    };
+    
 })

@@ -56,6 +56,14 @@ def update_user_game_to_false(id):
     return user_game
 
 
+def delete_wanted_game(id):
+    """Finds WantedGame by id and removes row"""
+
+    wanted_game = WantedGame.query.get(id)
+    db.session.delete(wanted_game)
+    db.session.commit()
+
+
 def create_listed_game(user_games_id, condition, price, comment=None):
     """Takes ID of existing UserGame object and creates ListedGame object"""
 
