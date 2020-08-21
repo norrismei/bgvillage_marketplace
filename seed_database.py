@@ -159,7 +159,7 @@ for user in users_list:
     # Randomly choose a game from user_games list, along with random choice
     # condition, and random choice price to create a ListedGame
     sell_game = choice(user_games)
-    condition = choice(["new", "like new", "very good", "good", "acceptable"])
+    condition = choice(["New", "Like New", "Very Good", "Good", "Acceptable"])
     price = choice([15.00, 16.00, 17.00, 18.00, 19.00, 20.00, 21.00, 22.00,
                     23.00, 24.00, 25.00])
     crud.create_listed_game(sell_game.id, condition, price)

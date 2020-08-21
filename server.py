@@ -30,11 +30,13 @@ def show_homepage():
 
     return render_template('homepage.html')
 
+
 @app.route('/users/<username>')
 def show_user_page(username):
     """View user's personal page"""
 
     return render_template('user_page.html', username=username)
+
 
 @app.route('/games')
 def show_all_games():
@@ -42,17 +44,35 @@ def show_all_games():
 
     return render_template('all_games.html')
 
+
 @app.route('/api/add-game', methods=['POST'])
 def add_game_to_database():
     """Add a UserGame"""
 
-    atlas_id_str = request.form.get("atlas_id")
-    atlas_id = int(atlas_id_str)
     add_type = request.form.get("add_type")
+    name = request.form.get("name")
+    atlas_id = request.form.get("atlas_id")
 
-    status = add_game_to_database(atlas_id, add_type)
+    if atlas_id:
+        status = helper.add_game_to_database(add_type, name, atlas_id)
+    else:
+        status = helper.add_game_to_database(add_type, name)
 
     return status
+
+
+@app.route('/api/list-game', methods=['POST'])
+def list_game():
+
+    user_game_id = request.form.get("game")
+    print(user_game_id)
+    condition = request.form.get("condition")
+    price = float(request.form.get("price"))
+    comment = request.form.get("comment")
+
+    listed_game = crud.create_listed_game(user_game_id, condition, price, comment)
+
+    return "Game was successfully listed"
 
 @app.route('/api/remove-game', methods=['POST'])
 def change_own_to_false():

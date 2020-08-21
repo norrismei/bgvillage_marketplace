@@ -24,7 +24,7 @@ function addGameRows(games) {
                     </div>
                 </td>
                 <td><img src=${game.image_url} height="50" /></td>
-                <td>${game.name}</td>
+                <td class="game-name">${game.name}</td>
                 <td>${players}</td>
                 <td>${game.publisher}</td>
             </tr>`
@@ -35,7 +35,8 @@ function addGameRows(games) {
 // Initial loading of All Games page. Preloads with this search.
 $.get('/api/games.json', {"search_terms": "Catan"}, (response) => {
     addGameRows(response);
-}
+    }
+)
     
 
 // Refreshing of page upon submitting a search for a game
@@ -64,8 +65,12 @@ $('#games-results').on('click', '.add-option', (event) => {
     const addOption = $(event.target);
     const addAtlasId = addOption.parents('.add-dropdown-content').
                         siblings('.dropdown-button').attr('data-atlas-id');
+    const addName = addOption.parents('.add-dropdown-content').
+                        parents('.dropdown').parents('td').
+                        siblings('.game-name').html();
     if (addOption.hasClass('add-to-own')) {
-        $.post('/api/add-game', {'atlas_id': addAtlasId, 
+        $.post('/api/add-game', {'atlas_id': addAtlasId,
+                                 'name': addName, 
                                  'add_type': 'own'}, (res) => {
             alert(res);
             // Close the open dropdown
@@ -74,6 +79,7 @@ $('#games-results').on('click', '.add-option', (event) => {
     };
     if (addOption.hasClass('add-to-wishlist')) {
         $.post('/api/add-game', {'game_id': addAtlasId, 
+                                 'name': addName,
                                  'add_type': 'wishlist'}, (res) => {
             alert(res);
             // Close the open dropdown

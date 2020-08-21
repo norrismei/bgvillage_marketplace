@@ -36,10 +36,26 @@ def create_game(name, description=None, publish_year=None, min_age=None,
     return game
 
 
-def get_game_id_by_atlas_id(atlas_id):
-    """Takes in atlas_id and returns id of matching Game"""
+def get_game_by_name(name):
+    """Takes in string and finds match with Game in db, if any"""
 
-    return "hi"
+    existing_game = db.session.query(Game).filter_by(name=name).first()
+
+    if existing_game:
+        return existing_game
+    else:
+        return None
+        
+
+def get_game_by_atlas_id(atlas_id):
+    """Takes in atlas_id and returns matching Game, if any"""
+
+    existing_game = db.session.query(Game).filter_by(atlas_id=atlas_id).first()
+
+    if existing_game:
+        return existing_game
+    else:
+        return None
 
 
 

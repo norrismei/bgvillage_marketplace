@@ -1,70 +1,21 @@
 "use strict";
 
-// Load Own games view on first load of the page
-
-$('#above-games-table').html(
-    '<a href="/games">Search for games to add</a>'
-);
-
 const gamesTable = $('#games-table');
 
-gamesTable.html(
-        `<th>Sell</th>
-         <th>Image</th>
-         <th>Name</th>
-         <th>Players</th>
-         <th>Playtime</th>
-         <th>Remove</th>`
-    );
-    $.get('/api/own_games.json', (response) => {
-        for (const game of response) {
-            let players = [];
-            if (game.min_players) {
-                players = `${game.min_players}`;
-                if (game.max_players && 
-                    game.max_players != game.min_players) {
-                    players = `${game.min_players}-${game.max_players}`
-                };
-            };
-            let playtime = [];
-            if (game.min_playtime) {
-                playtime = `${game.min_playtime} mins`;
-                if (game.max_playtime && 
-                    game.max_playtime != game.min_playtime) {
-                    playtime = `${game.min_playtime}-${game.max_playtime} mins`
-                };
-            };
-            gamesTable.append(
-                `<tr>
-                    <td></td>
-                    <td><img src=${game.image_url} height="50" /></td>
-                    <td>${game.name}</td>
-                    <td>${players}</td>
-                    <td>${playtime}</td>
-                    <td>
-                        <button class="remove from-own" 
-                                data-game-id=${game.key}>
-                            Remove
-                        </button>
-                    </td>
-                </tr>`
-            );
-        };
-    });
-
-// Show the user's own games upon clicking on Own button
-$('#own-button').on('click', () => {
+function displayOwnView() {
     $('#above-games-table').html(
         '<a href="/games">Search for games to add</a>'
     );
+
     gamesTable.html(
-        `<th>Sell</th>
-         <th>Image</th>
-         <th>Name</th>
-         <th>Players</th>
-         <th>Playtime</th>
-         <th>Remove</th>`
-    );
+            `<th>Sell</th>
+             <th>Image</th>
+             <th>Name</th>
+             <th>Players</th>
+             <th>Playtime</th>
+             <th>Remove</th>`
+        );
+
     $.get('/api/own_games.json', (response) => {
         for (const game of response) {
             let players = [];
@@ -100,14 +51,43 @@ $('#own-button').on('click', () => {
             );
         };
     });
-});
+}
 
 
-// Show the games that the user is selling upon clicking on Sell button
-$('#sell-button').on('click', () => {
+function displaySellView() {
     $('#above-games-table').html(
-        'Options of games to sell here'
+        `<div>
+            <form id="listing-form">
+                <select name="game" id="own-game-selector">
+                </select>
+                <select name="condition">
+                    <option value="" disabled selected>Game Condition</option>
+                    <option value="New">New</option>
+                    <option value="Like New">Like New</option>
+                    <option value="Very Good">Very Good</option>
+                    <option value="Good">Good</option>
+                    <option value="Acceptable">Acceptable</option>
+                </select>
+                <input type="text" 
+                       name="price" 
+                       placeholder="Enter Price">
+                </input>
+                <input type="text" 
+                       name="comment" 
+                       placeholder="Optional Comment">
+                </input>
+                <button type="submit">Create listing</button>
+            </form>
+        </div>`
     );
+    $.get('/api/own_games.json', (response) => {
+        $('#own-game-selector').html(
+                    '<option value="" disabled selected>Choose game</option');
+        for (const game of response) {
+            $('#own-game-selector').append(
+                    `<option value=${game.key}>${game.name}</option>`)
+        }
+    })
     gamesTable.html(
         `<th>Image</th>
          <th>Name</th>
@@ -134,7 +114,32 @@ $('#sell-button').on('click', () => {
             );
         };
     });
+}
+
+// Load Own games view on first load of the page
+displayOwnView();
+
+// Show the user's own games upon clicking on Own button
+$('#own-button').on('click', () => {
+    displayOwnView();
 });
+
+// After clicking on sell button, show form to create game listing, 
+// followed by table showing games user has listed for sale
+$('#sell-button').on('click', () => {
+    displaySellView();
+});
+    
+
+// When user submits form to create listing, send POST request to server
+// to create ListedGame in database and re-render listings table on page
+$('#above-games-table').on('submit', '#listing-form', (event) => {
+    event.preventDefault();
+    const formValues = $('#listing-form').serialize();
+    $.post("/api/list-game", formValues, (response) => {
+        displaySellView();
+    })
+})
 
 // Show the user's wishlist upon clicking on Wishlist button
 $('#wishlist-button').on('click', () => {
