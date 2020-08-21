@@ -71,10 +71,11 @@ with open('data/games.json') as f:
         max_playtime = game["max_playtime"]
         image_url = game["image_url"]
         msrp = float(game["msrp"])
+        atlas_id = game["id"]
 
         new_game = crud.create_game(name, description, publish_year, min_age,
                         min_players, max_players, min_playtime, max_playtime,
-                        image_url, msrp) 
+                        image_url, msrp, atlas_id) 
         games_list.append(new_game)
 
         # Create GameMechanic objects for game's mechanics
@@ -146,23 +147,6 @@ with open('data/games.json') as f:
                     new_designer = crud.create_designer(designer)
                     crud.create_game_designer(new_game.id, new_designer.id)
 
-        # Create Artists objects for game's artists
-        # Get a list of artists
-        artists_list = game["artists"]
-
-        # Iterate through the list, as long as it's not empty
-        if len(artists_list) > 0:
-            for artist in artists_list:
-                artist = artist.strip()
-                # See if artist already exists in db
-                existing_artist = model.Artist.query.filter_by(
-                                    name = artist).first()
-                if existing_artist:
-                    crud.create_game_artist(new_game.id, 
-                                              existing_artist.id)
-                else:
-                    new_artist = crud.create_artist(artist)
-                    crud.create_game_artist(new_game.id, new_artist.id)
 
 # Using users_list and games_list, choose 3 random games for each user
 # to seed the user_games table. Add games to user_games list.

@@ -21,18 +21,26 @@ def create_user(username, fname, lname, email, password, birthdate=None):
 def create_game(name, description=None, publish_year=None, min_age=None,
                 min_players=None, max_players=None, 
                 min_playtime=None, max_playtime=None,
-                image_url=None, msrp=None):
+                image_url=None, msrp=None, atlas_id=None):
     """Create and return a new game"""
 
     game = Game(name=name, description=description, publish_year=publish_year, 
                 min_age=min_age, min_players=min_players, 
                 max_players=max_players, min_playtime=min_playtime, 
-                max_playtime=max_playtime, image_url=image_url, msrp=msrp)
+                max_playtime=max_playtime, image_url=image_url, msrp=msrp,
+                atlas_id=atlas_id)
 
     db.session.add(game)
     db.session.commit()
 
     return game
+
+
+def get_game_id_by_atlas_id(atlas_id):
+    """Takes in atlas_id and returns id of matching Game"""
+
+    return "hi"
+
 
 
 def create_user_game(user_id, game_id, own=True):
@@ -185,28 +193,6 @@ def create_game_designer(game_id, designer_id):
     db.session.commit()
 
     return game_designer
-
-
-def create_artist(name):
-    """Create and return a new game artist"""
-
-    artist = Artist(name=name)
-
-    db.session.add(artist)
-    db.session.commit()
-
-    return artist
-
-
-def create_game_artist(game_id, artist_id):
-    """Create and return a new game tagged with artist instance"""
-
-    game_artist = GameArtist(game_id=game_id, artist_id=artist_id)
-
-    db.session.add(game_artist)
-    db.session.commit()
-
-    return game_artist
 
 
 if __name__ == '__main__':

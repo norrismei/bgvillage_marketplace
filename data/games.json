@@ -1,364 +1,334 @@
 [
   {
-    "name": "Small World",
-    "year_published": 2009,
-    "min_players": 2,
-    "max_players": 5,
-    "min_playtime": 40,
-    "max_playtime": 80,
-    "min_age": 8,
-    "description": "Small World is designed by Philippe Keyaerts and is a fantasy-themed game similar in game play to his Vinci, which was released in 1999 by French publisher Descartes. In Small World, players will be able to control characters from 14 fantasy races - dwarves, giants, orcs, elves, and so forth - while trying to take control of territory and push opponents out of adjacent lands and off the map. Even while dominating opponents, however, you have to keep in mind that your race's civilization is doomed as well, thanks to the passing of time and attacking of neighbors, so be ready to cast aside one tribe while taking the reins of another in order to keep dominating the world.<br />\r\n<br />\r\nSmall World is for 2-5 players and contains two double-sided gameboards, with one side being used for each of the different number of possible players. The 14 fantasy races come with matching banners and tokens, and the game also includes 20 special power badges to further customize the races along with mountains, troll lairs, fortresses, holes-in-the-ground, victory coins. and other items.",
-    "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559254992240-511JJsfrrNL.jpg",
-    "msrp": "50.00",
-    "publishers": [
-      "Days of Wonder"
-    ],
-    "mechanics": [
-      {
-        "id": "05zCZoLvQJ"
-      },
-      {
-        "id": "R0bGq4cAl4"
-      }
-    ],
-    "categories": [
-      {
-        "id": "ZTneo8TaIO"
-      },
-      {
-        "id": "upXZ8vNfNO"
-      },
-      {
-        "id": "buDTYyPw4D"
-      }
-    ],
-    "designers": [
-      " Philippe Keyaerts"
-    ],
-    "artists": [
-      "Miguel Coimbra",
-      "Cyrille Daujean"
-    ]
-  },
-  {
-    "name": "Chaos in the Old World",
-    "year_published": 2009,
-    "min_players": 3,
-    "max_players": 4,
-    "min_playtime": 90,
-    "max_playtime": 120,
-    "min_age": 13,
-    "description": "<p>In <strong>Chaos in the Old World</strong>, each player takes the role of one of the malevolent Lords of Chaos. Each god's distinctive powers and legion of followers give the controlling player unique strengths and heretical abilities with which to corrupt and enslave the Old World.<br /><br />Yet, as the powers of Chaos seek domination by corruption and conquest, they must vie not only against each other, but also against the desperate denizens of the Old World who fight to banish the gods back to the maelstrom of the Realm of Chaos...for now.</p>",
-    "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559258094784-51wguj68NWL.jpg",
-    "msrp": "50.99",
-    "publishers": [
-      "Fantasy Flight Games"
-    ],
-    "mechanics": [
-      {
-        "id": "oeg6wN9Eoc"
-      },
-      {
-        "id": "9NBcz45nN7"
-      },
-      {
-        "id": "R0bGq4cAl4"
-      },
-      {
-        "id": "T8JEFYwoqy"
-      },
-      {
-        "id": "XM2FYZmBHH"
-      }
-    ],
-    "categories": [],
-    "designers": [
-      "Eric M. Lang"
-    ],
-    "artists": []
-  },
-  {
-    "name": "Railways of the World",
-    "year_published": 2005,
-    "min_players": 2,
-    "max_players": 6,
-    "min_playtime": 120,
-    "max_playtime": 120,
-    "min_age": 10,
-    "description": "Rewrite the annals of history...and engrave your name alongside the world's greatest railroad barons. Build your railroad empire across the rails of the world and find out if you have the metal and the mettle to outwit and outmaneuver your opponents!",
-    "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559257208783-51Ei1hxiIbL.jpg",
-    "msrp": "0.00",
-    "publishers": [
-      "Flat River Group"
-    ],
-    "mechanics": [
-      {
-        "id": "oeg6wN9Eoc"
-      },
-      {
-        "id": "iWODHwRGuU"
-      },
-      {
-        "id": "BbTMRkwL0b"
-      },
-      {
-        "id": "8PN2HE86wg"
-      },
-      {
-        "id": "ohABM4GjbC"
-      }
-    ],
-    "categories": [],
-    "designers": [
-      "Glenn Drover",
-      "Martin Wallace"
-    ],
-    "artists": [
-      "Kurt Miller",
-      "Paul Niemeyer",
-      "David Oram"
-    ]
-  },
-  {
-    "name": "Small World: Underground",
-    "year_published": 2011,
-    "min_players": 2,
-    "max_players": 5,
-    "min_playtime": 40,
-    "max_playtime": 80,
-    "min_age": 8,
-    "description": "Small World Underground is a stand-alone game set beneath the surface of the same fun, light-hearted Small World universe of epic conquests and fallen empires. Featuring new Races and Special Powers, it also introduces a new twist to the original game play - Monster-occupied regions that protect Relics and Places of great power! While more daunting to conquer, these bestow even greater powers to their owner.<br>\n<br>\nSmall World Underground can be played on its own or combined with other Small World game elements, as many of the Races and Special Powers from the original game and previous expansions are compatible. Recommended for experienced Small World players, the game includes: two double-Sided Game Boards; 15 New Fantasy Races with matching banners &amp; tokens; 21 New Special Power badges; nine Popular Places and six Righteous Relics; 106 Victory Coins; dozens of additional special tokens; five Player and one Game Turn Summary Sheets; a Reinforcement Die; and a Rules Booklet.",
-    "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559255098802-616j4kx32RL.jpg",
-    "msrp": "50.00",
-    "publishers": [
-      "Days of Wonder"
-    ],
-    "mechanics": [
-      {
-        "id": "bgGxE0pI2B"
-      },
-      {
-        "id": "R0bGq4cAl4"
-      },
-      {
-        "id": "XM2FYZmBHH"
-      }
-    ],
-    "categories": [],
-    "designers": [
-      "Philippe Keyaerts"
-    ],
-    "artists": [
-      "Miguel Coimbra"
-    ]
-  },
-  {
-    "name": "Tuscany: Expand the World of Viticulture",
-    "year_published": 2014,
-    "min_players": 1,
-    "max_players": 6,
-    "min_playtime": 60,
-    "max_playtime": 120,
-    "min_age": 14,
-    "description": "<p><em><strong>Tuscany: Expand the World of Viticulture</strong></em> significantly extends the original game of winemaking. Using a tiered system that lets you gradually unlock (&quot;uncork&quot;) a number of new expansions to <em>Viticulture</em> legacy-style in an order that's unique to your game, <em>Tuscany</em> enhances and completes the rustic world that <em>Viticulture</em> introduced. Just like <em>Viticulture</em>, <em>Tuscany</em> plays 2-6 players and has a play time of around 20 minutes per player.</p>\r\n\r\n<p>These expansions add asymmetric starting resources, new and advanced visitor cards, an extended game board for actions in all four seasons, special types of worker meeples, and more. What story will you tell as you seek to create the most successful vineyard in Tuscany?</p>",
-    "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1545089307505",
-    "msrp": "0.00",
-    "publishers": [
-      "Stonemaier Games",
-      "Arclight",
-      "Hobby Japan"
-    ],
-    "mechanics": [
-      {
-        "id": "XM2FYZmBHH"
-      },
-      {
-        "id": "fBOTEBUAmV"
-      }
-    ],
-    "categories": [
-      {
-        "id": "Wr8uXcoR9p"
-      }
-    ],
-    "designers": [
-      "Morten Monrad Pedersen",
-      "Jamey Stegmaier",
-      "Alan Stone"
-    ],
-    "artists": [
-      "Morten Monrad Pedersen",
-      "Beth Sobel",
-      "Jamey Stegmaier",
-      "Alan Stone"
-    ]
-  },
-  {
-    "name": "Core Worlds",
-    "year_published": 2011,
-    "min_players": 2,
-    "max_players": 5,
-    "min_playtime": 60,
-    "max_playtime": 60,
-    "min_age": 10,
-    "description": "The ancient Galactic Realm, ruled from the Core Worlds of the galaxy, is waning. Now, the barbaric kingdoms that lie beyond the galactic frontier are amassing their strength, choosing this pivotal moment to strike at the heart of the fading republic, establishing new empires built upon the ashes of decaying civilizations.<br />\r\n<br />\r\nBut these outer systems are not yet strong enough to engage the forces of the Core Worlds directly. The young kingdoms must first gnaw at the edges of the crumbling frontier, developing new types of units and shrewder tactics. They must build up their energy resources to launch magnificent fleets and overwhelming ground forces. Then, when the time is right, they must strike at the galactic core itself, claiming the most exalted planets for themselves. <br />\r\n<br />\r\nCore Worlds is a deck-building card game for 2-5 players. Each player controls a barbarian Star Empire represented by many cards. Throughout the game, players will invade Worlds and draft new Units and Tactics into their Empires. Each card lists its Empire Points in the upper right corner. The player whose Empire contains the most Empire Points at the end of the game is the winner!",
-    "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559255068666-51ATBl-PeLL.jpg",
-    "msrp": "32.49",
-    "publishers": [
-      "Stronghold Games"
-    ],
-    "mechanics": [
-      {
-        "id": "iWODHwRGuU"
-      },
-      {
-        "id": "vZsDDAdOoe"
-      },
-      {
-        "id": "WPytek5P8l"
-      }
-    ],
-    "categories": [],
-    "designers": [
-      "Andrew Parks"
-    ],
-    "artists": [
-      "Alex Figini",
-      "Chechu Nieto",
-      "Jim Parks",
-      "Maciej Rebisz",
-      "Sergey Rumyantsev"
-    ]
-  },
-  {
-    "name": "Guildhall",
-    "year_published": 2012,
-    "min_players": 2,
-    "max_players": 2,
-    "min_playtime": 30,
-    "max_playtime": 30,
-    "min_age": 14,
-    "description": "Progress! That's what these Dark Ages need, someone with a little get-up-and-go. You've been a serf in this one-pig town long enough, and it's time to shake things up. You've opened a guildhall for like-minded professionals from all over Europe to work together, build their trades, and get some economic stability.<br /><br />\r\n\r\nNow if only everybody else didn't have the same idea...<br /><br />\r\n\r\nWell, you'll just have to do it faster than those other guys! Gather professionals into chapters, and use their combined might to reach for victory. Collect complete color sets of professions (all five colors of Trader, for instance), which you use to buy victory points (VP). The first player to gain 20 VP on her turn wins.<br /><br />\r\n\r\nIn Guildhall, each profession grants you special abilities, and these abilities grow stronger the more of the set that you complete. When you cash in the set for victory points, however, you lose the ability until you can build it up again. Which professions are worth risking VP to keep?",
-    "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559257276472-61KviQI0UJL.jpg",
-    "msrp": "27.99",
-    "publishers": [
-      "Alderac Entertainment Group"
-    ],
-    "mechanics": [
-      {
-        "id": "WPytek5P8l"
-      },
-      {
-        "id": "lA3KUtVFCy"
-      },
-      {
-        "id": "T8JEFYwoqy"
-      }
-    ],
-    "categories": [],
-    "designers": [
-      "Hope S. Hwang"
-    ],
-    "artists": [
-      "Michael Perry",
-      "Fabio Porfidia"
-    ]
-  },
-  {
-    "name": "World of Warcraft: The Board Game",
-    "year_published": 2005,
-    "min_players": 2,
-    "max_players": 6,
-    "min_playtime": 180,
-    "max_playtime": 180,
-    "min_age": 12,
-    "description": "The hughely popular massively multiplayer RPG is coming to your tabletop! The WORLD OF WARCRAFT Online Roleplaying Game is the most successful computer game ever, and has garnered enthusiastic acclaim from its more than 3 million players worldwide. Play your favorite Warcraft classes and races as you explore the world of Azeroth in this enormous board game. Battle opponents, gather treasure, and gain levels! Embark on quests to grow ever more powerful and compete to the greatest hero in all the land. The epic WORLD OF WARCRAFT: THE BOARDGAME production will include gorgeously crafted components, including over 150 highly detailed, sculpted plastic figures representing the multiple races of the WORLD OF WARCRAFT. Players will be able to take the roles of all nine of the WORLD OF WARCRAFT classes, each with its own unique and fun talents and powers. The WORLD OF WARCRAFT BOARDGAME is a massive production that will ship in FFG's signature &quot;Epic Style Box&quot; (similar to that of FFG's TWILIGHT IMPERIUM and DESCENT: JOURNEYS IN THE DARK games). You do not want to miss this exciting release that is bound to be one of the greatest board game events of 2005.",
-    "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559257276473-51FJ5HmpwaL.jpg",
-    "msrp": "0.00",
-    "publishers": [
-      "Fantasy Flight Publishing,U.S.",
-      "U.S.",
-      "Fantasy Flight Games"
-    ],
-    "mechanics": [
-      {
-        "id": "bgGxE0pI2B"
-      },
-      {
-        "id": "R0bGq4cAl4"
-      },
-      {
-        "id": "WPytek5P8l"
-      },
-      {
-        "id": "GNtouC8NLm"
-      },
-      {
-        "id": "XM2FYZmBHH"
-      }
-    ],
-    "categories": [],
-    "designers": [
-      "Christian T. Petersen"
-    ],
-    "artists": [
-      "Jesper Ejsing",
-      "John Goodenough",
-      "Andrew Navaro",
-      "Scott Nicely",
-      "Brian Schomburg"
-    ]
-  },
-  {
-    "name": "World's Fair 1893",
-    "year_published": null,
-    "min_players": null,
-    "max_players": null,
-    "min_playtime": null,
-    "max_playtime": null,
-    "min_age": null,
-    "description": "<p>The World's Fair of 1893 in Chicago was a spectacular international exhibition that showcased many great achievements in science, technology, culture, and entertainment. Acting as organizers of the fair, players work diligently to increase their influence throughout the fair and obtain the grand exhibits that will be put on display. The organizer who has earned the best reputation when the fair begins will emerge the victor. </p> <p>On each turn of World's Fair 1893, the active player sends a supporter to one of the five areas and gather all of the cards by it. New cards are then added to some of the areas, and the next player takes a turn. </p> <p>The five areas represent sections of exhibits, like Fine Arts and Electricity. Some cards represent exhibit proposals in one of those five areas, others represent influential people who give you bonus supporters, and other cards represent tickets for attractions and concessions along the Midway. </p> <p>The game consists of three scoring rounds, each triggered when players collectively gather a certain number of Midway tickets. Players gain reputation points for leading in number of supporters in an area and for gathering the most tickets in each round. The leaders in an area also receive approval for exhibit proposals they have gathered that match the area. Players gain reputation points at the end of the game based on the breadth and diversity of their approved exhibits.</p>",
-    "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559257691032-51AqGNKoV8L.jpg",
-    "msrp": "0.00",
-    "publishers": [
-      "Renegade Game Studios"
-    ],
-    "mechanics": [],
-    "categories": [],
-    "designers": [],
-    "artists": []
-  },
-  {
-    "name": "Mahjong Set",
-    "year_published": 1850,
-    "min_players": 3,
-    "max_players": 4,
-    "min_playtime": 120,
-    "max_playtime": 120,
-    "min_age": 8,
-    "description": "This Cantonese Style Mahjong Set features a set of 28 mm tiles, dice, and a batter. All of this is enclosed by a protective box, which prevents components from being misplaced between games.",
-    "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559257439673-21P7r3GsyWL.jpg",
-    "msrp": "0.00",
-    "publishers": [
-      "CHH Imports"
-    ],
-    "mechanics": [
-      {
-        "id": "WPytek5P8l"
-      },
-      {
-        "id": "lA3KUtVFCy"
-      }
-    ],
-    "categories": [],
-    "designers": [
-      "(Uncredited)"
-    ],
-    "artists": [
-      "Barbro Hennius"
-    ]
-  },
-  {
+      "id": "8UmzC1ZGGE",
+      "name": "Small World",
+      "year_published": 2009,
+      "min_players": 2,
+      "max_players": 5,
+      "min_playtime": 40,
+      "max_playtime": 80,
+      "min_age": 8,
+      "description": "Small World is designed by Philippe Keyaerts and is a fantasy-themed game similar in game play to his Vinci, which was released in 1999 by French publisher Descartes. In Small World, players will be able to control characters from 14 fantasy races - dwarves, giants, orcs, elves, and so forth - while trying to take control of territory and push opponents out of adjacent lands and off the map. Even while dominating opponents, however, you have to keep in mind that your race's civilization is doomed as well, thanks to the passing of time and attacking of neighbors, so be ready to cast aside one tribe while taking the reins of another in order to keep dominating the world.<br />\r\n<br />\r\nSmall World is for 2-5 players and contains two double-sided gameboards, with one side being used for each of the different number of possible players. The 14 fantasy races come with matching banners and tokens, and the game also includes 20 special power badges to further customize the races along with mountains, troll lairs, fortresses, holes-in-the-ground, victory coins. and other items.",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559254992240-511JJsfrrNL.jpg",
+      "msrp": "50.00",
+      "publishers": [
+        "Days of Wonder"
+      ],
+      "mechanics": [
+        {
+          "id": "05zCZoLvQJ"
+        },
+        {
+          "id": "R0bGq4cAl4"
+        }
+      ],
+      "categories": [
+        {
+          "id": "ZTneo8TaIO"
+        },
+        {
+          "id": "upXZ8vNfNO"
+        },
+        {
+          "id": "buDTYyPw4D"
+        }
+      ],
+      "designers": [
+        " Philippe Keyaerts"
+      ]
+    },
+    {
+      "id": "fQ1CmHsY5p",
+      "name": "Chaos in the Old World",
+      "year_published": 2009,
+      "min_players": 3,
+      "max_players": 4,
+      "min_playtime": 90,
+      "max_playtime": 120,
+      "min_age": 13,
+      "description": "<p>In <strong>Chaos in the Old World</strong>, each player takes the role of one of the malevolent Lords of Chaos. Each god's distinctive powers and legion of followers give the controlling player unique strengths and heretical abilities with which to corrupt and enslave the Old World.<br /><br />Yet, as the powers of Chaos seek domination by corruption and conquest, they must vie not only against each other, but also against the desperate denizens of the Old World who fight to banish the gods back to the maelstrom of the Realm of Chaos...for now.</p>",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559258094784-51wguj68NWL.jpg",
+      "msrp": "50.99",
+      "publishers": [
+        "Fantasy Flight Games"
+      ],
+      "mechanics": [
+        {
+          "id": "oeg6wN9Eoc"
+        },
+        {
+          "id": "9NBcz45nN7"
+        },
+        {
+          "id": "R0bGq4cAl4"
+        },
+        {
+          "id": "T8JEFYwoqy"
+        },
+        {
+          "id": "XM2FYZmBHH"
+        }
+      ],
+      "categories": [],
+      "designers": [
+        "Eric M. Lang"
+      ]
+    },
+    {
+      "id": "754qbigK4J",
+      "name": "Railways of the World",
+      "year_published": 2005,
+      "min_players": 2,
+      "max_players": 6,
+      "min_playtime": 120,
+      "max_playtime": 120,
+      "min_age": 10,
+      "description": "Rewrite the annals of history...and engrave your name alongside the world's greatest railroad barons. Build your railroad empire across the rails of the world and find out if you have the metal and the mettle to outwit and outmaneuver your opponents!",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559257208783-51Ei1hxiIbL.jpg",
+      "msrp": "0.00",
+      "publishers": [
+        "Flat River Group"
+      ],
+      "mechanics": [
+        {
+          "id": "oeg6wN9Eoc"
+        },
+        {
+          "id": "iWODHwRGuU"
+        },
+        {
+          "id": "BbTMRkwL0b"
+        },
+        {
+          "id": "8PN2HE86wg"
+        },
+        {
+          "id": "ohABM4GjbC"
+        }
+      ],
+      "categories": [],
+      "designers": [
+        "Glenn Drover",
+        "Martin Wallace"
+      ]
+    },
+    {
+      "id": "fOHzVVFf13",
+      "name": "Small World: Underground",
+      "year_published": 2011,
+      "min_players": 2,
+      "max_players": 5,
+      "min_playtime": 40,
+      "max_playtime": 80,
+      "min_age": 8,
+      "description": "Small World Underground is a stand-alone game set beneath the surface of the same fun, light-hearted Small World universe of epic conquests and fallen empires. Featuring new Races and Special Powers, it also introduces a new twist to the original game play - Monster-occupied regions that protect Relics and Places of great power! While more daunting to conquer, these bestow even greater powers to their owner.<br>\n<br>\nSmall World Underground can be played on its own or combined with other Small World game elements, as many of the Races and Special Powers from the original game and previous expansions are compatible. Recommended for experienced Small World players, the game includes: two double-Sided Game Boards; 15 New Fantasy Races with matching banners &amp; tokens; 21 New Special Power badges; nine Popular Places and six Righteous Relics; 106 Victory Coins; dozens of additional special tokens; five Player and one Game Turn Summary Sheets; a Reinforcement Die; and a Rules Booklet.",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559255098802-616j4kx32RL.jpg",
+      "msrp": "50.00",
+      "publishers": [
+        "Days of Wonder"
+      ],
+      "mechanics": [
+        {
+          "id": "bgGxE0pI2B"
+        },
+        {
+          "id": "R0bGq4cAl4"
+        },
+        {
+          "id": "XM2FYZmBHH"
+        }
+      ],
+      "categories": [],
+      "designers": [
+        "Philippe Keyaerts"
+      ]
+    },
+    {
+      "id": "KwoNC8QHJt",
+      "name": "Tuscany: Expand the World of Viticulture",
+      "year_published": 2014,
+      "min_players": 1,
+      "max_players": 6,
+      "min_playtime": 60,
+      "max_playtime": 120,
+      "min_age": 14,
+      "description": "<p><em><strong>Tuscany: Expand the World of Viticulture</strong></em> significantly extends the original game of winemaking. Using a tiered system that lets you gradually unlock (&quot;uncork&quot;) a number of new expansions to <em>Viticulture</em> legacy-style in an order that's unique to your game, <em>Tuscany</em> enhances and completes the rustic world that <em>Viticulture</em> introduced. Just like <em>Viticulture</em>, <em>Tuscany</em> plays 2-6 players and has a play time of around 20 minutes per player.</p>\r\n\r\n<p>These expansions add asymmetric starting resources, new and advanced visitor cards, an extended game board for actions in all four seasons, special types of worker meeples, and more. What story will you tell as you seek to create the most successful vineyard in Tuscany?</p>",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1545089307505",
+      "msrp": "0.00",
+      "publishers": [
+        "Stonemaier Games",
+        "Arclight",
+        "Hobby Japan"
+      ],
+      "mechanics": [
+        {
+          "id": "XM2FYZmBHH"
+        },
+        {
+          "id": "fBOTEBUAmV"
+        }
+      ],
+      "categories": [
+        {
+          "id": "Wr8uXcoR9p"
+        }
+      ],
+      "designers": [
+        "Morten Monrad Pedersen",
+        "Jamey Stegmaier",
+        "Alan Stone"
+      ]
+    },
+    {
+      "id": "Uguuoe9au0",
+      "name": "Core Worlds",
+      "year_published": 2011,
+      "min_players": 2,
+      "max_players": 5,
+      "min_playtime": 60,
+      "max_playtime": 60,
+      "min_age": 10,
+      "description": "The ancient Galactic Realm, ruled from the Core Worlds of the galaxy, is waning. Now, the barbaric kingdoms that lie beyond the galactic frontier are amassing their strength, choosing this pivotal moment to strike at the heart of the fading republic, establishing new empires built upon the ashes of decaying civilizations.<br />\r\n<br />\r\nBut these outer systems are not yet strong enough to engage the forces of the Core Worlds directly. The young kingdoms must first gnaw at the edges of the crumbling frontier, developing new types of units and shrewder tactics. They must build up their energy resources to launch magnificent fleets and overwhelming ground forces. Then, when the time is right, they must strike at the galactic core itself, claiming the most exalted planets for themselves. <br />\r\n<br />\r\nCore Worlds is a deck-building card game for 2-5 players. Each player controls a barbarian Star Empire represented by many cards. Throughout the game, players will invade Worlds and draft new Units and Tactics into their Empires. Each card lists its Empire Points in the upper right corner. The player whose Empire contains the most Empire Points at the end of the game is the winner!",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559255068666-51ATBl-PeLL.jpg",
+      "msrp": "32.49",
+      "publishers": [
+        "Stronghold Games"
+      ],
+      "mechanics": [
+        {
+          "id": "iWODHwRGuU"
+        },
+        {
+          "id": "vZsDDAdOoe"
+        },
+        {
+          "id": "WPytek5P8l"
+        }
+      ],
+      "categories": [],
+      "designers": [
+        "Andrew Parks"
+      ]
+    },
+    {
+      "id": "AM0QgG1RsL",
+      "name": "Guildhall",
+      "year_published": 2012,
+      "min_players": 2,
+      "max_players": 2,
+      "min_playtime": 30,
+      "max_playtime": 30,
+      "min_age": 14,
+      "description": "Progress! That's what these Dark Ages need, someone with a little get-up-and-go. You've been a serf in this one-pig town long enough, and it's time to shake things up. You've opened a guildhall for like-minded professionals from all over Europe to work together, build their trades, and get some economic stability.<br /><br />\r\n\r\nNow if only everybody else didn't have the same idea...<br /><br />\r\n\r\nWell, you'll just have to do it faster than those other guys! Gather professionals into chapters, and use their combined might to reach for victory. Collect complete color sets of professions (all five colors of Trader, for instance), which you use to buy victory points (VP). The first player to gain 20 VP on her turn wins.<br /><br />\r\n\r\nIn Guildhall, each profession grants you special abilities, and these abilities grow stronger the more of the set that you complete. When you cash in the set for victory points, however, you lose the ability until you can build it up again. Which professions are worth risking VP to keep?",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559257276472-61KviQI0UJL.jpg",
+      "msrp": "27.99",
+      "publishers": [
+        "Alderac Entertainment Group"
+      ],
+      "mechanics": [
+        {
+          "id": "WPytek5P8l"
+        },
+        {
+          "id": "lA3KUtVFCy"
+        },
+        {
+          "id": "T8JEFYwoqy"
+        }
+      ],
+      "categories": [],
+      "designers": [
+        "Hope S. Hwang"
+      ]
+    },
+    {
+      "id": "AjqvfAoKD8",
+      "name": "World of Warcraft: The Board Game",
+      "year_published": 2005,
+      "min_players": 2,
+      "max_players": 6,
+      "min_playtime": 180,
+      "max_playtime": 180,
+      "min_age": 12,
+      "description": "The hughely popular massively multiplayer RPG is coming to your tabletop! The WORLD OF WARCRAFT Online Roleplaying Game is the most successful computer game ever, and has garnered enthusiastic acclaim from its more than 3 million players worldwide. Play your favorite Warcraft classes and races as you explore the world of Azeroth in this enormous board game. Battle opponents, gather treasure, and gain levels! Embark on quests to grow ever more powerful and compete to the greatest hero in all the land. The epic WORLD OF WARCRAFT: THE BOARDGAME production will include gorgeously crafted components, including over 150 highly detailed, sculpted plastic figures representing the multiple races of the WORLD OF WARCRAFT. Players will be able to take the roles of all nine of the WORLD OF WARCRAFT classes, each with its own unique and fun talents and powers. The WORLD OF WARCRAFT BOARDGAME is a massive production that will ship in FFG's signature &quot;Epic Style Box&quot; (similar to that of FFG's TWILIGHT IMPERIUM and DESCENT: JOURNEYS IN THE DARK games). You do not want to miss this exciting release that is bound to be one of the greatest board game events of 2005.",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559257276473-51FJ5HmpwaL.jpg",
+      "msrp": "0.00",
+      "publishers": [
+        "Fantasy Flight Publishing,U.S.",
+        "U.S.",
+        "Fantasy Flight Games"
+      ],
+      "mechanics": [
+        {
+          "id": "bgGxE0pI2B"
+        },
+        {
+          "id": "R0bGq4cAl4"
+        },
+        {
+          "id": "WPytek5P8l"
+        },
+        {
+          "id": "GNtouC8NLm"
+        },
+        {
+          "id": "XM2FYZmBHH"
+        }
+      ],
+      "categories": [],
+      "designers": [
+        "Christian T. Petersen"
+      ]
+    },
+    {
+      "id": "aytH8q0ILE",
+      "name": "World's Fair 1893",
+      "year_published": null,
+      "min_players": null,
+      "max_players": null,
+      "min_playtime": null,
+      "max_playtime": null,
+      "min_age": null,
+      "description": "<p>The World's Fair of 1893 in Chicago was a spectacular international exhibition that showcased many great achievements in science, technology, culture, and entertainment. Acting as organizers of the fair, players work diligently to increase their influence throughout the fair and obtain the grand exhibits that will be put on display. The organizer who has earned the best reputation when the fair begins will emerge the victor. </p> <p>On each turn of World's Fair 1893, the active player sends a supporter to one of the five areas and gather all of the cards by it. New cards are then added to some of the areas, and the next player takes a turn. </p> <p>The five areas represent sections of exhibits, like Fine Arts and Electricity. Some cards represent exhibit proposals in one of those five areas, others represent influential people who give you bonus supporters, and other cards represent tickets for attractions and concessions along the Midway. </p> <p>The game consists of three scoring rounds, each triggered when players collectively gather a certain number of Midway tickets. Players gain reputation points for leading in number of supporters in an area and for gathering the most tickets in each round. The leaders in an area also receive approval for exhibit proposals they have gathered that match the area. Players gain reputation points at the end of the game based on the breadth and diversity of their approved exhibits.</p>",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559257691032-51AqGNKoV8L.jpg",
+      "msrp": "0.00",
+      "publishers": [
+        "Renegade Game Studios"
+      ],
+      "mechanics": [],
+      "categories": [],
+      "designers": []
+    },
+    {
+      "id": "R7VOYeJLqa",
+      "name": "Mahjong Set",
+      "year_published": 1850,
+      "min_players": 3,
+      "max_players": 4,
+      "min_playtime": 120,
+      "max_playtime": 120,
+      "min_age": 8,
+      "description": "This Cantonese Style Mahjong Set features a set of 28 mm tiles, dice, and a batter. All of this is enclosed by a protective box, which prevents components from being misplaced between games.",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559257439673-21P7r3GsyWL.jpg",
+      "msrp": "0.00",
+      "publishers": [
+        "CHH Imports"
+      ],
+      "mechanics": [
+        {
+          "id": "WPytek5P8l"
+        },
+        {
+          "id": "lA3KUtVFCy"
+        }
+      ],
+      "categories": [],
+      "designers": [
+        "(Uncredited)"
+      ]
+    },
+    {
+      "id": "mAcwRkACI5",
       "name": "Teotihuacan: City of Gods",
       "year_published": 2018,
       "min_players": 1,
@@ -394,12 +364,10 @@
       "designers": [
         "Daniele Tascini",
         "Dávid Turczi"
-      ],
-      "artists": [
-        "Odysseas Stamoglou"
       ]
     },
     {
+      "id": "AvqBwE0if0",
       "name": "Bruges",
       "year_published": 2013,
       "min_players": 2,
@@ -424,12 +392,10 @@
       "categories": [],
       "designers": [
         "Stefan Feld"
-      ],
-      "artists": [
-        "Michael Menzel"
       ]
     },
     {
+      "id": "qmcl21WSOV",
       "name": "Terror In Meeple City",
       "year_published": 2013,
       "min_players": 2,
@@ -471,12 +437,10 @@
       "designers": [
         "Antoine Bauza",
         "Ludovic Maublanc"
-      ],
-      "artists": [
-        "Pierô"
       ]
     },
     {
+      "id": "EiVU77dgUm",
       "name": "Ticket to Ride: New York",
       "year_published": 2018,
       "min_players": 2,
@@ -514,13 +478,10 @@
       ],
       "designers": [
         "Alan R. Moon"
-      ],
-      "artists": [
-        "Cyrille Daujean",
-        "Julien Delval"
       ]
     },
     {
+      "id": "4u9feEOO2t",
       "name": "Dice City",
       "year_published": 2015,
       "min_players": 1,
@@ -559,12 +520,10 @@
       ],
       "designers": [
         " Vangelis Bagiartakis "
-      ],
-      "artists": [
-        "Gong Studios"
       ]
     },
     {
+      "id": "NS9jJJqwby",
       "name": "Flip City",
       "year_published": 2014,
       "min_players": 1,
@@ -597,14 +556,10 @@
       ],
       "designers": [
         "Chih-Fan Chen"
-      ],
-      "artists": [
-        " Ralf Berszuck",
-        " Chih-Fan Chen",
-        "Adam P. McIver"
       ]
     },
     {
+      "id": "0PdAX1fLsD",
       "name": "Blue Moon: City",
       "year_published": 2006,
       "min_players": 2,
@@ -635,19 +590,10 @@
       "categories": [],
       "designers": [
         "Reiner Knizia"
-      ],
-      "artists": [
-        "Daren Bader",
-        "Scott Fischer",
-        "Lars Grant-West",
-        "Todd Lockwood",
-        "John Matson",
-        "James Nelson",
-        "Michael Phillippi",
-        "Franz Vohwinkel"
       ]
     },
     {
+      "id": "YDIDvBIFw9",
       "name": "The City of Kings",
       "year_published": 2018,
       "min_players": 1,
@@ -684,12 +630,10 @@
       "categories": [],
       "designers": [
         "Frank West"
-      ],
-      "artists": [
-        "Miguel Da Silva"
       ]
     },
     {
+      "id": "iBO9pE0xb8",
       "name": "Legendary: A Marvel Deck Building Game - Dark City",
       "year_published": 2013,
       "min_players": 1,
@@ -711,10 +655,10 @@
       ],
       "designers": [
         "Devin Low"
-      ],
-      "artists": []
+      ]
     },
     {
+      "id": "sX6oYnBhGo",
       "name": "Machi Koro: Bright Lights, Big City",
       "year_published": 2016,
       "min_players": 2,
@@ -739,9 +683,364 @@
       "categories": [],
       "designers": [
         "Masao Suganuma"
+      ]
+    },
+    {
+      "id": "E35EBpxuDX",
+      "name": "Century: Spice Road",
+      "year_published": 2017,
+      "min_players": 2,
+      "max_players": 5,
+      "min_playtime": 30,
+      "max_playtime": 45,
+      "min_age": 8,
+      "description": "<div>\r\n<p>Centuries ago, the spice trade was the most important market in the world. It established and destroyed empires, compelled men to explore the far corners of the earth, and led to the discovery of new worlds. At that time, the value of spices even rivaled that of gold! In the old days, they carried a sense of mystery and allure. Spice merchants would weave fantastic tales of danger to reach these spices in hopes of selling their wares at higher prices. In later centuries, the demand on spices became so great, that those who controlled the spices generated immense wealth and renown. It is at this time, you find yourself leading your caravan across the eastern lands to the Mediterranean Sea in search of wealth and fortune. As a caravan leader, your journey begins on the Spice Road. This is Century: Spice Road!<br /><br />In <strong>Century: Spice Road</strong>, players aim to collect and trade spices in order to acquire point cards and coins that are worth points at the end of the game. Players play cards from their hands to acquire spices for their caravan and trade those spices in for wealth and power (point cards and money), or to purchase new merchant cards to more efficiently acquire rare and valuable spices. Players take one action a turn until someone has acquired their fifth (or sixth in 2-3 player game) point card, players will finish out the current round of play and the person with the most points wins!<br /><br /><strong>Play or Acquire Cards</strong><br />At the start of the game, each player is given two merchant cards to start with and some preliminary spices. On their turn, each player may choose, as their action for the turn, to play a card from their hand, or spend spices to acquire a new merchant card from the row and place it in their hand. Merchant cards allow players to acquire new spices, exchange spices they currently have for different ones, or upgrade a spice to one worth more. Building up a good spice trading engine of merchant cards is an important part of succeeding on the Spice Road, so look out for powerful play sequences when taking new cards!<br /><br /><strong>Rest</strong><br />Once they've played all the cards from their hands, players must use their turn action to rest and return their cards to their hand. Now they'll be able to play their cards again on future turns, building up their caravan and further developing their hand of merchant cards to start acquiring point cards.<br /><br /><strong>Claim Point Cards</strong><br />The way to win in Century: Spice Road is to have the most points at the end of the game. Players get points when they acquire Point Cards and Coins by trading in their spices. Each point card in the row will have a different cost and overall point value listed on it, and the spice cost must be paid to acquire that card. If the two leftmost cards in the row are acquired, whoever acquired one of those point cards can take a coin from the pile above it. Silver coins are worth 1 point at the end of the game and gold coins are worth 3 points! Once a player has bought their fifth point card, the round of play finishes and a winner is crowned!</p>\r\n</div>",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559254192344-51tjV3rKyRL.jpg",
+      "msrp": "39.99",
+      "publishers": [
+        "Plan B Games"
       ],
-      "artists": [
-        "Noboru Hotta"
+      "mechanics": [
+        {
+          "id": "wV5peB05xs"
+        },
+        {
+          "id": "WPytek5P8l"
+        },
+        {
+          "id": "lA3KUtVFCy"
+        }
+      ],
+      "categories": [
+        {
+          "id": "eX8uuNlQkQ"
+        },
+        {
+          "id": "N0TkEGfEsF"
+        },
+        {
+          "id": "QAYkTHK1Dd"
+        }
+      ],
+      "designers": [
+        "Emerson Matsuuchi"
+      ]
+    },
+    {
+      "id": "XiPoK8sDYy",
+      "name": "Glass Road",
+      "year_published": 2013,
+      "min_players": 1,
+      "max_players": 4,
+      "min_playtime": 75,
+      "max_playtime": 90,
+      "min_age": 12,
+      "description": "Glass road puts the players in the role of medieval glass-makers and celebrates the tradition of Bavarian glasswork. Over four building periods, players will use their identical hands of 15 specialists and attempt to outwit and outplay their opponents. Each specialist has two abilities and if you are the only one to play a specialist, you can use both abilities; otherwise you may only use one. Make the best uses of your resources and specialists to win the game!",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559254924845-61Ozu22gtUL.jpg",
+      "msrp": "58.50",
+      "publishers": [
+        "Mayfair Games"
+      ],
+      "mechanics": [
+        {
+          "id": "wV5peB05xs"
+        },
+        {
+          "id": "lA3KUtVFCy"
+        },
+        {
+          "id": "8PN2HE86wg"
+        }
+      ],
+      "categories": [
+        {
+          "id": "ODWOjWAJj3"
+        },
+        {
+          "id": "N0TkEGfEsF"
+        }
+      ],
+      "designers": [
+        "Uwe Rosenberg"
+      ]
+    },
+    {
+      "id": "0bGeepj72N",
+      "name": "The Great Heartland Hauling Co.",
+      "year_published": 2013,
+      "min_players": 2,
+      "max_players": 4,
+      "min_playtime": 30,
+      "max_playtime": 45,
+      "min_age": 10,
+      "description": "In <b>The Great Heartland Hauling Co.</b> players take on the role of medium haul Midwest truck drivers doing their best to make a living by hauling goods for big suppliers. Players truck to various locations around America's Heartland, picking up and dropping off goods using matching cards from their hands. Most locations have native goods that require fewer cards to load; other locations may pay a premium for those goods but may also require more fuel - and time - to get there with the cargo. With limited space in each trailer and only five cards in hand at a time, players will have to expertly manage their resources, as well as play the odds and press their luck to be the best trucker on the road.<br />\r\n<br />\r\nThe Great Heartland Hauling Co. will offer a lot of replay value through the use of cards to create a variable board set-up each game. The game will include 60 goods cubes, 4 wooden trucks, and 46 resource cards - required for pick-up and delivery - that are drawn from a shared draft board, as well as 20 fuel cards, which are used to move about the Heartland.",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559254979391-610ZHlQDAAL.jpg",
+      "msrp": "19.95",
+      "publishers": [
+        "Dice Hate Me Games"
+      ],
+      "mechanics": [
+        {
+          "id": "WPytek5P8l"
+        },
+        {
+          "id": "U3zhCQH7Et"
+        },
+        {
+          "id": "BbTMRkwL0b"
+        }
+      ],
+      "categories": [],
+      "designers": [
+        "Jason Kotarski"
+      ]
+    },
+    {
+      "id": "0f1mCK47S7",
+      "name": "Hit Z Road",
+      "year_published": 2016,
+      "min_players": 1,
+      "max_players": 4,
+      "min_playtime": 30,
+      "max_playtime": 60,
+      "min_age": 12,
+      "description": "In the fast-paced and morbidly kitschy game <i>Hit Z Road</i>, you and your fellow players embark on a road trip going south from Chicago to the sandy beaches of the California coast along America's famous Route 66 - now infested by zombies! Battle zombie hordes, drive abandoned school buses, and scavenge for gas and bullets as you explore a darkened, tainted American countryside full of shambling undead, haunted carnivals, and plumes of toxic gas.",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559254888822-61kyQDyBxFL.jpg",
+      "msrp": "33.99",
+      "publishers": [
+        "Asmodee"
+      ],
+      "mechanics": [
+        {
+          "id": "AZxlPpi5oq"
+        },
+        {
+          "id": "iWODHwRGuU"
+        },
+        {
+          "id": "R0bGq4cAl4"
+        },
+        {
+          "id": "BGrhzIN69D"
+        },
+        {
+          "id": "hmipYN1R1I"
+        }
+      ],
+      "categories": [],
+      "designers": [
+        "Martin Wallace"
+      ]
+    },
+    {
+      "id": "lbzzasNAGG",
+      "name": "Roads & Boats",
+      "year_published": 1999,
+      "min_players": 1,
+      "max_players": 4,
+      "min_playtime": 240,
+      "max_playtime": 300,
+      "min_age": 12,
+      "description": "In Roads &amp; Boats, each player builds a civilization over a long period of time, like in many other games. Unlike most games, however, the emphasis is not on warfare, population growth, city or statebuilding, but on logistics, or rather: on transport.<br />\r\n <br />\r\nEach player starts the game with three donkeys, a pile of wooden boards, a number of stones and two geese. With these few resources, you try to build such diverse things as woodcutters, roads, boats, mines, a stock exchange... but beware! There is no concept of territory in this game: you cannot own land, nor buildings, so the things you build can be used by any other player... <br />\r\n<br />\r\nThe game can be played by two to four players, but it can also be used as a one-person puzzle.",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559254943589-41i5oSks56L.jpg",
+      "msrp": "199.99",
+      "publishers": [
+        "Splotter Spellen"
+      ],
+      "mechanics": [
+        {
+          "id": "qu5BcGjAzk"
+        },
+        {
+          "id": "MaXzmoZUoX"
+        },
+        {
+          "id": "U3zhCQH7Et"
+        },
+        {
+          "id": "BbTMRkwL0b"
+        },
+        {
+          "id": "ohABM4GjbC"
+        }
+      ],
+      "categories": [
+        {
+          "id": "ODWOjWAJj3"
+        },
+        {
+          "id": "329DxyFL9D"
+        },
+        {
+          "id": "N0TkEGfEsF"
+        },
+        {
+          "id": "zqFmdU4Fp2"
+        },
+        {
+          "id": "CWYOF9xu7O"
+        }
+      ],
+      "designers": [
+        "Jeroen Doumen",
+        "Joris Wiersinga"
+      ]
+    },
+    {
+      "id": "9cw0KGhwNu",
+      "name": "Afternova",
+      "year_published": 2020,
+      "min_players": 3,
+      "max_players": 6,
+      "min_playtime": 30,
+      "max_playtime": 60,
+      "min_age": 12,
+      "description": "In the aftermath of a supernova, form uneasy truces with your competitors to extract resources from unstable planets.",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559746823060",
+      "msrp": "0.00",
+      "publishers": [],
+      "mechanics": [
+        {
+          "id": "WPytek5P8l"
+        },
+        {
+          "id": "GNtouC8NLm"
+        },
+        {
+          "id": "AVY6EvSQTP"
+        }
+      ],
+      "categories": [
+        {
+          "id": "rrvd68LjOR"
+        }
+      ],
+      "designers": [
+        "Jeff Chin",
+        "Andrew Nerger"
+      ]
+    },
+    {
+      "id": "WOsLbWXFnr",
+      "name": "Merchants of the Dark Road",
+      "year_published": 2020,
+      "min_players": 1,
+      "max_players": 4,
+      "min_playtime": 60,
+      "max_playtime": 120,
+      "min_age": 12,
+      "description": "The road is costly, but the rewards are great! Merchants of the Dark Road is a strategy board game set in an exciting new fantasy world",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1591267608267",
+      "msrp": "0.00",
+      "publishers": [
+        "Elf Creek Games"
+      ],
+      "mechanics": [
+        {
+          "id": "FA6HjbhdNW"
+        },
+        {
+          "id": "B30dz3Ljjx"
+        }
+      ],
+      "categories": [
+        {
+          "id": "rrvd68LjOR"
+        }
+      ],
+      "designers": [
+        "Brian Suhre"
+      ]
+    },
+    {
+      "id": "Q0SWcBlkwN",
+      "name": "Kashgar: Merchants of the Silk Road",
+      "year_published": 2013,
+      "min_players": 2,
+      "max_players": 4,
+      "min_playtime": 45,
+      "max_playtime": 60,
+      "min_age": 12,
+      "description": "In Kashgar, players trade different spices that are coming over the silk road from Asia to Europe. Each player has control over three caravans. In the beginning, each caravan consists of three cards that are spread out vertically so that the top part of each card is visible; each card stands for a caravan member with different abilities. On his turn, a player performs only one action, choosing one of the cards on top of the three caravans and executing one action shown on that card. Then the card is put at the back of its caravan. To use the same caravan member again, a player must first use all the other cards on top of that caravan row. The core mechanism of Kashgar could be called &quot;open deck-building&quot;. The game plays quickly with little downtime. Simple, yet so much fun and lots of strategies to explore.",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1540097785665",
+      "msrp": "39.99",
+      "publishers": [
+        "Grail Games"
+      ],
+      "mechanics": [
+        {
+          "id": "vZsDDAdOoe"
+        }
+      ],
+      "categories": [],
+      "designers": [
+        "Gerhard Hecht"
+      ]
+    },
+    {
+      "id": "Tf1fGyZLua",
+      "name": "King's Road",
+      "year_published": null,
+      "min_players": 2,
+      "max_players": 5,
+      "min_playtime": 30,
+      "max_playtime": 45,
+      "min_age": 10,
+      "description": "Grail Games is proud to present a beautiful new game, from the dream team of designer Dr Reiner Knizia, and illustrator Vincent Dutrait!<br />\r\n<br />\r\nIn King's Road, the players are nobles who are attempting to gain power and influence within the king's many provinces. As the king travels along the road that connects all the major landmarks within his territory, he will allow the most influential noble in each region to govern in his stead. Over time, the most favored noble will win the game.<br />\r\n<br />\r\nKing's Road is an area-majority game. Each player has identical decks of eleven cards. On a turn, players simultaneously select the three cards they will play, and in what order. To win, players not only have to influence the king as he traverses the land, but attempt to read the minds of their opponents.<br />\r\n<br />\r\nKing's Road re-implements the game <i>Imperium</i>, previously only available within game compendiums.",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559254142049-61pPupZhUXL.jpg",
+      "msrp": "28.99",
+      "publishers": [
+        "Grail Games"
+      ],
+      "mechanics": [
+        {
+          "id": "05zCZoLvQJ"
+        },
+        {
+          "id": "WPytek5P8l"
+        },
+        {
+          "id": "DEvPj5twid"
+        }
+      ],
+      "categories": [],
+      "designers": []
+    },
+    {
+      "id": "CEzFMe8H2w",
+      "name": "The Road to Canterbury",
+      "year_published": 2011,
+      "min_players": 2,
+      "max_players": 3,
+      "min_playtime": 60,
+      "max_playtime": 60,
+      "min_age": 10,
+      "description": "Greed, Pride, Gluttony, Wrath, Luxury, Idleness, and Envy - the infamous &quot;Seven Deadly Sins&quot;. For the faithful, they instill horror. For you, on the other hand, they present a wonderful business opportunity!<br /><br />\r\n\r\nIn The Road to Canterbury, you play a medieval pardoner who sells certificates delivering sinners from the eternal penalties brought on by these Seven Deadly Sins. You make your money by peddling these counterfeit pardons to Pilgrims traveling the road to Canterbury. Perhaps you can persuade the Knight that his pride must be forgiven? Surely the Friar's greed will net you a few coins? The Miller's wrath and the Monk's gluttony are on full public display and demand pardoning! The Wife of Bath regales herself in luxury, the Man-of-Law languishes in idleness, and that Prioress has envy written all over her broad forehead. And the naughty stories these Pilgrims tell each other are so full of iniquity they would make a barkeep blush! Pardoning such wickedness should be easy money, right?<br /><br />\r\n\r\nNot quite. For you to succeed as a pardoner, you'll need to do more than just sell forged pardons for quick cash. To keep your services in demand, you will actually need to lead these Pilgrims into temptation yourself! Perhaps some phony relics might help? There is also one big catch. The Seven Deadly Sins live up to their name: each sin that a Pilgrim commits brings Death one step nearer, and a dead Pilgrim pays no pardoners!<br /><br />\r\n\r\nSo much to forgive, so little time. Will you be able to outwit your opponents by pardoning more of these Pilgrims' sins before they die or finish their pilgrimage to Canterbury?",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559257325268-61fKtr6Do7L.jpg",
+      "msrp": "0.00",
+      "publishers": [
+        "Gryphon Games"
+      ],
+      "mechanics": [
+        {
+          "id": "05zCZoLvQJ"
+        },
+        {
+          "id": "iWODHwRGuU"
+        },
+        {
+          "id": "WPytek5P8l"
+        },
+        {
+          "id": "lA3KUtVFCy"
+        },
+        {
+          "id": "T8JEFYwoqy"
+        }
+      ],
+      "categories": [],
+      "designers": [
+        "Alf Seegert"
       ]
     }
 ]

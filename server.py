@@ -6,7 +6,11 @@ import model
 
 import crud
 
+import helper
+
 from jinja2 import StrictUndefined
+
+import requests
 
 app = Flask(__name__)
 app.secret_key = "dev"
@@ -42,21 +46,13 @@ def show_all_games():
 def add_game_to_database():
     """Add a UserGame"""
 
-    game_id_str = request.form.get("game_id")
-    game_id = int(game_id_str)
+    atlas_id_str = request.form.get("atlas_id")
+    atlas_id = int(atlas_id_str)
     add_type = request.form.get("add_type")
 
-    added_game = False
-    if add_type == "own":
-        # Will need to replace 1 with username
-        added_game = crud.create_user_game(1, game_id)
-    elif add_type == "wishlist":
-        added_game = crud.create_wanted_game(1, game_id)
+    status = add_game_to_database(atlas_id, add_type)
 
-    if added_game:
-        return "Game was successfully added"
-    else:
-        return "A problem has occurred"
+    return status
 
 @app.route('/api/remove-game', methods=['POST'])
 def change_own_to_false():
@@ -80,28 +76,14 @@ def change_own_to_false():
 
 @app.route('/api/games.json')
 def return_all_games():
-    """Return all games from database"""
+    """Return games from database matching search terms"""
 
-    all_games = model.db.session.query(model.Game).all()
+    search_terms = request.args.get("search_terms")
 
-    results = []
-
-    for game in all_games:
-        primary_publisher = model.db.session.query(model.GamePublisher).join(
-              model.Publisher).filter(model.GamePublisher.game_id == 
-              game.id).first()
-
-        results.append(
-            {
-            "key": game.id,
-            "name": game.name,
-            "min_players": game.min_players,
-            "max_players": game.max_players,
-            "publisher": primary_publisher.pub.name,
-            "image_url": game.image_url
-            })
+    results = helper.search_board_game_atlas(search_terms)
 
     return jsonify(results)
+
 
 @app.route('/api/own_games.json')
 def show_user_own_games():

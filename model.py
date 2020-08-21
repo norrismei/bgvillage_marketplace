@@ -58,6 +58,7 @@ class Game(db.Model):
     max_playtime = db.Column(db.Integer)
     image_url = db.Column(db.String)
     msrp = db.Column(db.Float)
+    atlas_id = db.Column(db.String)
 
     user_game = db.relationship('UserGame', backref='games')
     wanted_game = db.relationship('WantedGame', backref='games')

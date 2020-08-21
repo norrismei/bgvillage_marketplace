@@ -1,12 +1,6 @@
-$('#games-results').html(
-    `<th>Add</th>
-     <th>Image</th>
-     <th>Name</th>
-     <th>Players</th>
-     <th>Publisher</th>`
-);
-$.get('/api/games.json', (response) => {
-    for (const game of response) {
+// Add rows of games retrieved from API underneath our table header
+function addGameRows(games) {
+    for (const game of games) {
         let players = [];
         if (game.min_players) {
             players = `${game.min_players}`;
@@ -16,11 +10,11 @@ $.get('/api/games.json', (response) => {
             };
         };
         $('#games-results').append(
-            `<tr>
+            `<tr class="game-row">
                 <td>
                     <div class="dropdown">
                         <button class="dropdown-button" 
-                                data-game-id="${game.key}">
+                                data-atlas-id="${game.key}">
                             Add Game
                         </button>
                         <div class="add-dropdown-content">
@@ -36,27 +30,42 @@ $.get('/api/games.json', (response) => {
             </tr>`
         );
     };
-  });
+  };
+
+// Initial loading of All Games page. Preloads with this search.
+$.get('/api/games.json', {"search_terms": "Catan"}, (response) => {
+    addGameRows(response);
+}
+    
+
+// Refreshing of page upon submitting a search for a game
+$('#games-search-form').submit((event) => {
+    event.preventDefault();
+    const searchTerms = $('#game-search-terms').val();
+    $.get('/api/games.json', {"search_terms": searchTerms}, (response) => {
+        $('.game-row').remove();
+        addGameRows(response);
+    })
+})
 
 // An example of event delegation. If we selected the buttons, which are
 // dynamically produced, the event handler won't bind to them. Instead, select
 // the parent element and move the button selector to second parameter of .on()
 // method.
+
+// Show drop-down menu when clicking on Add Game
 $('#games-results').on('click', 'button', (event) => {
     const addButton = $(event.target);
     addButton.next("div").toggleClass("show");
-//     // const addButtonId = addButton.attr('data-game-id');
-//     $.post('/api/add-game', {'game_id': addButtonId}, (res) => {
-//         alert(res);
-//     // });
 })
 
+// Handles the event, depending on which option user clicks
 $('#games-results').on('click', '.add-option', (event) => {
     const addOption = $(event.target);
-    const addGameId = addOption.parents('.add-dropdown-content').
-                        siblings('.dropdown-button').attr('data-game-id');
+    const addAtlasId = addOption.parents('.add-dropdown-content').
+                        siblings('.dropdown-button').attr('data-atlas-id');
     if (addOption.hasClass('add-to-own')) {
-        $.post('/api/add-game', {'game_id': addGameId, 
+        $.post('/api/add-game', {'atlas_id': addAtlasId, 
                                  'add_type': 'own'}, (res) => {
             alert(res);
             // Close the open dropdown
@@ -64,7 +73,7 @@ $('#games-results').on('click', '.add-option', (event) => {
         });
     };
     if (addOption.hasClass('add-to-wishlist')) {
-        $.post('/api/add-game', {'game_id': addGameId, 
+        $.post('/api/add-game', {'game_id': addAtlasId, 
                                  'add_type': 'wishlist'}, (res) => {
             alert(res);
             // Close the open dropdown
