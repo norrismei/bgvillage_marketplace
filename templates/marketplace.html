@@ -6,5 +6,25 @@
 
 
 {% block body %}
+<a href="/users/norrism3">Return to user's page</a>
+<h1>Marketplace</h1>
+<section id="listings-search">
+  <form action="/" id="listings-search-form">
+    <input type="text" id="game-search-terms" 
+           placeholder="Search for a game...">
+    <input type="submit">
+  </form>
+</section>
+<section>
+  <table id="listings-results">
+    <th>Image</th>
+    <th>Name</th>
+    <th>Condition</th>
+    <th>Price</th>
+    <th>Seller</th>
+    <th>Contact</th>
+  </table>
+</section>
 
+<script src="/static/js/marketplace.js"></script>
 {% endblock %}

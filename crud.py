@@ -45,7 +45,7 @@ def get_game_by_name(name):
         return existing_game
     else:
         return None
-        
+
 
 def get_game_by_atlas_id(atlas_id):
     """Takes in atlas_id and returns matching Game, if any"""
@@ -98,6 +98,25 @@ def create_listed_game(user_games_id, condition, price, comment=None):
     db.session.commit()
 
     return listed_game
+
+
+def delete_listed_game(id):
+    """Finds ListedGame by id and removes row"""
+
+    listed_game = ListedGame.query.get(id)
+    db.session.delete(listed_game)
+    db.session.commit()
+
+
+def get_listed_game_by_id(user_game_id):
+    """Takes in a UserGame id and returns a matching ListedGame, if any"""
+
+    listed_game = db.session.query(ListedGame).filter_by(id=user_game_id).first()
+
+    if listed_game:
+        return listed_game
+    else:
+        return None
 
 
 def create_wanted_game(user_id, game_id):

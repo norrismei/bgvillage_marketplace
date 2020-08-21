@@ -42,7 +42,7 @@ def search_board_game_atlas(search_terms):
     return search_results
 
 
-def add_game_to_database(add_type, name, atlas_id=None):
+def handle_add_game(add_type, name, atlas_id=None):
     """Adds game to either UserGame or WantedGame tables"""
 
     if atlas_id:
@@ -95,7 +95,7 @@ def add_game_to_database(add_type, name, atlas_id=None):
                 try:
                     mech = model.db.session.query(model.Mechanic).filter_by(
                            atlas_id = atlas_id).first()
-                    crud.create_game_mechanic(new_game.id, mech.id)
+                    crud.create_game_mechanic(game_id, mech.id)
                 except:
                     continue
 
@@ -112,7 +112,7 @@ def add_game_to_database(add_type, name, atlas_id=None):
                 try:
                     cat = model.db.session.query(model.Category).filter_by(
                            atlas_id = atlas_id).first()
-                    crud.create_game_category(new_game.id, cat.id)
+                    crud.create_game_category(game_id, cat.id)
                 except:
                     continue
         
@@ -128,10 +128,10 @@ def add_game_to_database(add_type, name, atlas_id=None):
                 existing_pub = model.Publisher.query.filter_by(
                                name = publisher).first()
                 if existing_pub:
-                    crud.create_game_publisher(new_game.id, existing_pub.id)
+                    crud.create_game_publisher(game_id, existing_pub.id)
                 else:
                     new_pub = crud.create_publisher(publisher)
-                    crud.create_game_publisher(new_game.id, new_pub.id)
+                    crud.create_game_publisher(game_id, new_pub.id)
 
         # Create Designers objects for game's designers
         # Get a list of designers
@@ -145,11 +145,11 @@ def add_game_to_database(add_type, name, atlas_id=None):
                 existing_designer = model.Designer.query.filter_by(
                                     name = designer).first()
                 if existing_designer:
-                    crud.create_game_designer(new_game.id, 
+                    crud.create_game_designer(game_id, 
                                               existing_designer.id)
                 else:
                     new_designer = crud.create_designer(designer)
-                    crud.create_game_designer(new_game.id, new_designer.id)
+                    crud.create_game_designer(game_id, new_designer.id)
 
     #After assigning game_id above, can add game to UserGame or WantedGame
     added_game = False
@@ -161,5 +161,22 @@ def add_game_to_database(add_type, name, atlas_id=None):
 
     if added_game:
         return "Game was successfully added"
+    else:
+        return "A problem has occurred"
+
+def handle_remove_game(remove_type, game_id):
+    """Updates UserGame to own=False or deletes WantedGame"""
+
+    removed_game = False
+    if remove_type == "own":
+        listed_game = crud.get_listed_game_by_id(game_id)
+        if listed_game:
+            crud.delete_listed_game(listed_game.id)
+        removed_game = crud.update_user_game_to_false(game_id)
+    elif remove_type == "wishlist":
+        removed_game = crud.delete_wanted_game(game_id)
+
+    if removed_game:
+        return "Game was successfully removed"
     else:
         return "A problem has occurred"

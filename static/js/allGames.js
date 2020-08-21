@@ -1,3 +1,5 @@
+"use strict";
+
 // Add rows of games retrieved from API underneath our table header
 function addGameRows(games) {
     for (const game of games) {

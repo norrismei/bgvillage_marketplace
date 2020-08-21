@@ -91,7 +91,10 @@ class UserGame(db.Model):
 
     # Because of the one-one relationship between UserGame and ListedGame,
     # set uselist to False
-    listing = db.relationship('ListedGame', uselist=False, backref="user_games")
+    listing = db.relationship('ListedGame', 
+                               uselist=False, 
+                               cascade="all, delete",
+                               backref="user_games")
 
     def __repr__(self):
         """Show human-readable UserGame instance"""

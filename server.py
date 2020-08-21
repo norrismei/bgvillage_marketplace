@@ -45,6 +45,13 @@ def show_all_games():
     return render_template('all_games.html')
 
 
+@app.route('/marketplace')
+def show_all_listings():
+    """View all games from database"""
+
+    return render_template('marketplace.html')
+
+
 @app.route('/api/add-game', methods=['POST'])
 def add_game_to_database():
     """Add a UserGame"""
@@ -54,9 +61,9 @@ def add_game_to_database():
     atlas_id = request.form.get("atlas_id")
 
     if atlas_id:
-        status = helper.add_game_to_database(add_type, name, atlas_id)
+        status = helper.handle_add_game(add_type, name, atlas_id)
     else:
-        status = helper.add_game_to_database(add_type, name)
+        status = helper.handle_add_game(add_type, name)
 
     return status
 
@@ -75,23 +82,16 @@ def list_game():
     return "Game was successfully listed"
 
 @app.route('/api/remove-game', methods=['POST'])
-def change_own_to_false():
+def remove_game():
     """Changes own Boolean to false on UserGames table"""
 
     game_id_str = request.form.get("user_game_id")
     game_id = int(game_id_str)
     remove_type = request.form.get("remove_type")
 
-    removed_game = False
-    if remove_type == "own":
-        removed_game = crud.update_user_game_to_false(game_id)
-    elif remove_type == "wishlist":
-        removed_game = crud.delete_wanted_game(game_id)
+    status = helper.handle_remove_game(remove_type, game_id)
 
-    if removed_game:
-        return "Game was successfully removed"
-    else:
-        return "A problem has occurred"
+    return status
 
 
 @app.route('/api/games.json')
