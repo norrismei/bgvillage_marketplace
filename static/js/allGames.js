@@ -39,9 +39,9 @@ $.get('/api/games.json', {"search_terms": "%"}, (response) => {
     addGameRows(response);
     }
 )
-    
 
-// Refreshing of page upon submitting a search for a game
+
+// Refreshing of displayed results upon submitting a search for a game
 $('#games-search-form').submit((event) => {
     event.preventDefault();
     const searchTerms = $('#game-search-terms').val();

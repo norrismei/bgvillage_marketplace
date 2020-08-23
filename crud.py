@@ -100,10 +100,12 @@ def create_listed_game(user_games_id, condition, price, comment=None):
     return listed_game
 
 
-def get_marketplace_listings():
+def get_marketplace_listings(search_terms):
     """Returns all ListedGames from all Users"""
 
-    listed_games = ListedGame.query.all()
+    listed_games = db.session.query(ListedGame).select_from(ListedGame).join(
+                   UserGame).join(Game).filter(
+                   Game.name.ilike(f'%{search_terms}%')).all()
 
     return listed_games
 

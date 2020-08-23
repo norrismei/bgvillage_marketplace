@@ -84,8 +84,8 @@ class UserGame(db.Model):
     id = db.Column(db.Integer,
                    autoincrement=True,
                    primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    game_id = db.Column(db.Integer, db.ForeignKey("games.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    game_id = db.Column(db.Integer, db.ForeignKey("games.id"), nullable=False)
     own = db.Column(db.Boolean, default=True)
 
     user = db.relationship('User', backref='user_games')
@@ -117,14 +117,15 @@ class ListedGame(db.Model):
     price = db.Column(db.Float, nullable=False)
     comment = db.Column(db.Text)
 
-    user_game = db.relationship('UserGame', backref='listed_games')
+    user_game = db.relationship('UserGame', uselist=False, backref='listed_games')
+    game = db.relationship('Game', secondary='user_games', backref='listed_games')
 
     def __repr__(self):
         """Show human-readable listed_game"""
 
-        return f"<ListedGame id={self.id} "\
-               f"user={self.user_game.user.username} "\
-               f" game={self.user_game.game.name}>"
+        return f"<ListedGame id={self.id}"\
+               f"user={self.user_game.user.username}"\
+               f"game={self.user_game.game.name}>"
 
 
 class WantedGame(db.Model):

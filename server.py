@@ -160,7 +160,9 @@ def show_user_sell_games():
 def show_marketplace_listings():
     """Return JSON for all listings from all users"""
 
-    listed_games = crud.get_marketplace_listings()
+    search_terms = request.args.get("search_terms")
+
+    listed_games = crud.get_marketplace_listings(search_terms)
 
     print(listed_games)
 
@@ -178,8 +180,6 @@ def show_marketplace_listings():
             "username": listed_game.user_game.user.username
             }
         )
-
-    print(results)
 
     return jsonify(results)
 
