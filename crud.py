@@ -100,6 +100,14 @@ def create_listed_game(user_games_id, condition, price, comment=None):
     return listed_game
 
 
+def get_marketplace_listings():
+    """Returns all ListedGames from all Users"""
+
+    listed_games = ListedGame.query.all()
+
+    return listed_games
+
+
 def delete_listed_game(id):
     """Finds ListedGame by id and removes row"""
 

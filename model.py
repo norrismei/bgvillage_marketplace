@@ -33,6 +33,8 @@ class User(db.Model):
 
     user_game = db.relationship('UserGame', backref='users')
     wanted_game = db.relationship('WantedGame', backref='users')
+    #Look this up in data modeling lecture
+    wishlist = db.relationship('Game', secondary='wanted_games', backref='users')
 
     def __repr__(self):
         """Show human-readable info about user"""
@@ -121,7 +123,8 @@ class ListedGame(db.Model):
         """Show human-readable listed_game"""
 
         return f"<ListedGame id={self.id} "\
-               f"user={self.user.username} game={self.game.name}>"
+               f"user={self.user_game.user.username} "\
+               f" game={self.user_game.game.name}>"
 
 
 class WantedGame(db.Model):

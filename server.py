@@ -81,6 +81,7 @@ def list_game():
 
     return "Game was successfully listed"
 
+
 @app.route('/api/remove-game', methods=['POST'])
 def remove_game():
     """Changes own Boolean to false on UserGames table"""
@@ -153,6 +154,35 @@ def show_user_sell_games():
         )
 
     return jsonify(results)
+
+
+@app.route('/api/marketplace.json')
+def show_marketplace_listings():
+    """Return JSON for all listings from all users"""
+
+    listed_games = crud.get_marketplace_listings()
+
+    print(listed_games)
+
+    results = []
+
+    for listed_game in listed_games:
+        results.append(
+            {
+            "key": listed_game.id,
+            "name": listed_game.user_game.game.name,
+            "condition": listed_game.condition,
+            "price": listed_game.price,
+            "comment": listed_game.comment,
+            "image_url": listed_game.user_game.game.image_url,
+            "username": listed_game.user_game.user.username
+            }
+        )
+
+    print(results)
+
+    return jsonify(results)
+
 
 @app.route('/api/wanted_games.json')
 def show_user_want_games():

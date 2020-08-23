@@ -35,7 +35,7 @@ function addGameRows(games) {
   };
 
 // Initial loading of All Games page. Preloads with this search.
-$.get('/api/games.json', {"search_terms": "Catan"}, (response) => {
+$.get('/api/games.json', {"search_terms": "%"}, (response) => {
     addGameRows(response);
     }
 )
