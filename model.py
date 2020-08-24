@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-def connect_to_db(flask_app, db_uri='postgresql:///bgvillage', echo=True):
+def connect_to_db(flask_app, db_uri='postgresql:///bgvillage', echo=False):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     flask_app.config['SQLALCHEMY_ECHO'] = echo
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -69,6 +69,14 @@ class Game(db.Model):
     game_pub = db.relationship('GamePublisher', backref='games')
     game_design = db.relationship('GameDesigner', backref='games')
     game_art = db.relationship('GameArtist', backref='games')
+    publishers = db.relationship('Publisher', secondary='games_publishers', 
+                                  backref='games')
+    designers = db.relationship('Designer', secondary='games_designers',
+                                 backref='games')
+    mechanisms = db.relationship('Mechanic', secondary='games_mechanics',
+                                  backref='games')
+    categories = db.relationship('Category', secondary='games_categories',
+                                  backref='games')
 
     def __repr__(self):
         """Show human-readable info about game"""
@@ -119,6 +127,7 @@ class ListedGame(db.Model):
 
     user_game = db.relationship('UserGame', uselist=False, backref='listed_games')
     game = db.relationship('Game', secondary='user_games', backref='listed_games')
+    user = db.relationship('User', secondary='user_games', backref='listed_games')
 
     def __repr__(self):
         """Show human-readable listed_game"""
@@ -126,6 +135,30 @@ class ListedGame(db.Model):
         return f"<ListedGame id={self.id}"\
                f"user={self.user_game.user.username}"\
                f"game={self.user_game.game.name}>"
+
+    def as_dict(self):
+        """Return object as a dictionary"""
+
+        return {
+            'image_url': self.game.image_url,
+            'game_name': self.game.name,
+            'condition': self.condition,
+            'price': self.price,
+            'msrp': self.game.msrp,
+            'email': self.user.email,
+            'comment': self.comment,
+            'min_age': self.game.min_age,
+            'min_players': self.game.min_players,
+            'max_players': self.game.max_players,
+            'min_playtime': self.game.min_playtime,
+            'max_playtime': self.game.max_playtime,
+            'publishers': self.game.publishers,
+            'designers': self.game.designers,
+            'publish_year': self.game.publish_year,
+            'game_description': self.game.description,
+            'mechanics': self.game.mechanisms,
+            'categories': self.game.categories
+        }
 
 
 class WantedGame(db.Model):

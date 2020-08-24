@@ -78,6 +78,15 @@ def create_user_game(user_id, game_id, own=True):
     return user_game
 
 
+def get_user_own_games(username):
+    """Takes in username and returns user's UserGames"""
+
+    own_games = db.session.query(UserGame).join(User).filter(
+                User.username==username, UserGame.own==True).all()
+
+    return own_games
+
+
 def update_user_game_to_false(id):
     """Finds UserGame by id and updates Own boolean to false"""
 
@@ -108,6 +117,16 @@ def create_listed_game(user_games_id, condition, price, comment=None):
     return listed_game
 
 
+def get_user_listed_games(username):
+    """Takes in a username and returns user's listed games"""
+
+    listed_games = db.session.query(ListedGame).select_from(
+                   ListedGame).join(UserGame).join(User).join(
+                   Game).filter(User.username==username).all()
+
+    return listed_games
+
+
 def get_marketplace_listings(search_terms):
     """Returns all ListedGames from all Users"""
 
@@ -118,10 +137,19 @@ def get_marketplace_listings(search_terms):
     return listed_games
 
 
+def get_listing_details(listing_id):
+    """Takes in listing ID and returns game listing details"""
+
+    listed_game = db.session.query(ListedGame).filter_by(id=listing_id).one()
+
+    return listed_game.as_dict()
+
+
 def delete_listed_game(id):
     """Finds ListedGame by id and removes row"""
 
     listed_game = ListedGame.query.get(id)
+
     db.session.delete(listed_game)
     db.session.commit()
 
@@ -146,6 +174,15 @@ def create_wanted_game(user_id, game_id):
     db.session.commit()
 
     return wanted_game
+
+
+def get_wanted_games(username):
+    """Takes in username and returns user's WantedGames"""
+
+    wanted_games = db.session.query(WantedGame).select_from(WantedGame).join(
+                   User).join(Game).filter(User.username==username).all()
+
+    return wanted_games
 
 #####Removed Rating component####
 # def create_rating(user_id, game_id, rating, comment=None):

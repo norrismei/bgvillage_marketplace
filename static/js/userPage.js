@@ -16,7 +16,7 @@ function displayOwnView() {
              <th>Remove</th>`
         );
 
-    $.get('/api/own_games.json', (response) => {
+    $.get('/api/user/own_games.json', (response) => {
         for (const game of response) {
             let players = [];
             if (game.min_players) {
@@ -80,7 +80,7 @@ function displaySellView() {
             </form>
         </div>`
     );
-    $.get('/api/own_games.json', (response) => {
+    $.get('/api/user/own_games.json', (response) => {
         $('#own-game-selector').html(
                     '<option value="" disabled selected>Choose game</option');
         for (const game of response) {
@@ -96,7 +96,7 @@ function displaySellView() {
          <th>Listing Comment</th>
          <th>Edit</th>`
     );
-    $.get('/api/listed_games.json', (response) => {
+    $.get('/api/user/listed_games.json', (response) => {
         for (const game of response) {
             let comment = []
             if (game.comment) {
@@ -153,7 +153,7 @@ $('#wishlist-button').on('click', () => {
          <th>Playtime</th>
          <th>Remove</th>`
     )
-    $.get('/api/wanted_games.json', (response) => {
+    $.get('/api/user/wanted_games.json', (response) => {
         for (const game of response) {
             let players = [];
             if (game.min_players) {

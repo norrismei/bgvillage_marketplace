@@ -35,7 +35,7 @@ function addGameRows(games) {
   };
 
 // Initial loading of All Games page. Preloads with this search.
-$.get('/api/games.json', {"search_terms": "%"}, (response) => {
+$.get('/api/games/search.json', {"search_terms": "%"}, (response) => {
     addGameRows(response);
     }
 )
@@ -45,7 +45,7 @@ $.get('/api/games.json', {"search_terms": "%"}, (response) => {
 $('#games-search-form').submit((event) => {
     event.preventDefault();
     const searchTerms = $('#game-search-terms').val();
-    $.get('/api/games.json', {"search_terms": searchTerms}, (response) => {
+    $.get('/api/games/search.json', {"search_terms": searchTerms}, (response) => {
         $('.game-row').remove();
         addGameRows(response);
     })
@@ -80,7 +80,7 @@ $('#games-results').on('click', '.add-option', (event) => {
         });
     };
     if (addOption.hasClass('add-to-wishlist')) {
-        $.post('/api/add-game', {'game_id': addAtlasId, 
+        $.post('/api/add-game', {'atlas_id': addAtlasId, 
                                  'name': addName,
                                  'add_type': 'wishlist'}, (res) => {
             alert(res);

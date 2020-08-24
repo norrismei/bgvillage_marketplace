@@ -42,12 +42,13 @@ def search_board_game_atlas(search_terms):
     return search_results
 
 
-def handle_add_game(add_type, name, atlas_id=None):
+def add_game_to_database(add_type, name, atlas_id=None):
     """Adds game to either UserGame or WantedGame tables"""
 
     if atlas_id:
         #Check if there's record of this game in db with matching atlas id
         existing_game = crud.get_game_by_atlas_id(atlas_id)
+        print(f"Existing game: {existing_game}")
     else:
         existing_game = crud.get_game_by_name(name)
 
@@ -159,12 +160,83 @@ def handle_add_game(add_type, name, atlas_id=None):
     elif add_type == "wishlist":
         added_game = crud.create_wanted_game(1, game_id)
 
+    print(f"Added game: {added_game}")
+    
     if added_game:
         return "Game was successfully added"
     else:
         return "A problem has occurred"
 
-def handle_remove_game(remove_type, game_id):
+
+def get_user_own_games(username):
+    """Returns list of user's own games as dictionary"""
+
+    own_games = crud.get_user_own_games(username)
+
+    results = []
+
+    for own_game in own_games:
+        results.append(
+            {
+            "key": own_game.id,
+            "name": own_game.game.name,
+            "min_players": own_game.game.min_players,
+            "max_players": own_game.game.max_players,
+            "min_playtime": own_game.game.min_playtime,
+            "max_playtime": own_game.game.max_playtime,
+            "image_url": own_game.game.image_url
+            }
+        )
+
+    return results
+
+
+def get_user_listed_games(username):
+    """Returns list of user's listed games as dictionary"""
+
+    listed_games = crud.get_user_listed_games(username)
+
+    results = []
+
+    for listed_game in listed_games:
+        results.append(
+            {
+            "key": listed_game.id,
+            "name": listed_game.user_game.game.name,
+            "condition": listed_game.condition,
+            "price": listed_game.price,
+            "comment": listed_game.comment,
+            "image_url": listed_game.user_game.game.image_url
+            }
+        )
+
+    return results
+
+
+def handle_user_wanted_games(username):
+    """Returns list of user's wanted games as dictionary"""
+
+    wanted_games = crud.get_wanted_games(username)
+
+    results = []
+
+    for wanted_game in wanted_games:
+        results.append(
+            {
+            "key": wanted_game.id,
+            "name": wanted_game.game.name,
+            "min_players": wanted_game.game.min_players,
+            "max_players": wanted_game.game.max_players,
+            "min_playtime": wanted_game.game.min_playtime,
+            "max_players": wanted_game.game.max_players,
+            "image_url": wanted_game.game.image_url
+            }
+        )
+
+    return results
+
+
+def remove_game(remove_type, game_id):
     """Updates UserGame to own=False or deletes WantedGame"""
 
     removed_game = False
@@ -180,3 +252,28 @@ def handle_remove_game(remove_type, game_id):
         return "Game was successfully removed"
     else:
         return "A problem has occurred"
+
+
+def search_marketplace_listings(search_terms):
+    """Returns all matching listings (by name) as dictionary"""
+
+    listed_games = crud.get_marketplace_listings(search_terms)
+
+    results = []
+
+    for listed_game in listed_games:
+        results.append(
+            {
+            "key": listed_game.id,
+            "name": listed_game.user_game.game.name,
+            "condition": listed_game.condition,
+            "price": listed_game.price,
+            "comment": listed_game.comment,
+            "image_url": listed_game.user_game.game.image_url,
+            "username": listed_game.user_game.user.username
+            }
+        )
+
+    return results
+
+

@@ -60,10 +60,12 @@ def add_game_to_database():
     name = request.form.get("name")
     atlas_id = request.form.get("atlas_id")
 
+    print(f"Atlas ID: {atlas_id}")
+
     if atlas_id:
-        status = helper.handle_add_game(add_type, name, atlas_id)
+        status = helper.add_game_to_database(add_type, name, atlas_id)
     else:
-        status = helper.handle_add_game(add_type, name)
+        status = helper.add_game_to_database(add_type, name)
 
     return status
 
@@ -72,7 +74,6 @@ def add_game_to_database():
 def list_game():
 
     user_game_id = request.form.get("game")
-    print(user_game_id)
     condition = request.form.get("condition")
     price = float(request.form.get("price"))
     comment = request.form.get("comment")
@@ -90,14 +91,14 @@ def remove_game():
     game_id = int(game_id_str)
     remove_type = request.form.get("remove_type")
 
-    status = helper.handle_remove_game(remove_type, game_id)
+    status = helper.remove_game(remove_type, game_id)
 
     return status
 
 
-@app.route('/api/games.json')
-def return_all_games():
-    """Return games from database matching search terms"""
+@app.route('/api/games/search.json')
+def search_atlas_games():
+    """Return games from Board Game Atlas matching search terms"""
 
     search_terms = request.args.get("search_terms")
 
@@ -106,117 +107,60 @@ def return_all_games():
     return jsonify(results)
 
 
-@app.route('/api/own_games.json')
+@app.route('/api/user/own_games.json')
 def show_user_own_games():
     """Return JSON for list of user's owned games"""
 
-    own_games = model.db.session.query(model.UserGame).join(model.User).filter(
-                model.User.username=="norrism3", model.UserGame.own==True).all()
+    own_games = helper.get_user_own_games(username="norrism3")
 
-    results = []
-
-    for own_game in own_games:
-        results.append(
-            {
-            "key": own_game.id,
-            "name": own_game.game.name,
-            "min_players": own_game.game.min_players,
-            "max_players": own_game.game.max_players,
-            "min_playtime": own_game.game.min_playtime,
-            "max_playtime": own_game.game.max_playtime,
-            "image_url": own_game.game.image_url
-            }
-        )
-
-    return jsonify(results)
+    return jsonify(own_games)
 
 
-@app.route('/api/listed_games.json')
-def show_user_sell_games():
+@app.route('/api/user/listed_games.json')
+def show_user_listed_games():
     """Return JSON for list of user's games for sale"""
 
-    listed_games = model.db.session.query(model.ListedGame).select_from(
-                 model.ListedGame).join(model.UserGame).join(model.User).join(
-                 model.Game).filter(model.User.username=="norrism3").all()
+    listed_games = helper.get_user_listed_games(username="norrism3")
 
-    results = []
-
-    for listed_game in listed_games:
-        results.append(
-            {
-            "key": listed_game.id,
-            "name": listed_game.user_game.game.name,
-            "condition": listed_game.condition,
-            "price": listed_game.price,
-            "comment": listed_game.comment,
-            "image_url": listed_game.user_game.game.image_url
-            }
-        )
-
-    return jsonify(results)
+    return jsonify(listed_games)
 
 
 @app.route('/api/marketplace.json')
-def show_marketplace_listings():
+def get_marketplace_listings():
     """Return JSON for all listings from all users"""
 
     search_terms = request.args.get("search_terms")
 
-    listed_games = crud.get_marketplace_listings(search_terms)
+    listed_games = helper.search_marketplace_listings(search_terms)
 
-    results = []
-
-    for listed_game in listed_games:
-        results.append(
-            {
-            "key": listed_game.id,
-            "name": listed_game.user_game.game.name,
-            "condition": listed_game.condition,
-            "price": listed_game.price,
-            "comment": listed_game.comment,
-            "image_url": listed_game.user_game.game.image_url,
-            "username": listed_game.user_game.user.username
-            }
-        )
-
-    return jsonify(results)
+    return jsonify(listed_games)
 
 
-@app.route('/api/email.json')
-def retrieve_seller_email():
+# @app.route('/api/listing/details.json')
+# def get_listing_details():
+#     """Return JSON for a single listing"""
+
+#     listing_id = request.args.get("listing_id") 
+
+#     return crud.get_listing_details(listing_id)
+
+
+@app.route('/api/user/email.json')
+def lookup_seller_email():
     """Returns a user's email address"""
 
     username = request.args.get("username")
 
-    email = crud.get_email_by_username(username)
-
-    return email
+    return crud.get_email_by_username(username)
 
 
-@app.route('/api/wanted_games.json')
+@app.route('/api/user/wanted_games.json')
 def show_user_want_games():
     """Return JSON for list of games user wants"""
 
-    wanted_games = model.db.session.query(model.WantedGame).select_from(
-                 model.WantedGame).join(model.User).join(model.Game).filter(
-                 model.User.username=="norrism3").all()
+    wanted_games = helper.handle_user_wanted_games(username="norrism3")
 
-    results = []
-
-    for wanted_game in wanted_games:
-        results.append(
-            {
-            "key": wanted_game.id,
-            "name": wanted_game.game.name,
-            "min_players": wanted_game.game.min_players,
-            "max_players": wanted_game.game.max_players,
-            "min_playtime": wanted_game.game.min_playtime,
-            "max_players": wanted_game.game.max_players,
-            "image_url": wanted_game.game.image_url
-            }
-        )
-
-    return jsonify(results)
+    return jsonify(wanted_games)
 
 
 if __name__ == '__main__':
