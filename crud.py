@@ -18,6 +18,14 @@ def create_user(username, fname, lname, email, password, birthdate=None):
     return user
 
 
+def get_email_by_username(username):
+    """Takes in username and returns email of matching user"""
+
+    user = User.query.filter_by(username=username).one()
+
+    return user.email
+
+
 def create_game(name, description=None, publish_year=None, min_age=None,
                 min_players=None, max_players=None, 
                 min_playtime=None, max_playtime=None,

@@ -164,8 +164,6 @@ def show_marketplace_listings():
 
     listed_games = crud.get_marketplace_listings(search_terms)
 
-    print(listed_games)
-
     results = []
 
     for listed_game in listed_games:
@@ -182,6 +180,17 @@ def show_marketplace_listings():
         )
 
     return jsonify(results)
+
+
+@app.route('/api/email.json')
+def retrieve_seller_email():
+    """Returns a user's email address"""
+
+    username = request.args.get("username")
+
+    email = crud.get_email_by_username(username)
+
+    return email
 
 
 @app.route('/api/wanted_games.json')
