@@ -16,7 +16,7 @@ function displayOwnView() {
              <th>Remove</th>`
         );
 
-    $.get('/api/user/own_games.json', (response) => {
+    $.get('/api/user/own-games.json', (response) => {
         for (const game of response) {
             let players = [];
             if (game.min_players) {
@@ -80,14 +80,14 @@ function displaySellView() {
             </form>
         </div>`
     );
-    $.get('/api/user/own_games.json', (response) => {
+    $.get('/api/user/own-games/to-sell.json', (response) => {
         $('#own-game-selector').html(
                     '<option value="" disabled selected>Choose game</option');
         for (const game of response) {
             $('#own-game-selector').append(
                     `<option value=${game.key}>${game.name}</option>`)
-        }
-    })
+        };
+    });
     gamesTable.html(
         `<th>Image</th>
          <th>Name</th>
@@ -96,7 +96,7 @@ function displaySellView() {
          <th>Listing Comment</th>
          <th>Edit</th>`
     );
-    $.get('/api/user/listed_games.json', (response) => {
+    $.get('/api/user/listed-games.json', (response) => {
         for (const game of response) {
             let comment = []
             if (game.comment) {
@@ -153,7 +153,7 @@ $('#wishlist-button').on('click', () => {
          <th>Playtime</th>
          <th>Remove</th>`
     )
-    $.get('/api/user/wanted_games.json', (response) => {
+    $.get('/api/user/wanted-games.json', (response) => {
         for (const game of response) {
             let players = [];
             if (game.min_players) {

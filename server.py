@@ -60,8 +60,6 @@ def add_game_to_database():
     name = request.form.get("name")
     atlas_id = request.form.get("atlas_id")
 
-    print(f"Atlas ID: {atlas_id}")
-
     if atlas_id:
         status = helper.add_game_to_database(add_type, name, atlas_id)
     else:
@@ -107,7 +105,7 @@ def search_atlas_games():
     return jsonify(results)
 
 
-@app.route('/api/user/own_games.json')
+@app.route('/api/user/own-games.json')
 def show_user_own_games():
     """Return JSON for list of user's owned games"""
 
@@ -116,7 +114,16 @@ def show_user_own_games():
     return jsonify(own_games)
 
 
-@app.route('/api/user/listed_games.json')
+@app.route('/api/user/own-games/to-sell.json')
+def show_available_to_sell():
+    """Return JSON for list of user's games available to sell"""
+
+    able_to_sell = helper.get_user_games_able_to_sell(username="norrism3")
+
+    return jsonify(able_to_sell)
+
+
+@app.route('/api/user/listed-games.json')
 def show_user_listed_games():
     """Return JSON for list of user's games for sale"""
 
@@ -136,13 +143,13 @@ def get_marketplace_listings():
     return jsonify(listed_games)
 
 
-# @app.route('/api/listing/details.json')
-# def get_listing_details():
-#     """Return JSON for a single listing"""
+@app.route('/api/listing/details.json')
+def get_listing_details():
+    """Return JSON for a single listing"""
 
-#     listing_id = request.args.get("listing_id") 
+    listing_id = request.args.get("listing_id") 
 
-#     return crud.get_listing_details(listing_id)
+    return helper.get_listing_details(listing_id)
 
 
 @app.route('/api/user/email.json')
@@ -154,11 +161,11 @@ def lookup_seller_email():
     return crud.get_email_by_username(username)
 
 
-@app.route('/api/user/wanted_games.json')
+@app.route('/api/user/wanted-games.json')
 def show_user_want_games():
     """Return JSON for list of games user wants"""
 
-    wanted_games = helper.handle_user_wanted_games(username="norrism3")
+    wanted_games = helper.get_user_wanted_games(username="norrism3")
 
     return jsonify(wanted_games)
 

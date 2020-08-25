@@ -124,6 +124,9 @@ def get_user_listed_games(username):
                    ListedGame).join(UserGame).join(User).join(
                    Game).filter(User.username==username).all()
 
+    # listed_games = db.session.query(ListedGame).select_from(ListedGame).join(
+    #                User).filter(User.username==username).all()
+
     return listed_games
 
 
@@ -142,7 +145,7 @@ def get_listing_details(listing_id):
 
     listed_game = db.session.query(ListedGame).filter_by(id=listing_id).one()
 
-    return listed_game.as_dict()
+    return listed_game
 
 
 def delete_listed_game(id):
@@ -176,7 +179,7 @@ def create_wanted_game(user_id, game_id):
     return wanted_game
 
 
-def get_wanted_games(username):
+def get_user_wanted_games(username):
     """Takes in username and returns user's WantedGames"""
 
     wanted_games = db.session.query(WantedGame).select_from(WantedGame).join(

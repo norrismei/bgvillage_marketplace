@@ -73,7 +73,7 @@ class Game(db.Model):
                                   backref='games')
     designers = db.relationship('Designer', secondary='games_designers',
                                  backref='games')
-    mechanisms = db.relationship('Mechanic', secondary='games_mechanics',
+    mechanics = db.relationship('Mechanic', secondary='games_mechanics',
                                   backref='games')
     categories = db.relationship('Category', secondary='games_categories',
                                   backref='games')
@@ -126,14 +126,20 @@ class ListedGame(db.Model):
     comment = db.Column(db.Text)
 
     user_game = db.relationship('UserGame', uselist=False, backref='listed_games')
-    game = db.relationship('Game', secondary='user_games', backref='listed_games')
-    user = db.relationship('User', secondary='user_games', backref='listed_games')
+    game = db.relationship('Game', 
+                            secondary='user_games',
+                            uselist=False, 
+                            backref='listed_games')
+    user = db.relationship('User', 
+                            secondary='user_games',
+                            uselist=False, 
+                            backref='listed_games')
 
     def __repr__(self):
         """Show human-readable listed_game"""
 
-        return f"<ListedGame id={self.id}"\
-               f"user={self.user_game.user.username}"\
+        return f"<ListedGame id={self.id} "\
+               f"user={self.user_game.user.username} "\
                f"game={self.user_game.game.name}>"
 
     def as_dict(self):

@@ -48,7 +48,6 @@ def add_game_to_database(add_type, name, atlas_id=None):
     if atlas_id:
         #Check if there's record of this game in db with matching atlas id
         existing_game = crud.get_game_by_atlas_id(atlas_id)
-        print(f"Existing game: {existing_game}")
     else:
         existing_game = crud.get_game_by_name(name)
 
@@ -61,7 +60,6 @@ def add_game_to_database(add_type, name, atlas_id=None):
         payload = {'ids': atlas_id,
                    'client_id': 'ZRKfcqdFcV'}
         response = requests.get('https://api.boardgameatlas.com/api/search', params=payload)
-        print(response.url)
         new_game_response = response.json()
         new_game_data = new_game_response["games"][0]
 
@@ -160,8 +158,6 @@ def add_game_to_database(add_type, name, atlas_id=None):
     elif add_type == "wishlist":
         added_game = crud.create_wanted_game(1, game_id)
 
-    print(f"Added game: {added_game}")
-    
     if added_game:
         return "Game was successfully added"
     else:
@@ -191,6 +187,30 @@ def get_user_own_games(username):
     return results
 
 
+def get_user_games_able_to_sell(username):
+    """Returns list of user's games available to sell, as dictionary"""
+
+    own_games = crud.get_user_own_games(username)
+    listed_games = crud.get_user_listed_games(username)
+
+    listed_game_ids = []
+    for listed_game in listed_games:
+        listed_game_ids.append(listed_game.id)
+
+    results = []
+
+    for game in own_games:
+        if game.id not in listed_game_ids:
+            results.append(
+                {
+                "key": game.id,
+                "name": game.game.name,
+                }
+            )
+
+    return results
+
+
 def get_user_listed_games(username):
     """Returns list of user's listed games as dictionary"""
 
@@ -213,10 +233,10 @@ def get_user_listed_games(username):
     return results
 
 
-def handle_user_wanted_games(username):
+def get_user_wanted_games(username):
     """Returns list of user's wanted games as dictionary"""
 
-    wanted_games = crud.get_wanted_games(username)
+    wanted_games = crud.get_user_wanted_games(username)
 
     results = []
 
@@ -255,7 +275,7 @@ def remove_game(remove_type, game_id):
 
 
 def search_marketplace_listings(search_terms):
-    """Returns all matching listings (by name) as dictionary"""
+    """Returns all matching listings (by name) as dictionary list"""
 
     listed_games = crud.get_marketplace_listings(search_terms)
 
@@ -275,5 +295,164 @@ def search_marketplace_listings(search_terms):
         )
 
     return results
+
+
+def get_listing_details(listing_id):
+    """Returns details of a listing as a dictionary"""
+
+    listing = crud.get_listing_details(listing_id)
+    game = listing.user_game.game
+
+    comment = format_comment(listing)
+
+    players = format_players(game)
+    playtime = format_playtime(game)
+    msrp = format_msrp(game)
+    primary_publisher = format_publishers(game)
+    designers = format_designers(game)
+    mechanics = format_mechanics(game)
+    categories = format_categories(game)
+
+    return {
+        "key": listing.id,
+        "image_url": listing.game.image_url,
+        "game_name": listing.game.name,
+        "condition": listing.condition,
+        "price": listing.price,
+        "msrp": msrp,
+        "email": listing.user.email,
+        "comment": comment,
+        "min_age": listing.game.min_age,
+        "players": players,
+        "playtime": playtime,
+        "publisher": primary_publisher,
+        "designers": designers,
+        "publish_year": listing.game.publish_year,
+        "game_description": listing.game.description,
+        "mechanics": mechanics,
+        "categories": categories
+    }
+
+
+def format_players(game):
+    """Takes in game object and returns formatted player count"""
+
+    min_players = game.min_players
+    max_players = game.max_players
+
+    num_players = []
+    if min_players:
+        num_players = min_players
+        if max_players and (max_players != min_players):
+            num_players = f"{min_players}-{max_players}"
+        return num_players
+    else:
+        return ""
+
+
+def format_playtime(game):
+    """Takes in game object and returns formatted playtime"""
+
+    min_playtime = game.min_playtime
+    max_playtime = game.max_playtime
+
+    playtime = []
+    if min_playtime:
+        playtime = min_playtime
+        if max_playtime and (max_playtime != min_playtime):
+            playtime = f"{min_playtime}-{max_playtime} mins"
+        return playtime
+    else:
+        return ""
+
+
+def format_msrp(game):
+    """Takes in game object and returns formatted msrp"""
+
+    msrp = game.msrp
+
+    if msrp and msrp > 0:
+        return msrp
+    else:
+        return ""
+
+
+def format_comment(listed_game):
+    """Takes in ListedGame object and returns formatted comment"""
+
+    comment = listed_game.comment
+
+    if comment:
+        return comment
+    else:
+        return ""
+
+
+def format_publishers(game):
+    """Takes in game object and returns primary publisher name"""
+
+    publishers_list = game.publishers
+
+    try:
+        return publishers_list[0].name
+    except:
+        return ""
+
+
+def format_designers(game):
+    """Takes in game object and returns list of designers as string"""
+
+    designers = game.designers
+    designer_names = []
+
+    for designer in designers:
+        if designer and designer.name:
+            designer_names.append(designer.name)
+
+    if len(designer_names) > 1:
+        designers_list_str = ", ".join(designer_names)
+        return designers_list_str
+    elif len(designer_names) == 1:
+        return designer_names[0]
+    else:
+        return ""
+
+
+def format_mechanics(game):
+    """Takes in game object and returns list of mechanics as string"""
+
+    mechanics = game.mechanics
+    mechanic_names = []
+
+    for mechanic in mechanics:
+        if mechanic and mechanic.name:
+            mechanic_names.append(mechanic.name)
+
+    if len(mechanic_names) > 1:
+        mechanics_list_str = ", ".join(mechanic_names)
+        return mechanics_list_str
+    elif len(mechanic_names) == 1:
+        return mechanic_names[0]
+    else:
+        return ""
+
+
+def format_categories(game):
+    """Takes in game object and returns list of categories as string"""
+
+    categories = game.categories
+    category_names = []
+
+    for category in categories:
+        if category and category.name:
+            category_names.append(category.name)
+
+    if len(category_names) > 1:
+        categories_list_str = ", ".join(category_names)
+        return categories_list_str
+    elif len(category_names) == 1:
+        return category_names[0]
+    else:
+        return ""
 
 
