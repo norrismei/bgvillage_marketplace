@@ -2,34 +2,51 @@
 
 const listingsTable = $('#listings-results');
 
-function displayListings(search_terms) {
+function displayListings(listings) {
+    $('.listing-row').remove();
+    for (const game of listings) {
+        listingsTable.append(
+            `<tr class="listing-row" data-listing-id=${game.key} >
+                <td><img src=${game.image_url} height="50" /></td>
+                <td class="game-name">${game.name}</td>
+                <td>${game.condition}</td>
+                <td>$${game.price}</td>
+                <td class="seller-username" 
+                    data-username=${game.username}>${game.username}</td>
+                <td><button class="email-seller">Email</button></td>
+            </tr>`
+        );
+    }
+}
+
+function displaySearchResults(search_terms) {
     $.get('/api/marketplace.json', {"search_terms": `${search_terms}`}, (response) => {
-        $('.listing-row').remove();
-        for (const game of response) {
-            listingsTable.append(
-                `<tr class="listing-row" data-listing-id=${game.key} >
-                    <td><img src=${game.image_url} height="50" /></td>
-                    <td class="game-name">${game.name}</td>
-                    <td>${game.condition}</td>
-                    <td>$${game.price}</td>
-                    <td class="seller-username" 
-                        data-username=${game.username}>${game.username}</td>
-                    <td><button class="email-seller">Email</button></td>
-                </tr>`
-            );
-        }
+        displayListings(response)
     });
 };
 
-// Initial loading of all Marketplace listings. 
-displayListings('');
+function displayAllListings() {
+    displaySearchResults('');
+} 
 
 
 // Refreshing of displayed results upon submitting a search for a game
 $('#listings-search-form').submit((event) => {
     event.preventDefault();
     const searchTerms = $('#listings-search-terms').val();
-    displayListings(searchTerms);
+    displaySearchResults(searchTerms);
+})
+
+// Refreshing of displayed results upon selecting Wishlist Matches in dropdown
+const viewOption = $('#view-selector');
+viewOption.on('change', (event) => {
+    if ($('#view-selector option:selected').attr('id') == "view-wishlist") {
+        $.get('/api/marketplace/wishlist-filter.json', (response) => {
+            displayListings(response);
+        })
+    } else {
+        displayAllListings();
+    }
 })
 
 
@@ -107,3 +124,6 @@ modal.on('click', (event) => {
         modal.hide();
     }
 })
+
+// Initial loading of all Marketplace listings.
+displayAllListings()

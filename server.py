@@ -143,6 +143,15 @@ def get_marketplace_listings():
     return jsonify(listed_games)
 
 
+@app.route('/api/marketplace/wishlist-filter.json')
+def filter_listings_by_wishlist():
+    """Return JSON for all listings filtered by user's wishlist"""
+
+    filtered_listings = helper.filter_listings_by_wishlist(username="norrism3")
+
+    return jsonify(filtered_listings)
+
+
 @app.route('/api/listing/details.json')
 def get_listing_details():
     """Return JSON for a single listing"""

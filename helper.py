@@ -297,6 +297,41 @@ def search_marketplace_listings(search_terms):
     return results
 
 
+def filter_listings_by_wishlist(username):
+    """Returns listings filtered by wishlist"""
+
+    all_listings = crud.get_marketplace_listings('')
+    print(f"All listings: {all_listings}")
+    wishlist = crud.get_user_wanted_games(username)
+    print(f"Wishlist: {wishlist}")
+
+    wishlist_game_ids = set([])
+    for game in wishlist:
+        wishlist_game_ids.add(game.game_id)
+
+    print(f"Wishlist game IDs: {wishlist_game_ids}")
+
+    results = []
+
+    for listing in all_listings:
+        if listing.game.id in wishlist_game_ids:
+            results.append(
+                {
+                "key": listing.id,
+                "name": listing.game.name,
+                "condition": listing.condition,
+                "price": listing.price,
+                "comment": listing.comment,
+                "image_url": listing.game.image_url,
+                "username": listing.user.username
+                }        
+            )
+
+    print(results)
+
+    return results
+
+
 def get_listing_details(listing_id):
     """Returns details of a listing as a dictionary"""
 
