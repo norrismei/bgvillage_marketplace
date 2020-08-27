@@ -5,8 +5,13 @@ const listingsTable = $('#listings-results');
 function displayListings(listings) {
     $('.listing-row').remove();
     for (const game of listings) {
+        let wishlistClass = "wishlist-false"
+        if (game.wishlist == true) {
+            wishlistClass = "wishlist-true"
+        }
         listingsTable.append(
-            `<tr class="listing-row" data-listing-id=${game.key} >
+            `<tr class="listing-row ${wishlistClass}" 
+                 data-listing-id=${game.key}>
                 <td><img src=${game.image_url} height="50" /></td>
                 <td class="game-name">${game.name}</td>
                 <td>${game.condition}</td>
@@ -16,7 +21,7 @@ function displayListings(listings) {
                 <td><button class="email-seller">Email</button></td>
             </tr>`
         );
-    }
+    };
 }
 
 function displaySearchResults(search_terms) {
@@ -26,6 +31,7 @@ function displaySearchResults(search_terms) {
 };
 
 function displayAllListings() {
+    $('#back-to-listings-search').hide();
     displaySearchResults('');
 } 
 
@@ -37,17 +43,22 @@ $('#listings-search-form').submit((event) => {
     displaySearchResults(searchTerms);
 })
 
-// Refreshing of displayed results upon selecting Wishlist Matches in dropdown
+// Hiding/showing of listings dependent on view-selector choice
 const viewOption = $('#view-selector');
 viewOption.on('change', (event) => {
     if ($('#view-selector option:selected').attr('id') == "view-wishlist") {
-        $.get('/api/marketplace/wishlist-filter.json', (response) => {
-            displayListings(response);
-        })
+        $('.wishlist-false').hide();
+        $('.wishlist-true').show();
     } else {
-        displayAllListings();
+        $('.listing-row').show();
     }
-})
+    //     $.get('/api/marketplace/wishlist-filter.json', (response) => {
+    //         displayListings(response);
+    //     })
+    // } else {
+    //     displayAllListings();
+    // }
+});
 
 
 // Event handler for Email contact button
@@ -63,14 +74,18 @@ listingsTable.on('click', '.email-seller', (event) => {
 
 // <---------------------Event handler for modal------------------------>
 const modal = $('.modal');
-const modalBody = $('.modal-body')
+const modalBody = $('.modal-body');
+const otherGames = $('#list-other-games');
 const close = $('.close');
 
 // Retrieve listing details when user clicks on game name
 listingsTable.on('click', '.game-name', (event) => {
     const listing = $(event.target);
     const listingId = listing.parents().attr('data-listing-id');
-    $.get('/api/listing/details.json', {"listing_id": listingId}, (response) => {
+    const seller = listing.siblings('.seller-username').attr('data-username'); 
+    const data = {"listing_id": listingId,
+                  "username": seller}
+    $.get('/api/listing/details.json', data, (response) => {
         $('#list-img').html(`<img src=${response.image_url} height="150" />`);
         $('#list-game-name').html(response.game_name);
         $('#list-condition').html(`Condition: ${response.condition}`);
@@ -79,31 +94,38 @@ listingsTable.on('click', '.game-name', (event) => {
             $('#list-msrp').html(`MSRP: ${response.msrp}`);
         }
         $('#list-email').html(`Email: ${response.email}`);
+        if (response.other_games) {
+            $('#list-other-games').html(
+                `<button class="view-other-games" data-username=${
+                    response.username}>View all listings from user</button>`);
+        };
         if (response.comment) {
             $('#list-comment').html(`Comment: ${response.comment}`);
         };
-        $('#list-min-age').html(`Min age: ${response.min_age}`);
+        if (response.min_age) {
+            $('#list-min-age').html(`Min age: ${response.min_age}`);
+        };
         if (response.players) {
             $('#list-players').html(`Players: ${response.players}`);
-        }
+        };
         if (response.playtime) {
             $('#list-playtime').html(`Playtime: ${response.playtime}`);
-        }
+        };
         if (response.publisher) {
             $('#list-publisher').html(`Publisher: ${response.publisher}`);
-        }
+        };
         if (response.designers) {
             $('#list-designers').html(`Designers: ${response.designers}`);
         };
         if (response.publish_year) {
             $('#list-year').html(`Year Published: ${response.publish_year}`);
-        }
+        };    
         // if (response.game_description) {
         //     $('#list-description').html(response.game_description);
         // }
         if (response.mechanics) {
             $('#list-mechanics').html(`Mechanics: ${response.mechanics}`);
-        }
+        };
         if (response.categories) {
             $('#list-categories').html(`Categories: ${response.categories}`);
         };
@@ -111,19 +133,42 @@ listingsTable.on('click', '.game-name', (event) => {
     })
 })
 
+
 close.on('click', (event) => {
     modal.hide();
+    $('.list-details').empty();
 })
+
+// Links to Marketplace listings filtered by username when button is clicked
+otherGames.on('click', '.view-other-games', (event) => {
+    const username = $('.view-other-games').attr('data-username');
+    $.get(`/api/marketplace/${username}.json`,response => {
+            modal.hide();
+            $('.listings-search-field').hide();
+            $('#back-to-listings-search').show();
+            displayListings(response);
+        })
+})
+
+
+// From filtered user listings view, toggles back to all listings
+$('#back-to-listings-search').on('click', 'button', (event) => {
+    $('.listings-search-field').show();
+    $('#back-to-listings-search').hide();
+    $('#view-selector option:first').prop('selected', true);
+    displayAllListings();
+}) 
+
 
 // Non-working code to close modal window if clicking anywhere outside modal
 
-modal.on('click', (event) => {
-    console.log('Clicked on document');
-    console.log(`Event target: ${event.target}`);
-    if (event.target !== $('.modal-content')) {
-        modal.hide();
-    }
-})
+// modal.on('click', (event) => {
+//     console.log('Clicked on document');
+//     console.log(`Event target: ${event.target}`);
+//     if (event.target !== $('.modal-content')) {
+//         modal.hide();
+//     }
+// })
 
 // Initial loading of all Marketplace listings.
 displayAllListings()

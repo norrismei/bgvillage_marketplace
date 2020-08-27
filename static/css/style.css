@@ -17,6 +17,7 @@
     background-color: #ddd;
 }
 
+
 .show {
     display: block;
 }
@@ -50,4 +51,5 @@
 .close:hover {
     cursor: pointer;
 }
+
 

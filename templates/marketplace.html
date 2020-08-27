@@ -10,11 +10,20 @@
 <h1>Marketplace</h1>
 <section id="listings-search">
   <form action="/" id="listings-search-form">
-    <input type="text" id="listings-search-terms" 
+    <input type="text" 
+           class="listings-search-field" 
+           id="listings-search-terms" 
            placeholder="Search for a game...">
-    <input type="submit">
+    <input type="submit"
+           class="listings-search-field">
   </form>
 </section>
+
+<div id="back-to-listings-search">
+  <button>
+    Return to main search
+  </button>
+</div>
 
 <form>
   Show:
@@ -41,22 +50,23 @@
   <div class="modal-content">
     <span class="close">&times;</span>
     <div class="modal-body">
-      <p id="list-img"></p>
-      <h2 id="list-game-name"></h2>
-      <p id="list-condition"></p>
-      <p id="list-price"></p>
-      <p id="list-msrp"></p>
-      <p id="list-email"></p>
-      <p id="list-comment"></p>
-      <p id="list-min-age"></p>
-      <p id="list-players"></p>
-      <p id="list-playtime"></p>
-      <p id="list-publisher"></p>
-      <p id="list-designers"></p>
-      <p id="list-year"></p>
-      <p id="list-description"></p>
-      <p id="list-mechanics"></p>
-      <p id="list-categories"></p>
+      <p class="list-details" id="list-img"></p>
+      <h2 class="list-details" id="list-game-name"></h2>
+      <p class="list-details" id="list-condition"></p>
+      <p class="list-details" id="list-price"></p>
+      <p class="list-details" id="list-msrp"></p>
+      <p class="list-details" id="list-email"></p>
+      <p class="list-details" id="list-other-games"></p>
+      <p class="list-details" id="list-comment"></p>
+      <p class="list-details" id="list-min-age"></p>
+      <p class="list-details" id="list-players"></p>
+      <p class="list-details" id="list-playtime"></p>
+      <p class="list-details" id="list-publisher"></p>
+      <p class="list-details" id="list-designers"></p>
+      <p class="list-details" id="list-year"></p>
+      <p class="list-details" id="list-description"></p>
+      <p class="list-details" id="list-mechanics"></p>
+      <p class="list-details" id="list-categories"></p>
 
     </div>
   </div>

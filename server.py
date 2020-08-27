@@ -52,6 +52,7 @@ def show_all_listings():
     return render_template('marketplace.html')
 
 
+
 @app.route('/api/add-game', methods=['POST'])
 def add_game_to_database():
     """Add a UserGame"""
@@ -127,7 +128,11 @@ def show_available_to_sell():
 def show_user_listed_games():
     """Return JSON for list of user's games for sale"""
 
-    listed_games = helper.get_user_listed_games(username="norrism3")
+    username = request.args.get("username")
+    if username == None:
+        username = "norrism3"
+
+    listed_games = helper.get_user_listed_games(username)
 
     return jsonify(listed_games)
 
@@ -138,16 +143,22 @@ def get_marketplace_listings():
 
     search_terms = request.args.get("search_terms")
 
-    listed_games = helper.search_marketplace_listings(search_terms)
+    listed_games = helper.search_marketplace_listings(
+                   search_terms, username="norrism3")
 
     return jsonify(listed_games)
 
 
-@app.route('/api/marketplace/wishlist-filter.json')
-def filter_listings_by_wishlist():
-    """Return JSON for all listings filtered by user's wishlist"""
+@app.route('/api/marketplace/<username>.json')
+def filter_listings_by_username(username):
+    """Return JSON for all listings filtered by username"""
 
-    filtered_listings = helper.filter_listings_by_wishlist(username="norrism3")
+    # Replace with user in session in the future
+    user = "norrism3"
+    selected_username = username
+
+    filtered_listings = helper.filter_listings_by_username(
+        user, selected_username)
 
     return jsonify(filtered_listings)
 
@@ -157,8 +168,9 @@ def get_listing_details():
     """Return JSON for a single listing"""
 
     listing_id = request.args.get("listing_id") 
+    username = request.args.get("username")
 
-    return helper.get_listing_details(listing_id)
+    return helper.get_listing_details(listing_id, username)
 
 
 @app.route('/api/user/email.json')

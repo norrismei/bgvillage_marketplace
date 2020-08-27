@@ -119,13 +119,10 @@ def create_listed_game(user_games_id, condition, price, comment=None):
 
 def get_user_listed_games(username):
     """Takes in a username and returns user's listed games"""
-
+    
     listed_games = db.session.query(ListedGame).select_from(
                    ListedGame).join(UserGame).join(User).join(
                    Game).filter(User.username==username).all()
-
-    # listed_games = db.session.query(ListedGame).select_from(ListedGame).join(
-    #                User).filter(User.username==username).all()
 
     return listed_games
 

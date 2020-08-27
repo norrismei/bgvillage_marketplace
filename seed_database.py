@@ -148,21 +148,23 @@ with open('data/games.json') as f:
                     crud.create_game_designer(new_game.id, new_designer.id)
 
 
-# Using users_list and games_list, choose 3 random games for each user
+# Using users_list and games_list, choose 5 random games for each user
 # to seed the user_games table. Add games to user_games list.
 for user in users_list:
     user_games = []
-    for game in range(3):
+    for game in range(5):
         random_game = choice(games_list)
         owned_game = crud.create_user_game(user.id, random_game.id)
         user_games.append(owned_game)
-    # Randomly choose a game from user_games list, along with random choice
+    # Randomly choose two games from user_games list, along with random choice
     # condition, and random choice price to create a ListedGame
-    sell_game = choice(user_games)
-    condition = choice(["New", "Like New", "Very Good", "Good", "Acceptable"])
-    price = choice([15.00, 16.00, 17.00, 18.00, 19.00, 20.00, 21.00, 22.00,
-                    23.00, 24.00, 25.00])
-    crud.create_listed_game(sell_game.id, condition, price)
+    for i in range(2):
+        sell_game = choice(user_games)
+        user_games.remove(sell_game)
+        condition = choice(["New", "Like New", "Very Good", "Good", "Acceptable"])
+        price = choice([15.00, 16.00, 17.00, 18.00, 19.00, 20.00, 21.00, 22.00,
+                        23.00, 24.00, 25.00])
+        crud.create_listed_game(sell_game.id, condition, price)
 
 
 # Using users_list and games_list, choose 3 random games for each user

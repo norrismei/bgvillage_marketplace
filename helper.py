@@ -222,11 +222,13 @@ def get_user_listed_games(username):
         results.append(
             {
             "key": listed_game.id,
-            "name": listed_game.user_game.game.name,
+            "name": listed_game.game.name,
             "condition": listed_game.condition,
             "price": listed_game.price,
+            "username": listed_game.user.username,
+            "email": listed_game.user.email,
             "comment": listed_game.comment,
-            "image_url": listed_game.user_game.game.image_url
+            "image_url": listed_game.game.image_url
             }
         )
 
@@ -274,14 +276,42 @@ def remove_game(remove_type, game_id):
         return "A problem has occurred"
 
 
-def search_marketplace_listings(search_terms):
+def search_marketplace_listings(search_terms, username):
     """Returns all matching listings (by name) as dictionary list"""
 
     listed_games = crud.get_marketplace_listings(search_terms)
+    
+    # We want to include info about whether a game is on a user's 
+    # wishlist, so we pass in the username to our function
+    results = create_listings_dict(listed_games, username)
+
+    return results
+
+
+def filter_listings_by_username(user, username):
+    """Returns a single user's listings as a dictionary"""
+
+    filtered_listings = crud.get_user_listed_games(username)
+
+    results = create_listings_dict(filtered_listings, user)
+
+    return results
+
+
+def create_listings_dict(listings, username):
+    """Takes in listings and username of user on site"""
+
+    user_wishlist = crud.get_user_wanted_games(username)
+    wishlist_game_ids = set([])
+    for game in user_wishlist:
+        wishlist_game_ids.add(game.game_id)
 
     results = []
 
-    for listed_game in listed_games:
+    for listed_game in listings:
+        wishlist = False
+        if listed_game.game.id in wishlist_game_ids:
+            wishlist = True
         results.append(
             {
             "key": listed_game.id,
@@ -290,53 +320,26 @@ def search_marketplace_listings(search_terms):
             "price": listed_game.price,
             "comment": listed_game.comment,
             "image_url": listed_game.user_game.game.image_url,
-            "username": listed_game.user_game.user.username
+            "username": listed_game.user_game.user.username,
+            "wishlist": wishlist
             }
         )
 
     return results
 
 
-def filter_listings_by_wishlist(username):
-    """Returns listings filtered by wishlist"""
-
-    all_listings = crud.get_marketplace_listings('')
-    print(f"All listings: {all_listings}")
-    wishlist = crud.get_user_wanted_games(username)
-    print(f"Wishlist: {wishlist}")
-
-    wishlist_game_ids = set([])
-    for game in wishlist:
-        wishlist_game_ids.add(game.game_id)
-
-    print(f"Wishlist game IDs: {wishlist_game_ids}")
-
-    results = []
-
-    for listing in all_listings:
-        if listing.game.id in wishlist_game_ids:
-            results.append(
-                {
-                "key": listing.id,
-                "name": listing.game.name,
-                "condition": listing.condition,
-                "price": listing.price,
-                "comment": listing.comment,
-                "image_url": listing.game.image_url,
-                "username": listing.user.username
-                }        
-            )
-
-    print(results)
-
-    return results
-
-
-def get_listing_details(listing_id):
+def get_listing_details(listing_id, username):
     """Returns details of a listing as a dictionary"""
 
     listing = crud.get_listing_details(listing_id)
     game = listing.user_game.game
+
+    selling_other_games = False
+    all_games = crud.get_user_listed_games(username)
+    if len(all_games) > 1:
+        selling_other_games = True
+
+    print(selling_other_games)
 
     comment = format_comment(listing)
 
@@ -355,6 +358,7 @@ def get_listing_details(listing_id):
         "condition": listing.condition,
         "price": listing.price,
         "msrp": msrp,
+        "username": listing.user.username,
         "email": listing.user.email,
         "comment": comment,
         "min_age": listing.game.min_age,
@@ -365,7 +369,8 @@ def get_listing_details(listing_id):
         "publish_year": listing.game.publish_year,
         "game_description": listing.game.description,
         "mechanics": mechanics,
-        "categories": categories
+        "categories": categories,
+        "other_games": selling_other_games
     }
 
 
