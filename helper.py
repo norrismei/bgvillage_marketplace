@@ -219,12 +219,13 @@ def get_user_listed_games(username):
     results = []
 
     for listed_game in listed_games:
+        price = format_price(listed_game.price)
         results.append(
             {
             "key": listed_game.id,
             "name": listed_game.game.name,
             "condition": listed_game.condition,
-            "price": listed_game.price,
+            "price": price,
             "username": listed_game.user.username,
             "email": listed_game.user.email,
             "comment": listed_game.comment,
@@ -309,6 +310,7 @@ def create_listings_dict(listings, username):
     results = []
 
     for listed_game in listings:
+        price = format_price(listed_game.price)
         wishlist = False
         if listed_game.game.id in wishlist_game_ids:
             wishlist = True
@@ -317,7 +319,7 @@ def create_listings_dict(listings, username):
             "key": listed_game.id,
             "name": listed_game.user_game.game.name,
             "condition": listed_game.condition,
-            "price": listed_game.price,
+            "price": price,
             "comment": listed_game.comment,
             "image_url": listed_game.user_game.game.image_url,
             "username": listed_game.user_game.user.username,
@@ -339,8 +341,7 @@ def get_listing_details(listing_id, username):
     if len(all_games) > 1:
         selling_other_games = True
 
-    print(selling_other_games)
-
+    price = format_price(listing.price) 
     comment = format_comment(listing)
 
     players = format_players(game)
@@ -356,7 +357,7 @@ def get_listing_details(listing_id, username):
         "image_url": listing.game.image_url,
         "game_name": listing.game.name,
         "condition": listing.condition,
-        "price": listing.price,
+        "price": price,
         "msrp": msrp,
         "username": listing.user.username,
         "email": listing.user.email,
@@ -494,5 +495,13 @@ def format_categories(game):
         return category_names[0]
     else:
         return ""
+
+
+def format_price(price):
+    """Takes in price and formats as str with two decimal places"""
+
+    formatted_price = "{:.2f}".format(price)
+
+    return formatted_price
 
 
