@@ -4,6 +4,8 @@ import crud
 
 import model
 
+from flask_sqlalchemy import SQLAlchemy
+
 def search_board_game_atlas(search_terms):
     """Makes call to Board Game Atlas API using search terms"""
 
@@ -167,7 +169,7 @@ def add_game_to_database(add_type, name, atlas_id=None):
 def get_user_own_games(username):
     """Returns list of user's own games as dictionary"""
 
-    own_games = crud.get_user_own_games(username)
+    own_games = crud.get_user_current_own_games(username)
 
     results = []
 
@@ -190,12 +192,12 @@ def get_user_own_games(username):
 def get_user_games_able_to_sell(username):
     """Returns list of user's games available to sell, as dictionary"""
 
-    own_games = crud.get_user_own_games(username)
+    own_games = crud.get_user_current_own_games(username)
     listed_games = crud.get_user_listed_games(username)
 
     listed_game_ids = []
     for listed_game in listed_games:
-        listed_game_ids.append(listed_game.id)
+        listed_game_ids.append(listed_game.user_games_id)
 
     results = []
 
@@ -209,6 +211,14 @@ def get_user_games_able_to_sell(username):
             )
 
     return results
+
+
+def get_user_ever_own_game_ids(username):
+    """Returns set of user's ever-owned user_games"""
+    ever_own_games = crud.get_user_ever_own_games(username)
+    ever_own_game_ids = get_id_set(ever_own_games)
+
+    return ever_own_game_ids
 
 
 def get_user_listed_games(username):
@@ -259,17 +269,29 @@ def get_user_wanted_games(username):
     return results
 
 
-def remove_game(remove_type, game_id):
+def get_rec_game_ids(listed_games, wanted_games, username):
+    """Takes in listed games and returns recommended games based on user's lists"""
+
+    ever_own_user_games = crud.get_user_ever_own_games(username)
+    ever_own_games = get_game_set(ever_own_user_games)
+
+    rec_basis_games = wanted_games|ever_own_games
+
+    return rec_basis_games
+
+
+def remove_game(remove_type, user_game_id):
     """Updates UserGame to own=False or deletes WantedGame"""
 
     removed_game = False
     if remove_type == "own":
-        listed_game = crud.get_listed_game_by_id(game_id)
-        if listed_game:
-            crud.delete_listed_game(listed_game.id)
-        removed_game = crud.update_user_game_to_false(game_id)
+    # <-------No longer want to deleted listed games from db-------->
+        # listed_game = crud.get_listed_game_by_id(user_game_id)
+        # if listed_game:
+        #     crud.delete_listed_game(listed_game.id)
+        removed_game = crud.update_user_game_to_false(user_game_id)
     elif remove_type == "wishlist":
-        removed_game = crud.delete_wanted_game(game_id)
+        removed_game = crud.delete_wanted_game(user_game_id)
 
     if removed_game:
         return "Game was successfully removed"
@@ -281,38 +303,43 @@ def search_marketplace_listings(search_terms, username):
     """Returns all matching listings (by name) as dictionary list"""
 
     listed_games = crud.get_marketplace_listings(search_terms)
+
+    wanted = crud.get_user_wanted_games(username)
+    wanted_game_ids = get_id_set(wanted)
+    wanted_games = get_game_set(wanted)
+
+    test = get_rec_game_ids(listed_games, wanted_games, username)
+    print(test)
     
     # We want to include info about whether a game is on a user's 
     # wishlist, so we pass in the username to our function
-    results = create_listings_dict(listed_games, username)
+    results = create_listings_dict(listed_games, wanted_game_ids)
 
     return results
 
 
-def filter_listings_by_username(user, username):
+def filter_listings_by_username(user, selected_username):
     """Returns a single user's listings as a dictionary"""
 
-    filtered_listings = crud.get_user_listed_games(username)
+    filtered_listings = crud.get_user_listed_games(selected_username)
 
-    results = create_listings_dict(filtered_listings, user)
+    wanted_games = crud.get_user_wanted_games(user)
+    wanted_game_ids = get_id_set(wanted_games)
+
+    results = create_listings_dict(filtered_listings, wanted_game_ids)
 
     return results
 
 
-def create_listings_dict(listings, username):
-    """Takes in listings and username of user on site"""
-
-    user_wishlist = crud.get_user_wanted_games(username)
-    wishlist_game_ids = set([])
-    for game in user_wishlist:
-        wishlist_game_ids.add(game.game_id)
+def create_listings_dict(listings, wanted_games):
+    """Takes in listings, wanted game IDs, and username of user on site"""
 
     results = []
 
     for listed_game in listings:
         price = format_price(listed_game.price)
         wishlist = False
-        if listed_game.game.id in wishlist_game_ids:
+        if listed_game.game.id in wanted_games:
             wishlist = True
         results.append(
             {
@@ -373,6 +400,26 @@ def get_listing_details(listing_id, username):
         "categories": categories,
         "other_games": selling_other_games
     }
+
+
+def get_id_set(games):
+    """Takes in list of game objects. Returns set of ids"""
+
+    id_set = set([])
+    for game in games:
+        id_set.add(game.game_id)
+
+    return id_set
+
+
+def get_game_set(games):
+    """Takes in list of UserGames or WantedGames and returns Games set"""
+
+    game_set = set([])
+    for game in games:
+        game_set.add(game.game)
+
+    return game_set
 
 
 def format_players(game):
@@ -504,4 +551,8 @@ def format_price(price):
 
     return formatted_price
 
+
+if __name__ == '__main__':
+    from server import app
+    model.connect_to_db(app)
 

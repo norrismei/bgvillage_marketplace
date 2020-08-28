@@ -78,13 +78,24 @@ def create_user_game(user_id, game_id, own=True):
     return user_game
 
 
-def get_user_own_games(username):
+def get_user_current_own_games(username):
     """Takes in username and returns user's UserGames"""
 
     own_games = db.session.query(UserGame).join(User).filter(
                 User.username==username, UserGame.own==True).all()
 
+    print(f"Current own games: {own_games}")
+
     return own_games
+
+
+def get_user_ever_own_games(username):
+    """Takes in username and returns UserGames ever owned"""
+
+    ever_own_games = db.session.query(UserGame).join(User).filter(
+                     User.username==username).all()
+
+    return ever_own_games
 
 
 def update_user_game_to_false(id):
@@ -97,18 +108,10 @@ def update_user_game_to_false(id):
     return user_game
 
 
-def delete_wanted_game(id):
-    """Finds WantedGame by id and removes row"""
-
-    wanted_game = WantedGame.query.get(id)
-    db.session.delete(wanted_game)
-    db.session.commit()
-
-
 def create_listed_game(user_games_id, condition, price, comment=None):
     """Takes ID of existing UserGame object and creates ListedGame object"""
 
-    listed_game = ListedGame(id=user_games_id, condition=condition,
+    listed_game = ListedGame(user_games_id=user_games_id, condition=condition,
                              price=price, comment=comment)
 
     db.session.add(listed_game)
@@ -122,7 +125,10 @@ def get_user_listed_games(username):
     
     listed_games = db.session.query(ListedGame).select_from(
                    ListedGame).join(UserGame).join(User).join(
-                   Game).filter(User.username==username).all()
+                   Game).filter(User.username==username,
+                   UserGame.own==True).all()
+
+    print(f"Listed games that are currently owned: {listed_games}")
 
     return listed_games
 
@@ -132,7 +138,7 @@ def get_marketplace_listings(search_terms):
 
     listed_games = db.session.query(ListedGame).select_from(ListedGame).join(
                    UserGame).join(Game).filter(
-                   Game.name.ilike(f'%{search_terms}%')).all()
+                   UserGame.own==True, Game.name.ilike(f'%{search_terms}%')).all()
 
     return listed_games
 
@@ -148,7 +154,7 @@ def get_listing_details(listing_id):
 def delete_listed_game(id):
     """Finds ListedGame by id and removes row"""
 
-    listed_game = ListedGame.query.get(id)
+    listed_game = ListedGame.query.filter_by(user_games_id=id).first()
 
     db.session.delete(listed_game)
     db.session.commit()
@@ -179,10 +185,19 @@ def create_wanted_game(user_id, game_id):
 def get_user_wanted_games(username):
     """Takes in username and returns user's WantedGames"""
 
-    wanted_games = db.session.query(WantedGame).select_from(WantedGame).join(
-                   User).join(Game).filter(User.username==username).all()
+    wanted_games = db.session.query(WantedGame).join(User).filter(
+                   User.username==username).all()
 
     return wanted_games
+
+
+def delete_wanted_game(id):
+    """Finds WantedGame by id and removes row"""
+
+    wanted_game = WantedGame.query.get(id)
+    db.session.delete(wanted_game)
+    db.session.commit()
+
 
 #####Removed Rating component####
 # def create_rating(user_id, game_id, rating, comment=None):

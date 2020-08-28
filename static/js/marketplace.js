@@ -150,6 +150,8 @@ otherGames.on('click', '.view-other-games', (event) => {
         })
 })
 
+// <------------------End of functions related to modal--------------------->
+
 
 // From filtered user listings view, toggles back to all listings
 $('#back-to-listings-search').on('click', 'button', (event) => {

@@ -86,11 +86,11 @@ def list_game():
 def remove_game():
     """Changes own Boolean to false on UserGames table"""
 
-    game_id_str = request.form.get("user_game_id")
-    game_id = int(game_id_str)
+    user_game_id_str = request.form.get("user_game_id")
+    user_game_id = int(user_game_id_str)
     remove_type = request.form.get("remove_type")
 
-    status = helper.remove_game(remove_type, game_id)
+    status = helper.remove_game(remove_type, user_game_id)
 
     return status
 

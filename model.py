@@ -103,7 +103,6 @@ class UserGame(db.Model):
     # set uselist to False
     listing = db.relationship('ListedGame', 
                                uselist=False, 
-                               cascade="all, delete",
                                backref="user_games")
 
     def __repr__(self):
@@ -119,21 +118,27 @@ class ListedGame(db.Model):
     __tablename__ = "listed_games"
 
     id = db.Column(db.Integer, 
-                   db.ForeignKey('user_games.id'), 
+                   autoincrement=True, 
                    primary_key=True)
+    user_games_id = db.Column(db.Integer,
+                            db.ForeignKey('user_games.id'))
     condition = db.Column(db.String, nullable=False)
     price = db.Column(db.Float, nullable=False)
     comment = db.Column(db.Text)
 
     user_game = db.relationship('UserGame', uselist=False, backref='listed_games')
     game = db.relationship('Game', 
-                            secondary='user_games',
+                            secondary='join(UserGame, Game, UserGame.game_id == Game.id)',
                             uselist=False, 
-                            backref='listed_games')
+                            viewonly=True,
+                            backref='listed_games',
+                            sync_backref=False)
     user = db.relationship('User', 
-                            secondary='user_games',
-                            uselist=False, 
-                            backref='listed_games')
+                            secondary='join(UserGame, User, UserGame.user_id == User.id)',
+                            uselist=False,
+                            viewonly=True, 
+                            backref='listed_games',
+                            sync_backref=False)
 
     def __repr__(self):
         """Show human-readable listed_game"""
