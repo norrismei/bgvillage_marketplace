@@ -393,7 +393,8 @@ def search_marketplace_listings(search_terms, username):
     
     # We want to include info about whether a game is on a user's 
     # wishlist, so we pass in the username to our function
-    results = create_listings_dict(listed_games, wanted_game_ids)
+    results = create_listings_dict(listed_games, wanted_game_ids,
+                                   rec_game_ids)
 
     return results
 
@@ -411,16 +412,22 @@ def filter_listings_by_username(user, selected_username):
     return results
 
 
-def create_listings_dict(listings, wanted_games):
-    """Takes in listings, wanted game IDs, and username of user on site"""
+def create_listings_dict(listings, wanted_games, rec_games):
+    """Formats listings info, along with wishlist and rec data, into dict"""
 
     results = []
 
     for listed_game in listings:
         price = format_price(listed_game.price)
+        
         wishlist = False
         if listed_game.game.id in wanted_games:
             wishlist = True
+        
+        recommended = False
+        if listed_game.game.id in rec_games:
+            recommended = True
+        
         results.append(
             {
             "key": listed_game.id,
@@ -430,7 +437,8 @@ def create_listings_dict(listings, wanted_games):
             "comment": listed_game.comment,
             "image_url": listed_game.user_game.game.image_url,
             "username": listed_game.user_game.user.username,
-            "wishlist": wishlist
+            "wishlist": wishlist,
+            "recommended": recommended
             }
         )
 

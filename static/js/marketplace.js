@@ -5,12 +5,10 @@ const listingsTable = $('#listings-results');
 function displayListings(listings) {
     $('.listing-row').remove();
     for (const game of listings) {
-        let wishlistClass = "wishlist-false"
-        if (game.wishlist == true) {
-            wishlistClass = "wishlist-true"
-        }
+        const wishlistClass = game.wishlist ? "wishlist-true" : "wishlist-false"
+        const recClass = game.recommended ? "rec-true" : "rec-false"
         listingsTable.append(
-            `<tr class="listing-row ${wishlistClass}" 
+            `<tr class="listing-row ${wishlistClass} ${recClass}" 
                  data-listing-id=${game.key}>
                 <td><img src=${game.image_url} height="50" /></td>
                 <td class="game-name">${game.name}</td>
@@ -49,6 +47,9 @@ viewOption.on('change', (event) => {
     if ($('#view-selector option:selected').attr('id') == "view-wishlist") {
         $('.wishlist-false').hide();
         $('.wishlist-true').show();
+    } else if ($('#view-selector option:selected').attr('id') == "view-rec") {
+        $('.rec-false').hide();
+        $('.rec-true').show();
     } else {
         $('.listing-row').show();
     }
