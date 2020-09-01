@@ -84,8 +84,6 @@ def get_user_current_own_games(username):
     own_games = db.session.query(UserGame).join(User).filter(
                 User.username==username, UserGame.own==True).all()
 
-    print(f"Current own games: {own_games}")
-
     return own_games
 
 
@@ -127,8 +125,6 @@ def get_user_listed_games(username):
                    ListedGame).join(UserGame).join(User).join(
                    Game).filter(User.username==username,
                    UserGame.own==True).all()
-
-    print(f"Listed games that are currently owned: {listed_games}")
 
     return listed_games
 
