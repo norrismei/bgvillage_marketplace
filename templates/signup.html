@@ -7,13 +7,13 @@
 
 {% block body %}
 
-<h1>Sign Up</h1>
+<h1>Join the Village</h1>
 
 <form action="/process-sign-up" method="POST" id="signup-form">
 
   <div id="email-field">
     <label for="email-input">Email: </label>
-    <input type="text" name="email" id="email-input">
+    <input type="email" name="email" id="email-input" value="{{ email }}" required>
     {% if email_warning %}
       An account already exists with that email
     {% endif %}
@@ -21,27 +21,41 @@
  
   <div>
     <label for="first-name-input">First Name: </label>
-    <input type="text" name="fname" id="first-name-input">
+    <input type="text" name="fname" id="first-name-input" value="{{ fname }}" required>
+  </div>
+
+  <div>
     <label for="last-name-input">Last Name: </label>
-    <input type="text" name="lname" id="last-name-input">
+    <input type="text" name="lname" id="last-name-input" value="{{ lname }}" required>
   </div>
 
   <div>
     <label for="birthdate">Birthdate: </label>
-    <input type="date" name="birthdate" id="birthdate">
+    <input type="date" name="birthdate" id="birthdate" value="{{ birthdate }}">
   </div>
 
   <div>
     <label for="username-input">Username: </label>
-    <input type="text" name="username" id="username-input">
+    <input type="text" name="username" id="username-input" value="{{ username }}" required>
+    {% if username_warning %}
+      This username is already taken
+    {% endif %}
   </div>
 
   <div>
     <label for="password-input">Password: </label>
-    <input type="password" name="password" id="password-input">
+    <input type="password" name="password" id="password-input" required>
+    {% if password_warning %}
+      Entered passwords did not match
+    {% endif %}
   </div>
 
-  <button type="submit">Login</button>
+  <div>
+    <label for="repeat-password-input">Re-type Password: </label>
+    <input type="password" name="repeat-password" id="repeat-password-input" required>
+  </div>
+
+  <button type="submit">Sign Up</button>
 </form>
 
 <script src="/static/js/signup.js"></script>

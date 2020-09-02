@@ -6,13 +6,16 @@
 
 
 {% block body %}
-<h1>Login</h1>
+<h1>Enter Board Game Village</h1>
 
 <form action="/handle-login" method="POST">
-  <label for="username-input">Username: </label>
-  <input type="text" name="username" id="username-input">
-  <label for="password-input">Password: </label>
-  <input type="password" name="password" id="password-input">
+  <div>
+    <input type="text" name="username" placeholder="enter username">
+  </div>
+  <div>
+    <input type="password" name="password" placeholder="enter password">
+  </div>
   <button type="submit">Login</button>
 </form>
+<a href="/sign-up">Sign Up</a>
 {% endblock %}

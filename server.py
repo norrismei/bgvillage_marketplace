@@ -57,7 +57,15 @@ def show_sign_up():
     """View sign up form"""
 
 
-    return render_template('signup.html', email_warning=False)
+    return render_template('signup.html', 
+                            email_warning=False,
+                            username_warning=False,
+                            password_warning=False,
+                            email="",
+                            username="",
+                            fname="",
+                            lname="",
+                            birthdate="")
 
 
 @app.route('/process-sign-up', methods=['POST'])
@@ -67,11 +75,32 @@ def handle_sign_up():
     email = request.form.get('email')
     email_warning = helper.check_email(email)
 
-    if email_warning:
-        return render_template('signup.html', 
-                                email_warning=email_warning)
+    username = request.form.get('username')
+    username_warning = helper.check_username(username)
 
-    flash("Welcome to Board Game Village!")
+    password = request.form.get('password')
+    repeat_password = request.form.get('repeat-password')
+    password_warning = helper.check_if_not_same(password, repeat_password)
+
+    fname = request.form.get('fname')
+    lname = request.form.get('lname')
+    birthdate = request.form.get('birthdate')
+
+    if email_warning or username_warning or password_warning:
+        return render_template('signup.html', 
+                                email_warning=email_warning,
+                                username_warning=username_warning,
+                                password_warning=password_warning,
+                                email=email,
+                                username=username,
+                                fname=fname,
+                                lname=lname,
+                                birthdate=birthdate)
+
+    crud.create_user(username, fname, lname, email, password, birthdate)
+    session['current_user'] = username
+
+    flash(f"Welcome to the Village, {username}")
     return redirect(f'/users/{username}')
 
 
@@ -88,6 +117,12 @@ def handle_logout():
 @app.route('/')
 def show_homepage():
     """View homepage"""
+
+    if 'current_user' not in session:
+        return redirect('/login')
+    else:
+        username = session['current_user']
+        return redirect(f'/users/{username}')
 
     return render_template('homepage.html')
 

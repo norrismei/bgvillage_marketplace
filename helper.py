@@ -28,6 +28,26 @@ def check_email(email):
         return False
 
 
+def check_username(username):
+    """Checks if username already exists in database"""
+
+    existing_username = crud.lookup_user(username)
+
+    if existing_username:
+        return True
+    else:
+        return False
+
+
+def check_if_not_same(value1, value2):
+    """Checks if two entered values are not the same"""
+
+    if value1 == value2:
+        return False
+    else:
+        return True
+
+
 def search_board_game_atlas(search_terms):
     """Makes call to Board Game Atlas API using search terms"""
 
