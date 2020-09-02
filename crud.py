@@ -18,12 +18,29 @@ def create_user(username, fname, lname, email, password, birthdate=None):
     return user
 
 
+def lookup_user(username):
+    """Returns True if username exists in User table"""
+
+    user = User.query.filter_by(username=username).first()
+
+    return user
+
+
 def get_email_by_username(username):
     """Takes in username and returns email of matching user"""
 
-    user = User.query.filter_by(username=username).one()
+    user = User.query.filter_by(username=username).first()
 
     return user.email
+
+
+def get_password(username):
+    """Takes in username and returns matching user's password"""
+
+    password = db.session.query(User.password).filter_by(
+               username=username).one()
+
+    return password[0]
 
 
 def create_game(name, description=None, publish_year=None, min_age=None,

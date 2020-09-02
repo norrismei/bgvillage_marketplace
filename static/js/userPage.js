@@ -119,6 +119,7 @@ function displaySellView() {
 // Load Own games view on first load of the page
 displayOwnView();
 
+
 // Show the user's own games upon clicking on Own button
 $('#own-button').on('click', () => {
     displayOwnView();

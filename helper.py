@@ -6,6 +6,17 @@ import model
 
 from flask_sqlalchemy import SQLAlchemy
 
+
+def check_password(username, password):
+    """Verifies if entered password equals password stored in db"""
+    correct_password = crud.get_password(username)
+
+    if password == correct_password:
+        return True
+    else:
+        return False
+
+
 def search_board_game_atlas(search_terms):
     """Makes call to Board Game Atlas API using search terms"""
 
@@ -404,10 +415,16 @@ def filter_listings_by_username(user, selected_username):
 
     filtered_listings = crud.get_user_listed_games(selected_username)
 
-    wanted_games = crud.get_user_wanted_games(user)
-    wanted_game_ids = get_id_set(wanted_games)
+    wanted = crud.get_user_wanted_games(user)
+    wanted_game_ids = get_id_set(wanted)
+    wanted_games = get_game_set(wanted)
+    rec_game_ids, rec_criteria = get_recs(filtered_listings, 
+                                          wanted_games, 
+                                          user)
 
-    results = create_listings_dict(filtered_listings, wanted_game_ids)
+    results = create_listings_dict(filtered_listings, 
+                                   wanted_game_ids, 
+                                   rec_game_ids)
 
     return results
 

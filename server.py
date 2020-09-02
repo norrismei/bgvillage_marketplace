@@ -24,33 +24,94 @@ app.jinja_env.undefined = StrictUndefined
 
 #     return render_template('root.html')
 
+@app.route('/login')
+def show_login():
+    """View login page"""
+
+    return render_template('login.html')
+
+
+@app.route('/handle-login', methods=['POST'])
+def handle_login():
+    """Log user into site"""
+
+    username = request.form['username']
+    password = request.form['password']
+
+    user = crud.lookup_user(username)
+    if not user:
+        print(f"Reached if not user")
+        flash("No account with this username. Please sign up.")
+        return redirect('/login')
+
+    if password == crud.get_password(username):
+        session['current_user'] = username
+        return redirect(f"/users/{username}")
+    else:
+        flash("Wrong password. Please try again.")
+        return redirect('/login')
+
+
+@app.route('/logout')
+def handle_logout():
+    """Logs user out of site"""
+
+    del session['current_user']
+
+    flash("You've successfully logged out.")
+    return redirect('/login')
+
+
 @app.route('/')
 def show_homepage():
     """View homepage"""
 
+
     return render_template('homepage.html')
+
+@app.route('/users/')
+def redirect_to_user_page():
+    """Redirects to current user's page"""
+
+    if 'current_user' not in session:
+        flash('Please log in first')
+        return redirect('/login')
+    else:
+        username = session['current_user']
+        return redirect(f'/users/{username}')
 
 
 @app.route('/users/<username>')
 def show_user_page(username):
     """View user's personal page"""
 
-    return render_template('user_page.html', username=username)
+    if 'current_user' not in session:
+        flash('Please log in first')
+        return redirect('/login')
+    else:
+        return render_template('user_page.html', username=username)
 
 
 @app.route('/games')
 def show_all_games():
     """View all games from database"""
 
-    return render_template('all_games.html')
+    if 'current_user' not in session:
+        flash('Please log in first')
+        return redirect('/login')
+    else:
+        return render_template('all_games.html')
 
 
 @app.route('/marketplace')
 def show_all_listings():
     """View all games from database"""
 
-    return render_template('marketplace.html')
-
+    if 'current_user' not in session:
+        flash('Please log in first')
+        return redirect('/login')
+    else:
+        return render_template('marketplace.html')
 
 
 @app.route('/api/add-game', methods=['POST'])
@@ -110,7 +171,9 @@ def search_atlas_games():
 def show_user_own_games():
     """Return JSON for list of user's owned games"""
 
-    own_games = helper.get_user_own_games(username="norrism3")
+    username = session['current_user']
+
+    own_games = helper.get_user_own_games(username)
 
     return jsonify(own_games)
 
@@ -119,7 +182,9 @@ def show_user_own_games():
 def show_available_to_sell():
     """Return JSON for list of user's games available to sell"""
 
-    able_to_sell = helper.get_user_games_able_to_sell(username="norrism3")
+    username = session['current_user']
+
+    able_to_sell = helper.get_user_games_able_to_sell(username)
 
     return jsonify(able_to_sell)
 
@@ -128,9 +193,7 @@ def show_available_to_sell():
 def show_user_listed_games():
     """Return JSON for list of user's games for sale"""
 
-    username = request.args.get("username")
-    if username == None:
-        username = "norrism3"
+    username = session['current_user']
 
     listed_games = helper.get_user_listed_games(username)
 
@@ -142,9 +205,10 @@ def get_marketplace_listings():
     """Return JSON for all listings from all users"""
 
     search_terms = request.args.get("search_terms")
+    username = session['current_user']
 
     listed_games = helper.search_marketplace_listings(
-                   search_terms, username="norrism3")
+                   search_terms, username)
 
     return jsonify(listed_games)
 
@@ -154,7 +218,7 @@ def filter_listings_by_username(username):
     """Return JSON for all listings filtered by username"""
 
     # Replace with user in session in the future
-    user = "norrism3"
+    user = session['current_user']
     selected_username = username
 
     filtered_listings = helper.filter_listings_by_username(
@@ -186,7 +250,9 @@ def lookup_seller_email():
 def show_user_want_games():
     """Return JSON for list of games user wants"""
 
-    wanted_games = helper.get_user_wanted_games(username="norrism3")
+    username = session['current_user']
+
+    wanted_games = helper.get_user_wanted_games(username)
 
     return jsonify(wanted_games)
 
