@@ -249,14 +249,27 @@ def get_user_games_able_to_sell(username):
                 {
                 "key": game.id,
                 "name": game.game.name,
+                "msrp": game.game.msrp,
+                "image_url": game.game.image_url
                 }
             )
 
     return results
 
 
+# def get_game_data_for_listing_form(user_game_id):
+#     """Returns data for creating listing form as dictionary"""
+
+#     user_game = crud.get_user_game_by_id(user_game_id)
+
+#     game_data = {
+#         ""
+#     }
+
+
 def get_user_ever_own_game_ids(username):
     """Returns set of user's ever-owned user_games"""
+    
     ever_own_games = crud.get_user_ever_own_games(username)
     ever_own_game_ids = get_id_set(ever_own_games)
 

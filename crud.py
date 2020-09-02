@@ -103,6 +103,14 @@ def create_user_game(user_id, game_id, own=True):
     return user_game
 
 
+def get_user_game_by_id(id):
+    """Takes in id and finds corresponding UserGame"""
+
+    user_game = UserGame.query.get(id)
+
+    return user_game
+
+
 def get_user_current_own_games(username):
     """Takes in username and returns user's UserGames"""
 

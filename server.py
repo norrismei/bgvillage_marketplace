@@ -40,7 +40,6 @@ def handle_login():
 
     user = crud.lookup_user(username)
     if not user:
-        print(f"Reached if not user")
         flash("No account with this username. Please sign up.")
         return redirect('/login')
 
@@ -245,6 +244,15 @@ def show_available_to_sell():
     able_to_sell = helper.get_user_games_able_to_sell(username)
 
     return jsonify(able_to_sell)
+
+
+# @app.route('/api/user/own_games/create-listing-form.json')
+# def show_create_listing():
+#     """Return JSON for UserGame's game details to create listing form"""
+
+#     user_game_id = request.args.get("user_game_id")
+
+#     create_listing_details = helper.get_game_data_for_listing_form(user_game_id)
 
 
 @app.route('/api/user/listed-games.json')

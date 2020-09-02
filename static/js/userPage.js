@@ -57,35 +57,49 @@ function displayOwnView() {
 function displaySellView() {
     $('#above-games-table').html(
         `<div>
-            <form id="listing-form">
+            <form id="select-game-to-sell-form">
                 <select name="game" id="own-game-selector">
                 </select>
-                <select name="condition">
-                    <option value="" disabled selected>Game Condition</option>
-                    <option value="New">New</option>
-                    <option value="Like New">Like New</option>
-                    <option value="Very Good">Very Good</option>
-                    <option value="Good">Good</option>
-                    <option value="Acceptable">Acceptable</option>
-                </select>
-                <input type="text" 
-                       name="price" 
-                       placeholder="Enter Price">
                 </input>
-                <input type="text" 
-                       name="comment" 
-                       placeholder="Optional Comment">
-                </input>
-                <button type="submit">Create listing</button>
+                <button type="submit" id="create-listing-button">
+                    Create listing
+                </button>
             </form>
         </div>`
     );
+    // $('#above-games-table').html(
+    //     `<div>
+    //         <form id="listing-form">
+    //             <select name="game" id="own-game-selector">
+    //             </select>
+                // <select name="condition">
+                //     <option value="" disabled selected>Game Condition</option>
+                //     <option value="New">New</option>
+                //     <option value="Like New">Like New</option>
+                //     <option value="Very Good">Very Good</option>
+                //     <option value="Good">Good</option>
+                //     <option value="Acceptable">Acceptable</option>
+                // </select>
+                // <input type="text" 
+                //        name="price" 
+                //        placeholder="Enter Price">
+                // </input>
+                // <input type="text" 
+                //        name="comment" 
+                //        placeholder="Optional Comment">
+                // </input>
+    //             <button type="submit">Create listing</button>
+    //         </form>
+    //     </div>`
+    // );
     $.get('/api/user/own-games/to-sell.json', (response) => {
         $('#own-game-selector').html(
                     '<option value="" disabled selected>Choose game</option');
         for (const game of response) {
             $('#own-game-selector').append(
-                    `<option value=${game.key}>${game.name}</option>`)
+                    `<option value=${game.key} data-msrp=${game.msrp} data-img=${game.image_url}>
+                        ${game.name}
+                     </option>`);
         };
     });
     gamesTable.html(
@@ -109,7 +123,11 @@ function displaySellView() {
                     <td>${game.condition}</td>
                     <td>${game.price}</td>
                     <td>${comment}</td>
-                    <td></td>
+                    <td>
+                        <button class="edit-listing" data-game-id=${game.key}>
+                            Edit
+                        </button>
+                    </td>
                 </tr>`
             );
         };
@@ -132,14 +150,52 @@ $('#sell-button').on('click', () => {
 });
     
 
-// When user submits form to create listing, send POST request to server
-// to create ListedGame in database and re-render listings table on page
-$('#above-games-table').on('submit', '#listing-form', (event) => {
+// When user clicks button to create listing, open modal with create listing form
+$('#above-games-table').on('click', '#create-listing-button', (event) => {
     event.preventDefault();
-    const formValues = $('#listing-form').serialize();
-    $.post("/api/list-game", formValues, (response) => {
+    const createListingButton = $(event.target);
+    const gameSelector = createListingButton.siblings('#own-game-selector');
+    const gameId = gameSelector.val();
+    const gameImageURL = gameSelector.children(':selected').attr('data-img');
+    const gameName = gameSelector.children(':selected').text();
+    const gameMSRP = gameSelector.children(':selected').attr('data-msrp');
+    console.log(gameMSRP);
+    $('#user-list-img').html(`<img src=${gameImageURL} height="150" />`);
+    $('#user-list-game-name').html(`<h2 key=${gameId}>${gameName}</h2>`);
+    $('#user-list-msrp').html(`MSRP: $${gameMSRP}`);
+    $('#user-list-button').html(`<button type="submit" class="create-listing" id="create-listing-button">
+                                    Submit
+                                 </button>`);
+    modal.show();
+})
+// $('#above-games-table').on('submit', '#listing-form', (event) => {
+//     event.preventDefault();
+//     const formValues = $('#listing-form').serialize();
+//     $.post("/api/list-game", formValues, (response) => {
+//         displaySellView();
+//     })
+// })
+
+// When user fills out form and clicks on button to submit, send POST request to 
+// server to create ListedGame in database and re-render listings table on page
+
+const listingForm = $('#listing-form');
+listingForm.on('click', 'button.create-listing', (event) => {
+    event.preventDefault();
+    const gameId = listingForm.children('#user-list-game-name').children().attr('key')
+    const data = {
+        'game': gameId,
+        'condition': $('#listing-condition').val(),
+        'price': $('#listing-price').val(),
+        'comment': $('#listing-comment').val()
+    };
+    $.post("/api/list-game", data, (response) => {
+        modal.hide();
+        $('#listing-condition option:first').prop('selected', true);
+        $('#listing-price').val("");
+        $('#listing-comment').val("");
         displaySellView();
-    })
+    });
 })
 
 // Show the user's wishlist upon clicking on Wishlist button
@@ -210,3 +266,15 @@ $('#games-table').on('click', 'button.remove', (event) => {
     };
     
 })
+
+// <---------------------Event handler for modal------------------------>
+const modal = $('.modal');
+const modalBody = $('.modal-body');
+const close = $('.close');
+
+close.on('click', (event) => {
+    modal.hide();
+    // $('.list-details').empty();
+})
+
+
