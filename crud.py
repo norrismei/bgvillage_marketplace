@@ -26,6 +26,14 @@ def lookup_user(username):
     return user
 
 
+def lookup_email(email):
+    """Returns True if email exists in User table"""
+
+    email = User.query.filter_by(email=email).first()
+
+    return email
+
+
 def get_email_by_username(username):
     """Takes in username and returns email of matching user"""
 

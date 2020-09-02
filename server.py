@@ -52,6 +52,29 @@ def handle_login():
         return redirect('/login')
 
 
+@app.route('/sign-up')
+def show_sign_up():
+    """View sign up form"""
+
+
+    return render_template('signup.html', email_warning=False)
+
+
+@app.route('/process-sign-up', methods=['POST'])
+def handle_sign_up():
+    """Create new user and redirects to user page"""
+
+    email = request.form.get('email')
+    email_warning = helper.check_email(email)
+
+    if email_warning:
+        return render_template('signup.html', 
+                                email_warning=email_warning)
+
+    flash("Welcome to Board Game Village!")
+    return redirect(f'/users/{username}')
+
+
 @app.route('/logout')
 def handle_logout():
     """Logs user out of site"""
@@ -66,8 +89,8 @@ def handle_logout():
 def show_homepage():
     """View homepage"""
 
-
     return render_template('homepage.html')
+
 
 @app.route('/users/')
 def redirect_to_user_page():

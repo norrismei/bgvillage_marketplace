@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Sign Up{% endblock %}
+
+{% block js %}
+{% endblock %}
+
+
+{% block body %}
+
+<h1>Sign Up</h1>
+
+<form action="/process-sign-up" method="POST" id="signup-form">
+
+  <div id="email-field">
+    <label for="email-input">Email: </label>
+    <input type="text" name="email" id="email-input">
+    {% if email_warning %}
+      An account already exists with that email
+    {% endif %}
+  </div>
+ 
+  <div>
+    <label for="first-name-input">First Name: </label>
+    <input type="text" name="fname" id="first-name-input">
+    <label for="last-name-input">Last Name: </label>
+    <input type="text" name="lname" id="last-name-input">
+  </div>
+
+  <div>
+    <label for="birthdate">Birthdate: </label>
+    <input type="date" name="birthdate" id="birthdate">
+  </div>
+
+  <div>
+    <label for="username-input">Username: </label>
+    <input type="text" name="username" id="username-input">
+  </div>
+
+  <div>
+    <label for="password-input">Password: </label>
+    <input type="password" name="password" id="password-input">
+  </div>
+
+  <button type="submit">Login</button>
+</form>
+
+<script src="/static/js/signup.js"></script>
+{% endblock %}

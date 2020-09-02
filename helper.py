@@ -17,6 +17,17 @@ def check_password(username, password):
         return False
 
 
+def check_email(email):
+    """Checks if email address is already in database"""
+
+    existing_email = crud.lookup_email(email)
+
+    if existing_email:
+        return True
+    else:
+        return False
+
+
 def search_board_game_atlas(search_terms):
     """Makes call to Board Game Atlas API using search terms"""
 
