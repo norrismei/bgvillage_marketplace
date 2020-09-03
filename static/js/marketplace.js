@@ -94,7 +94,10 @@ listingsTable.on('click', '.game-name', (event) => {
         if (response.msrp) {
             $('#list-msrp').html(`MSRP: ${response.msrp}`);
         }
-        $('#list-email').html(`Email: ${response.email}`);
+        $('#list-email').html(`
+            <a href="mailto:${response.email}?subject=${response.game_name}">
+                <button>Email seller</button>
+            </a>`)
         if (response.other_games) {
             $('#list-other-games').html(
                 `<button class="view-other-games" data-username=${
