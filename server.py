@@ -214,6 +214,16 @@ def update_listing():
     return updated_game
 
 
+@app.route('/api/deactivate-listing', methods=['POST'])
+def deactivate_listing():
+
+    user_game_id = request.form.get("user_game_id")
+
+    deactivated_listing = helper.deactivate_listing(user_game_id)
+
+    return deactivated_listing
+
+
 @app.route('/api/remove-game', methods=['POST'])
 def remove_game():
     """Changes own Boolean to false on UserGames table"""

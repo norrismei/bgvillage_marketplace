@@ -139,11 +139,11 @@ def update_user_game_to_false(id):
     return user_game
 
 
-def create_listed_game(user_games_id, condition, price, comment=None):
+def create_listed_game(user_games_id, condition, price, comment=None, active=True):
     """Takes ID of existing UserGame object and creates ListedGame object"""
 
     listed_game = ListedGame(user_games_id=user_games_id, condition=condition,
-                             price=price, comment=comment)
+                             price=price, comment=comment, active=active)
 
     db.session.add(listed_game)
     db.session.commit()
@@ -169,13 +169,33 @@ def update_listed_game(user_game_id, condition, price, comment=None):
     return updated_game
 
 
+def update_listed_game_to_false(user_game_id):
+    """Finds ListedGame by user_games_id and updates Active boolean to false"""
+
+    listed_game = ListedGame.query.filter_by(user_games_id=user_game_id).one()
+    listed_game.active = False
+    db.session.commit()
+
+    return listed_game
+
+
+def update_listed_game_to_true(user_game_id):
+    """Finds ListedGame by user_games_id and updates Active boolean to true"""
+
+    listed_game = ListedGame.query.filter_by(user_games_id=user_game_id).one()
+    listed_game.active = True
+    db.session.commit()
+
+    return listed_game
+
+
 def get_user_listed_games(username):
     """Takes in a username and returns user's listed games"""
     
     listed_games = db.session.query(ListedGame).select_from(
                    ListedGame).join(UserGame).join(User).join(
                    Game).filter(User.username==username,
-                   UserGame.own==True).all()
+                   ListedGame.active==True).all()
 
     return listed_games
 
@@ -210,7 +230,8 @@ def delete_listed_game(id):
 def get_listed_game_by_id(user_game_id):
     """Takes in a UserGame id and returns a matching ListedGame, if any"""
 
-    listed_game = db.session.query(ListedGame).filter_by(id=user_game_id).first()
+    listed_game = db.session.query(ListedGame).filter_by(
+                  user_games_id=user_game_id).first()
 
     if listed_game:
         return listed_game

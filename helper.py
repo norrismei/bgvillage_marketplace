@@ -287,6 +287,7 @@ def get_user_listed_games(username):
     for listed_game in listed_games:
         price = format_price(listed_game.price)
         msrp = format_msrp(listed_game.game)
+        comment = format_comment(listed_game)
         results.append(
             {
             "key": listed_game.user_games_id,
@@ -295,7 +296,7 @@ def get_user_listed_games(username):
             "price": price,
             "username": listed_game.user.username,
             "email": listed_game.user.email,
-            "comment": listed_game.comment,
+            "comment": comment,
             "image_url": listed_game.game.image_url,
             "msrp": msrp
             }
@@ -307,7 +308,13 @@ def get_user_listed_games(username):
 def list_game(user_game_id, condition, price, comment):
     """Creates new listed game and returns listed game as dictionary"""
 
-    listed_game = crud.create_listed_game(user_game_id, condition, price, comment)
+    previously_listed = crud.get_listed_game_by_id(user_game_id)
+
+    if previously_listed:
+        reactivated = crud.update_listed_game_to_true(user_game_id)
+        listed_game = crud.update_listed_game(user_game_id, condition, price, comment)
+    else:
+        listed_game = crud.create_listed_game(user_game_id, condition, price, comment)
 
     price = format_price(listed_game.price)
     msrp = format_msrp(listed_game.game)
@@ -340,6 +347,23 @@ def update_user_listed_game(user_game_id, condition, price, comment):
         "price": price,
         "comment": comment
     }
+
+
+def deactivate_listing(user_game_id):
+    """Updates ListedGame active=False and returns removed ListedGame as dict"""
+
+    deactivated_listing = crud.update_listed_game_to_false(user_game_id)
+
+    msrp = format_msrp(deactivated_listing.game)
+
+
+    return {
+        "key": deactivated_listing.user_games_id,
+        "name": deactivated_listing.game.name,
+        "msrp": msrp,
+        "image_url": deactivated_listing.game.image_url
+    }
+
 
 def get_user_wanted_games(username):
     """Returns list of user's wanted games as dictionary"""
@@ -459,10 +483,7 @@ def remove_game(remove_type, user_game_id):
 
     removed_game = False
     if remove_type == "own":
-    # <-------No longer want to deleted listed games from db-------->
-        # listed_game = crud.get_listed_game_by_id(user_game_id)
-        # if listed_game:
-        #     crud.delete_listed_game(listed_game.id)
+        deactivated = crud.update_listed_game_to_false(user_game_id)
         removed_game = crud.update_user_game_to_false(user_game_id)
     elif remove_type == "wishlist":
         removed_game = crud.delete_wanted_game(user_game_id)

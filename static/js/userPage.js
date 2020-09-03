@@ -157,6 +157,7 @@ function clearListingForm() {
     $('#listing-condition option:first').prop('selected', true);
     $('#listing-price').val("");
     $('#listing-comment').val("");
+    $('#user-list-delete').remove();
 }
 
 function tearDownListingForm() {
@@ -252,6 +253,7 @@ $('#games-table').on('click', 'button.remove', (event) => {
 // <---------------------Event handler for modal------------------------>
 const modal = $('.modal');
 const modalBody = $('.modal-body');
+const listingForm = $('#listing-form');
 const close = $('.close');
 
 close.on('click', (event) => {
@@ -296,11 +298,13 @@ gamesTable.on('click', 'button.select-edit-listing', (event) => {
     $('#listing-condition').val(condition);
     $('#listing-price').val(price);
     $('#listing-comment').val(comment);
+    listingForm.append(`<p class="list-details" id="user-list-delete">
+                            <a href="/api/deactivate-listing">Keep game, remove listing</a>
+                        </p>`);
     modal.show();
 })
 
 
-const listingForm = $('#listing-form');
 // When user fills out form and clicks on button to submit, send POST request to 
 // server to create ListedGame in database and re-render listings table on page
 listingForm.on('click', 'button.create-listing', (event) => {
@@ -330,7 +334,7 @@ listingForm.on('click', 'button.create-listing', (event) => {
     });
 })
 // When user edits listing form and clicks on save button, send POST request to 
-// server to update ListedGame in database and re-render listings to table tochanges
+// server to update ListedGame in database and re-render just the row to
 // reflect changes
 listingForm.on('click', 'button.edit-listing', (event) => {
     event.preventDefault();
@@ -342,6 +346,23 @@ listingForm.on('click', 'button.edit-listing', (event) => {
         updatedRow.children('.list-row-comment').html(response.comment);
         tearDownListingForm();
     });
+})
+
+// When user clicks on link to delete listing, send POST request to server to 
+// update ListedGame in database and remove row
+listingForm.on('click', '#user-list-delete', (event) => {
+    event.preventDefault();
+    const gameId = listingForm.children(
+                   '#user-list-game-name').children().attr('key');
+    $.post("/api/deactivate-listing", {'user_game_id': gameId}, (response) => {
+        const removeRow = $(`#list-row-${response.key}`);
+        removeRow.remove();
+        $('#own-game-selector').append(
+            `<option value=${response.key} data-msrp=${response.msrp} data-img=${response.image_url}>
+                ${response.name}
+            </option>`);
+        tearDownListingForm();
+    })
 })
 
 

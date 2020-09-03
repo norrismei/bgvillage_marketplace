@@ -94,7 +94,7 @@ class UserGame(db.Model):
                    primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     game_id = db.Column(db.Integer, db.ForeignKey("games.id"), nullable=False)
-    own = db.Column(db.Boolean, default=True)
+    own = db.Column(db.Boolean, default=True, nullable=False)
 
     user = db.relationship('User', backref='user_games')
     game = db.relationship('Game', backref='user_games')
@@ -125,6 +125,7 @@ class ListedGame(db.Model):
     condition = db.Column(db.String, nullable=False)
     price = db.Column(db.Float, nullable=False)
     comment = db.Column(db.Text)
+    active = db.Column(db.Boolean, default=True, nullable=False)
 
     user_game = db.relationship('UserGame', uselist=False, backref='listed_games')
     game = db.relationship('Game', 
