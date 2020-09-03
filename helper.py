@@ -245,11 +245,12 @@ def get_user_games_able_to_sell(username):
 
     for game in own_games:
         if game.id not in listed_game_ids:
+            msrp = format_msrp(game.game)
             results.append(
                 {
                 "key": game.id,
                 "name": game.game.name,
-                "msrp": game.game.msrp,
+                "msrp": msrp,
                 "image_url": game.game.image_url
                 }
             )
@@ -285,21 +286,60 @@ def get_user_listed_games(username):
 
     for listed_game in listed_games:
         price = format_price(listed_game.price)
+        msrp = format_msrp(listed_game.game)
         results.append(
             {
-            "key": listed_game.id,
+            "key": listed_game.user_games_id,
             "name": listed_game.game.name,
             "condition": listed_game.condition,
             "price": price,
             "username": listed_game.user.username,
             "email": listed_game.user.email,
             "comment": listed_game.comment,
-            "image_url": listed_game.game.image_url
+            "image_url": listed_game.game.image_url,
+            "msrp": msrp
             }
         )
 
     return results
 
+
+def list_game(user_game_id, condition, price, comment):
+    """Creates new listed game and returns listed game as dictionary"""
+
+    listed_game = crud.create_listed_game(user_game_id, condition, price, comment)
+
+    price = format_price(listed_game.price)
+    msrp = format_msrp(listed_game.game)
+    comment = format_comment(listed_game)
+
+    return {
+        "key": listed_game.user_games_id,
+        "name": listed_game.game.name,
+        "condition": listed_game.condition,
+        "price": price,
+        "username": listed_game.user.username,
+        "email": listed_game.user.email,
+        "comment": comment,
+        "image_url": listed_game.game.image_url,
+        "msrp": msrp    
+    }
+
+
+def update_user_listed_game(user_game_id, condition, price, comment):
+    """Updates listed game and returns updates as dictionary"""
+
+    updated_game = crud.update_listed_game(user_game_id, condition, price, comment)
+
+    price = format_price(updated_game.price)
+    comment = format_comment(updated_game)
+
+    return {
+        "key": updated_game.user_games_id,
+        "condition": updated_game.condition,
+        "price": price,
+        "comment": comment
+    }
 
 def get_user_wanted_games(username):
     """Returns list of user's wanted games as dictionary"""
@@ -443,8 +483,6 @@ def search_marketplace_listings(search_terms, username):
     wanted_games = get_game_set(wanted)
 
     rec_game_ids, rec_criteria = get_recs(listed_games, wanted_games, username)
-    print(f"Rec game IDs {rec_game_ids}")
-    print(f"Rec criteria {rec_criteria}")
     
     # We want to include info about whether a game is on a user's 
     # wishlist, so we pass in the username to our function

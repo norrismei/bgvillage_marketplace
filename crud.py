@@ -151,6 +151,24 @@ def create_listed_game(user_games_id, condition, price, comment=None):
     return listed_game
 
 
+def update_listed_game(user_game_id, condition, price, comment=None):
+    """Takes ID of existing UserGame, updates, and returns updated ListedGame"""
+
+    listed_game = db.session.query(ListedGame).filter_by(
+                  user_games_id=user_game_id).one()
+
+    listed_game.condition = condition
+    listed_game.price = price
+    listed_game.comment = comment
+
+    db.session.commit()
+
+    updated_game = db.session.query(ListedGame).filter_by(
+                  user_games_id=user_game_id).one()
+
+    return updated_game
+
+
 def get_user_listed_games(username):
     """Takes in a username and returns user's listed games"""
     

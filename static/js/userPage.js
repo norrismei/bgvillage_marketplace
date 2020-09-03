@@ -112,19 +112,18 @@ function displaySellView() {
     );
     $.get('/api/user/listed-games.json', (response) => {
         for (const game of response) {
-            let comment = []
-            if (game.comment) {
-                comment = game.comment
-            }
             gamesTable.append(
-                `<tr>
-                    <td width="20%"><img src=${game.image_url} height="50"/></td>
-                    <td>${game.name}</td>
-                    <td>${game.condition}</td>
-                    <td>${game.price}</td>
-                    <td>${comment}</td>
+                `<tr id="list-row-${game.key}">
+                    <td class="list-row-img" width="20%">
+                        <img src=${game.image_url} height="50"/>
+                    </td>
+                    <td class="list-row-name">${game.name}</td>
+                    <td class="list-row-condition">${game.condition}</td>
+                    <td class="list-row-price" 
+                        data-msrp=${game.msrp}>${game.price}</td>
+                    <td class="list-row-comment">${game.comment}</td>
                     <td>
-                        <button class="edit-listing" data-game-id=${game.key}>
+                        <button class="select-edit-listing" data-game-id=${game.key}>
                             Edit
                         </button>
                     </td>
@@ -132,6 +131,37 @@ function displaySellView() {
             );
         };
     });
+}
+
+function createListingForm(imgURL,gId, gName, msrp, bClass, bText) {
+    $('#user-list-img').html(`<img src=${imgURL} height="150" />`);
+    $('#user-list-game-name').html(`<h2 key=${gId}>${gName}</h2>`);
+    $('#user-list-msrp').html(`MSRP: $${msrp}`);
+    $('#user-list-button').html(`<button type="submit" class="${bClass}">
+                                    ${bText}
+                                 </button>`);
+}
+
+function createListingFormData() {
+    const gameId = listingForm.children('#user-list-game-name').children().attr('key')
+    const data = {
+        'game': gameId,
+        'condition': $('#listing-condition').val(),
+        'price': $('#listing-price').val(),
+        'comment': $('#listing-comment').val()
+    };
+    return data;
+}
+
+function clearListingForm() {
+    $('#listing-condition option:first').prop('selected', true);
+    $('#listing-price').val("");
+    $('#listing-comment').val("");
+}
+
+function tearDownListingForm() {
+    modal.hide();
+    clearListingForm();
 }
 
 // Load Own games view on first load of the page
@@ -149,54 +179,6 @@ $('#sell-button').on('click', () => {
     displaySellView();
 });
     
-
-// When user clicks button to create listing, open modal with create listing form
-$('#above-games-table').on('click', '#create-listing-button', (event) => {
-    event.preventDefault();
-    const createListingButton = $(event.target);
-    const gameSelector = createListingButton.siblings('#own-game-selector');
-    const gameId = gameSelector.val();
-    const gameImageURL = gameSelector.children(':selected').attr('data-img');
-    const gameName = gameSelector.children(':selected').text();
-    const gameMSRP = gameSelector.children(':selected').attr('data-msrp');
-    console.log(gameMSRP);
-    $('#user-list-img').html(`<img src=${gameImageURL} height="150" />`);
-    $('#user-list-game-name').html(`<h2 key=${gameId}>${gameName}</h2>`);
-    $('#user-list-msrp').html(`MSRP: $${gameMSRP}`);
-    $('#user-list-button').html(`<button type="submit" class="create-listing" id="create-listing-button">
-                                    Submit
-                                 </button>`);
-    modal.show();
-})
-// $('#above-games-table').on('submit', '#listing-form', (event) => {
-//     event.preventDefault();
-//     const formValues = $('#listing-form').serialize();
-//     $.post("/api/list-game", formValues, (response) => {
-//         displaySellView();
-//     })
-// })
-
-// When user fills out form and clicks on button to submit, send POST request to 
-// server to create ListedGame in database and re-render listings table on page
-
-const listingForm = $('#listing-form');
-listingForm.on('click', 'button.create-listing', (event) => {
-    event.preventDefault();
-    const gameId = listingForm.children('#user-list-game-name').children().attr('key')
-    const data = {
-        'game': gameId,
-        'condition': $('#listing-condition').val(),
-        'price': $('#listing-price').val(),
-        'comment': $('#listing-comment').val()
-    };
-    $.post("/api/list-game", data, (response) => {
-        modal.hide();
-        $('#listing-condition option:first').prop('selected', true);
-        $('#listing-price').val("");
-        $('#listing-comment').val("");
-        displaySellView();
-    });
-})
 
 // Show the user's wishlist upon clicking on Wishlist button
 $('#wishlist-button').on('click', () => {
@@ -274,7 +256,92 @@ const close = $('.close');
 
 close.on('click', (event) => {
     modal.hide();
-    // $('.list-details').empty();
+    clearListingForm();
+})
+
+// When user clicks button to create listing, open modal with create listing form
+$('#above-games-table').on('click', '#create-listing-button', (event) => {
+    event.preventDefault();
+    const createListingButton = $(event.target);
+    const gameSelector = createListingButton.siblings('#own-game-selector');
+    const gameId = gameSelector.val();
+    const gameImageURL = gameSelector.children(':selected').attr('data-img');
+    const gameName = gameSelector.children(':selected').text();
+    const gameMSRP = gameSelector.children(':selected').attr('data-msrp');
+    const buttonClass = 'create-listing'
+    const buttonText = 'Submit'
+    createListingForm(gameImageURL, gameId, gameName, gameMSRP, 
+                      buttonClass, buttonText);
+    modal.show();
+})
+
+// When user clicks button to edit listing, open modal with edit listing form
+gamesTable.on('click', 'button.select-edit-listing', (event) => {
+    event.preventDefault();
+    const editListingButton = $(event.target);
+    const gameId = editListingButton.attr('data-game-id');
+    const gameImageURL = editListingButton.parent().siblings(
+                         '.list-row-img').children('img').attr('src');
+    const gameName = editListingButton.parent().siblings('.list-row-name').html();
+    const msrp = editListingButton.parent().siblings('.list-row-price').attr('data-msrp');
+    const buttonClass = 'edit-listing'
+    const buttonText = 'Save'
+    createListingForm(gameImageURL, gameId, gameName, msrp, 
+                      buttonClass, buttonText);
+    const condition = editListingButton.parent().siblings(
+                      '.list-row-condition').html();
+    const price = editListingButton.parent().siblings('.list-row-price').html();
+    const comment = editListingButton.parent().siblings(
+                          '.list-row-comment').html();
+    $('#listing-condition').val(condition);
+    $('#listing-price').val(price);
+    $('#listing-comment').val(comment);
+    modal.show();
+})
+
+
+const listingForm = $('#listing-form');
+// When user fills out form and clicks on button to submit, send POST request to 
+// server to create ListedGame in database and re-render listings table on page
+listingForm.on('click', 'button.create-listing', (event) => {
+    event.preventDefault();
+    const data = createListingFormData();
+    $.post("/api/list-game", data, (response) => {
+        gamesTable.append(
+                `<tr id="list-row-${response.key}">
+                    <td class="list-row-img" width="20%">
+                        <img src=${response.image_url} height="50"/>
+                    </td>
+                    <td class="list-row-name">${response.name}</td>
+                    <td class="list-row-condition">${response.condition}</td>
+                    <td class="list-row-price" 
+                        data-msrp=${response.msrp}>${response.price}</td>
+                    <td class="list-row-comment">${response.comment}</td>
+                    <td>
+                        <button class="select-edit-listing" data-game-id=${response.key}>
+                            Edit
+                        </button>
+                    </td>
+                </tr>`
+        );
+        $('#own-game-selector').children(':selected').remove();
+        $('#own-game-selector option:first').prop('selected', true);
+        tearDownListingForm();
+    });
+})
+// When user edits listing form and clicks on save button, send POST request to 
+// server to update ListedGame in database and re-render listings to table tochanges
+// reflect changes
+listingForm.on('click', 'button.edit-listing', (event) => {
+    event.preventDefault();
+    const data = createListingFormData();
+    $.post("/api/update-listing", data, (response) => {
+        const updatedRow = $(`#list-row-${response.key}`);
+        updatedRow.children('.list-row-condition').html(response.condition);
+        updatedRow.children('.list-row-price').html(response.price);
+        updatedRow.children('.list-row-comment').html(response.comment);
+        tearDownListingForm();
+    });
 })
 
 

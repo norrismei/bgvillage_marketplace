@@ -195,9 +195,23 @@ def list_game():
     price = float(request.form.get("price"))
     comment = request.form.get("comment")
 
-    listed_game = crud.create_listed_game(user_game_id, condition, price, comment)
+    listed_game = helper.list_game(user_game_id, condition, price, comment)
 
-    return "Game was successfully listed"
+    return listed_game
+
+
+@app.route('/api/update-listing', methods=['POST'])
+def update_listing():
+
+    user_game_id = request.form.get("game")
+    condition = request.form.get("condition")
+    price = float(request.form.get("price"))
+    comment = request.form.get("comment")
+
+    updated_game = helper.update_user_listed_game(user_game_id, condition,
+                                                  price, comment)
+    
+    return updated_game
 
 
 @app.route('/api/remove-game', methods=['POST'])

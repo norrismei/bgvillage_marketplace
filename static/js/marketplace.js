@@ -136,7 +136,6 @@ listingsTable.on('click', '.game-name', (event) => {
 
 
 close.on('click', (event) => {
-    console.log("close clicked")
     modal.hide();
     $('.list-details').empty();
 })
