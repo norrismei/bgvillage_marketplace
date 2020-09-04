@@ -70,21 +70,23 @@ def find_game_matches(games, mechanics, categories):
     """Takes in games list and returns list of games with matching mechs/cats"""
 
     rec_ids = set([])
-    criteria = {}
+    criteria = set([])
+
+    print(f"Categories: {categories}")
 
     for game in games:
         for mechanic in game.mechanics:
             if mechanic.name in mechanics:
                 rec_ids.add(game.id)
-                criteria[game.id] = criteria.get(game.id, [])
-                criteria[game.id].append(mechanic.name)
+                criteria.add(mechanic.name)
+                print(f"added mech: {mechanic.name} criteria {criteria}")
         for category in game.categories:
+            print(category.name)
             if category.name in categories:
                 rec_ids.add(game.id)
-                criteria[game.id] = criteria.get(game.id, [])
-                criteria[game.id].append(category.name)
-    
-    return rec_ids, criteria
+                criteria.add(category.name)
+                print(f"added category: {category.name} criteria {criteria}")
+    return rec_ids, list(criteria)
 
 
 def get_recs(listed_games, wanted_games, username):
@@ -99,9 +101,9 @@ def get_recs(listed_games, wanted_games, username):
     listed_games = helper.get_game_set(listed_games)
 
     games_to_consider = listed_games - rec_basis_games
-    rec_ids, criteria = find_game_matches(games_to_consider, rec_mechs, rec_cats)
+    rec_ids, rec_criteria = find_game_matches(games_to_consider, rec_mechs, rec_cats)
 
-    return rec_ids, criteria
+    return rec_ids, rec_criteria
 
 
 if __name__ == '__main__':

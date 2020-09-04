@@ -21,15 +21,15 @@ def search_marketplace_listings(search_terms, username):
     # We want to include info about whether a game is on a user's 
     # wishlist, so we pass in the username to our function
     results = create_listings_dict(listed_games, wanted_game_ids,
-                                   rec_game_ids)
+                                   rec_game_ids, rec_criteria)
 
     return results
 
 
-def create_listings_dict(listings, wanted_games, rec_games):
+def create_listings_dict(listings, wanted_games, rec_games, rec_criteria):
     """Formats listings info, along with wishlist and rec data, into dict"""
 
-    results = []
+    results = {"games": [], "rec_criteria": []}
 
     for listed_game in listings:
         price = format_helper.format_price(listed_game.price)
@@ -42,7 +42,7 @@ def create_listings_dict(listings, wanted_games, rec_games):
         if listed_game.game.id in rec_games:
             recommended = True
         
-        results.append(
+        results["games"].append(
             {
             "key": listed_game.id,
             "name": listed_game.user_game.game.name,
@@ -52,9 +52,12 @@ def create_listings_dict(listings, wanted_games, rec_games):
             "image_url": listed_game.user_game.game.image_url,
             "username": listed_game.user_game.user.username,
             "wishlist": wishlist,
-            "recommended": recommended
+            "recommended": recommended,
+            "rec_criteria": rec_criteria
             }
         )
+
+    results["rec_criteria"] = rec_criteria
 
     return results
 
@@ -118,7 +121,7 @@ def filter_listings_by_username(user, selected_username):
 
     results = create_listings_dict(filtered_listings, 
                                    wanted_game_ids, 
-                                   rec_game_ids)
+                                   rec_game_ids, rec_criteria)
 
     return results
 

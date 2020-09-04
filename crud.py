@@ -205,7 +205,7 @@ def get_marketplace_listings(search_terms):
 
     listed_games = db.session.query(ListedGame).select_from(ListedGame).join(
                    UserGame).join(Game).filter(
-                   UserGame.own==True, Game.name.ilike(f'%{search_terms}%')).all()
+                   ListedGame.active==True, Game.name.ilike(f'%{search_terms}%')).all()
 
     return listed_games
 

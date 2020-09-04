@@ -22,17 +22,23 @@ function displayListings(listings) {
     };
 }
 
-function displaySearchResults(search_terms) {
-    $.get('/api/marketplace.json', {"search_terms": `${search_terms}`}, (response) => {
-        displayListings(response)
+function displaySearchResults(searchTerms) {
+    $.get('/api/marketplace.json', {"search_terms": `${searchTerms}`}, (response) => {
+        displayListings(response.games);
+        $('#rec-criteria').html(formatRecCriteria(response.rec_criteria));
     });
 };
 
 function displayAllListings() {
     $('#back-to-listings-search').hide();
+    $('#rec-criteria').hide();
     displaySearchResults('');
 } 
 
+function formatRecCriteria(recCriteria) {
+    const traits = recCriteria.join(', ');
+    return `These games are recommended based on your interest in ${traits}.`
+}
 
 // Refreshing of displayed results upon submitting a search for a game
 $('#listings-search-form').submit((event) => {
@@ -45,20 +51,17 @@ $('#listings-search-form').submit((event) => {
 const viewOption = $('#view-selector');
 viewOption.on('change', (event) => {
     if ($('#view-selector option:selected').attr('id') == "view-wishlist") {
+        $('#rec-criteria').hide();
         $('.wishlist-false').hide();
         $('.wishlist-true').show();
     } else if ($('#view-selector option:selected').attr('id') == "view-rec") {
+        $('#rec-criteria').show();
         $('.rec-false').hide();
         $('.rec-true').show();
     } else {
+        $('#rec-criteria').hide();
         $('.listing-row').show();
     }
-    //     $.get('/api/marketplace/wishlist-filter.json', (response) => {
-    //         displayListings(response);
-    //     })
-    // } else {
-    //     displayAllListings();
-    // }
 });
 
 
@@ -150,7 +153,10 @@ otherGames.on('click', '.view-other-games', (event) => {
             modal.hide();
             $('.listings-search-field').hide();
             $('#back-to-listings-search').show();
-            displayListings(response);
+            $('#rec-criteria').hide();
+            $('#rec-criteria').html(formatRecCriteria(response.rec_criteria));
+            $('#view-selector option:first').prop('selected', true);
+            displayListings(response.games);
         })
 })
 
@@ -161,6 +167,7 @@ otherGames.on('click', '.view-other-games', (event) => {
 $('#back-to-listings-search').on('click', 'button', (event) => {
     $('.listings-search-field').show();
     $('#back-to-listings-search').hide();
+    $('#rec-criteria').hide();
     $('#view-selector option:first').prop('selected', true);
     displayAllListings();
 }) 

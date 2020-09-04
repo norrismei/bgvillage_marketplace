@@ -299,10 +299,10 @@ def get_marketplace_listings():
     search_terms = request.args.get("search_terms")
     username = session['current_user']
 
-    listed_games = market_helper.search_marketplace_listings(
+    response = market_helper.search_marketplace_listings(
                    search_terms, username)
 
-    return jsonify(listed_games)
+    return jsonify(response)
 
 
 @app.route('/api/marketplace/<username>.json')
@@ -312,10 +312,10 @@ def filter_listings_by_username(username):
     user = session['current_user']
     selected_username = username
 
-    filtered_listings = market_helper.filter_listings_by_username(
+    response = market_helper.filter_listings_by_username(
         user, selected_username)
 
-    return jsonify(filtered_listings)
+    return jsonify(response)
 
 
 @app.route('/api/listing/details.json')
