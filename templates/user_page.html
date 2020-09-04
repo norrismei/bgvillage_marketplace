@@ -25,7 +25,7 @@
   <div class="modal-content">
     <span class="close">&times;</span>
     <div class="modal-body">
-      <form id="listing-form">
+      <form id="listing-form" action="/api/create-listing">
         <p class="list-details" id="user-list-img"></p>
         <h2 class="list-details" id="user-list-game-name"></h2>
         <p class="list-details" id="user-list-msrp"></p>
@@ -50,7 +50,9 @@
         <p class="list-details" id="user-list-comment">
           <textarea name="comment" id="listing-comment" form="#listing-form" placeholder="Optional comment"></textarea>
         </p>
-        <p class="list-details" id="user-list-button"></p>
+        <p class="list-details">
+          <button type="submit" id="user-list-button"></button>
+        </p>
       </form>
     </div>
   </div>

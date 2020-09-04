@@ -7,6 +7,10 @@ import model
 import crud
 
 import helper
+import login_signup_helper
+import listing_helper
+import market_helper
+import atlas_api_helper
 
 from jinja2 import StrictUndefined
 
@@ -45,6 +49,7 @@ def handle_login():
 
     if password == crud.get_password(username):
         session['current_user'] = username
+        session['current_user_id'] = user.id
         return redirect(f"/users/{username}")
     else:
         flash("Wrong password. Please try again.")
@@ -72,32 +77,33 @@ def handle_sign_up():
     """Create new user and redirects to user page"""
 
     email = request.form.get('email')
-    email_warning = helper.check_email(email)
+    email_warning = login_signup_helper.check_email(email)
 
     username = request.form.get('username')
-    username_warning = helper.check_username(username)
+    username_warning = login_signup_helper.check_username(username)
 
-    password = request.form.get('password')
-    repeat_password = request.form.get('repeat-password')
-    password_warning = helper.check_if_not_same(password, repeat_password)
+    pw = request.form.get('password')
+    repeat_pw = request.form.get('repeat-password')
+    pw_warning = login_signup_helper.check_if_not_same(pw, repeat_pw)
 
     fname = request.form.get('fname')
     lname = request.form.get('lname')
     birthdate = request.form.get('birthdate')
 
-    if email_warning or username_warning or password_warning:
+    if email_warning or username_warning or pw_warning:
         return render_template('signup.html', 
                                 email_warning=email_warning,
                                 username_warning=username_warning,
-                                password_warning=password_warning,
+                                password_warning=pw_warning,
                                 email=email,
                                 username=username,
                                 fname=fname,
                                 lname=lname,
                                 birthdate=birthdate)
 
-    crud.create_user(username, fname, lname, email, password, birthdate)
+    user = crud.create_user(username, fname, lname, email, pw, birthdate)
     session['current_user'] = username
+    session['current_user_id'] = user.id
 
     flash(f"Welcome to the Village, {username}")
     return redirect(f'/users/{username}')
@@ -108,6 +114,7 @@ def handle_logout():
     """Logs user out of site"""
 
     del session['current_user']
+    del session['current_user_id']
 
     flash("You've successfully logged out.")
     return redirect('/login')
@@ -175,14 +182,18 @@ def show_all_listings():
 def add_game_to_database():
     """Add a UserGame"""
 
+    user_id = session['current_user_id']
+
     add_type = request.form.get("add_type")
-    name = request.form.get("name")
+    game_name = request.form.get("name")
     atlas_id = request.form.get("atlas_id")
 
     if atlas_id:
-        status = helper.add_game_to_database(add_type, name, atlas_id)
+        status = atlas_api_helper.add_game_to_database(add_type, game_name, 
+                                                       user_id, atlas_id)
     else:
-        status = helper.add_game_to_database(add_type, name)
+        status = atlas_api_helper.add_game_to_database(add_type, game_name, 
+                                                       user_id)
 
     return status
 
@@ -195,7 +206,7 @@ def list_game():
     price = float(request.form.get("price"))
     comment = request.form.get("comment")
 
-    listed_game = helper.list_game(user_game_id, condition, price, comment)
+    listed_game = listing_helper.list_game(user_game_id, condition, price, comment)
 
     return listed_game
 
@@ -208,8 +219,8 @@ def update_listing():
     price = float(request.form.get("price"))
     comment = request.form.get("comment")
 
-    updated_game = helper.update_user_listed_game(user_game_id, condition,
-                                                  price, comment)
+    updated_game = listing_helper.update_user_listed_game(user_game_id, condition,
+                                                          price, comment)
     
     return updated_game
 
@@ -219,7 +230,7 @@ def deactivate_listing():
 
     user_game_id = request.form.get("user_game_id")
 
-    deactivated_listing = helper.deactivate_listing(user_game_id)
+    deactivated_listing = listing_helper.deactivate_listing(user_game_id)
 
     return deactivated_listing
 
@@ -243,7 +254,7 @@ def search_atlas_games():
 
     search_terms = request.args.get("search_terms")
 
-    results = helper.search_board_game_atlas(search_terms)
+    results = atlas_api_helper.search_board_game_atlas(search_terms)
 
     return jsonify(results)
 
@@ -265,18 +276,9 @@ def show_available_to_sell():
 
     username = session['current_user']
 
-    able_to_sell = helper.get_user_games_able_to_sell(username)
+    able_to_sell = listing_helper.get_user_games_able_to_sell(username)
 
     return jsonify(able_to_sell)
-
-
-# @app.route('/api/user/own_games/create-listing-form.json')
-# def show_create_listing():
-#     """Return JSON for UserGame's game details to create listing form"""
-
-#     user_game_id = request.args.get("user_game_id")
-
-#     create_listing_details = helper.get_game_data_for_listing_form(user_game_id)
 
 
 @app.route('/api/user/listed-games.json')
@@ -285,7 +287,7 @@ def show_user_listed_games():
 
     username = session['current_user']
 
-    listed_games = helper.get_user_listed_games(username)
+    listed_games = listing_helper.get_user_listed_games(username)
 
     return jsonify(listed_games)
 
@@ -297,7 +299,7 @@ def get_marketplace_listings():
     search_terms = request.args.get("search_terms")
     username = session['current_user']
 
-    listed_games = helper.search_marketplace_listings(
+    listed_games = market_helper.search_marketplace_listings(
                    search_terms, username)
 
     return jsonify(listed_games)
@@ -307,11 +309,10 @@ def get_marketplace_listings():
 def filter_listings_by_username(username):
     """Return JSON for all listings filtered by username"""
 
-    # Replace with user in session in the future
     user = session['current_user']
     selected_username = username
 
-    filtered_listings = helper.filter_listings_by_username(
+    filtered_listings = market_helper.filter_listings_by_username(
         user, selected_username)
 
     return jsonify(filtered_listings)
@@ -324,7 +325,7 @@ def get_listing_details():
     listing_id = request.args.get("listing_id") 
     username = request.args.get("username")
 
-    return helper.get_listing_details(listing_id, username)
+    return market_helper.get_listing_details(listing_id, username)
 
 
 @app.route('/api/user/email.json')

@@ -18,7 +18,7 @@ function displayOwnView() {
 
     $.get('/api/user/own-games.json', (response) => {
         for (const game of response) {
-            let players = [];
+            let players = "";
             if (game.min_players) {
                 players = `${game.min_players}`;
                 if (game.max_players && 
@@ -26,7 +26,7 @@ function displayOwnView() {
                     players = `${game.min_players}-${game.max_players}`
                 };
             };
-            let playtime = [];
+            let playtime = "";
             if (game.min_playtime) {
                 playtime = `${game.min_playtime} mins`;
                 if (game.max_playtime && 
@@ -34,9 +34,13 @@ function displayOwnView() {
                     playtime = `${game.min_playtime}-${game.max_playtime} mins`
                 };
             };
+            let selling = ""
+            if (game.selling) {
+                selling = "Y"
+            };
             gamesTable.append(
                 `<tr>
-                    <td></td>
+                    <td>${selling}</td>
                     <td><img src=${game.image_url} height="50" /></td>
                     <td>${game.name}</td>
                     <td>${players}</td>
@@ -137,9 +141,8 @@ function createListingForm(imgURL,gId, gName, msrp, bClass, bText) {
     $('#user-list-img').html(`<img src=${imgURL} height="150" />`);
     $('#user-list-game-name').html(`<h2 key=${gId}>${gName}</h2>`);
     $('#user-list-msrp').html(`MSRP: $${msrp}`);
-    $('#user-list-button').html(`<button type="submit" class="${bClass}">
-                                    ${bText}
-                                 </button>`);
+    $('#user-list-button').addClass(`${bClass}`);
+    $('#user-list-button').html(`${bText}`);
 }
 
 function createListingFormData() {
@@ -158,11 +161,48 @@ function clearListingForm() {
     $('#listing-price').val("");
     $('#listing-comment').val("");
     $('#user-list-delete').remove();
+    $('#user-list-button').removeClass();
+    $('#user-list-button').empty();
 }
 
 function tearDownListingForm() {
     modal.hide();
     clearListingForm();
+}
+
+function createListing(data) {
+    $.post("/api/list-game", data, (response) => {
+        gamesTable.append(
+                `<tr id="list-row-${response.key}">
+                    <td class="list-row-img" width="20%">
+                        <img src=${response.image_url} height="50"/>
+                    </td>
+                    <td class="list-row-name">${response.name}</td>
+                    <td class="list-row-condition">${response.condition}</td>
+                    <td class="list-row-price" 
+                        data-msrp=${response.msrp}>${response.price}</td>
+                    <td class="list-row-comment">${response.comment}</td>
+                    <td>
+                        <button class="select-edit-listing" data-game-id=${response.key}>
+                            Edit
+                        </button>
+                    </td>
+                </tr>`
+        );
+        $('#own-game-selector').children(':selected').remove();
+        $('#own-game-selector option:first').prop('selected', true);
+        tearDownListingForm();
+    });
+}
+
+function editListing(data) {
+    $.post("/api/update-listing", data, (response) => {
+        const updatedRow = $(`#list-row-${response.key}`);
+        updatedRow.children('.list-row-condition').html(response.condition);
+        updatedRow.children('.list-row-price').html(response.price);
+        updatedRow.children('.list-row-comment').html(response.comment);
+        tearDownListingForm();
+    });
 }
 
 // Load Own games view on first load of the page
@@ -306,46 +346,16 @@ gamesTable.on('click', 'button.select-edit-listing', (event) => {
 
 
 // When user fills out form and clicks on button to submit, send POST request to 
-// server to create ListedGame in database and re-render listings table on page
-listingForm.on('click', 'button.create-listing', (event) => {
+// server to create or edit ListedGame in database depending on the button class
+listingForm.submit((event) => {
+    console.log('Event was clicked')
     event.preventDefault();
     const data = createListingFormData();
-    $.post("/api/list-game", data, (response) => {
-        gamesTable.append(
-                `<tr id="list-row-${response.key}">
-                    <td class="list-row-img" width="20%">
-                        <img src=${response.image_url} height="50"/>
-                    </td>
-                    <td class="list-row-name">${response.name}</td>
-                    <td class="list-row-condition">${response.condition}</td>
-                    <td class="list-row-price" 
-                        data-msrp=${response.msrp}>${response.price}</td>
-                    <td class="list-row-comment">${response.comment}</td>
-                    <td>
-                        <button class="select-edit-listing" data-game-id=${response.key}>
-                            Edit
-                        </button>
-                    </td>
-                </tr>`
-        );
-        $('#own-game-selector').children(':selected').remove();
-        $('#own-game-selector option:first').prop('selected', true);
-        tearDownListingForm();
-    });
-})
-// When user edits listing form and clicks on save button, send POST request to 
-// server to update ListedGame in database and re-render just the row to
-// reflect changes
-listingForm.on('click', 'button.edit-listing', (event) => {
-    event.preventDefault();
-    const data = createListingFormData();
-    $.post("/api/update-listing", data, (response) => {
-        const updatedRow = $(`#list-row-${response.key}`);
-        updatedRow.children('.list-row-condition').html(response.condition);
-        updatedRow.children('.list-row-price').html(response.price);
-        updatedRow.children('.list-row-comment').html(response.comment);
-        tearDownListingForm();
-    });
+    if ($('#user-list-button').hasClass('create-listing')) {
+        createListing(data);
+    } else if ($('#user-list-button').hasClass('edit-listing')) {
+        editListing(data);
+    }
 })
 
 // When user clicks on link to delete listing, send POST request to server to 
