@@ -57,7 +57,7 @@ def get_user_games_able_to_sell(username):
                 "image_url": game.game.image_url
                 }
             )
-
+                    
     return results
 
 

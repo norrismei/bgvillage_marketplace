@@ -101,7 +101,7 @@ function displaySellView() {
                     '<option value="" disabled selected>Choose game</option');
         for (const game of response) {
             $('#own-game-selector').append(
-                    `<option value=${game.key} data-msrp=${game.msrp} data-img=${game.image_url}>
+                    `<option value="${game.key}" data-msrp="${game.msrp}" data-img="${game.image_url}">
                         ${game.name}
                      </option>`);
         };
@@ -119,15 +119,15 @@ function displaySellView() {
             gamesTable.append(
                 `<tr id="list-row-${game.key}">
                     <td class="list-row-img" width="20%">
-                        <img src=${game.image_url} height="50"/>
+                        <img src="${game.image_url}" height="50"/>
                     </td>
                     <td class="list-row-name">${game.name}</td>
                     <td class="list-row-condition">${game.condition}</td>
                     <td class="list-row-price" 
-                        data-msrp=${game.msrp}>${game.price}</td>
+                        data-msrp="${game.msrp}">${game.price}</td>
                     <td class="list-row-comment">${game.comment}</td>
                     <td>
-                        <button class="select-edit-listing" data-game-id=${game.key}>
+                        <button class="select-edit-listing" data-game-id="${game.key}">
                             Edit
                         </button>
                     </td>
@@ -137,7 +137,7 @@ function displaySellView() {
     });
 }
 
-function createListingForm(imgURL,gId, gName, msrp, bClass, bText) {
+function createListingForm(imgURL, gId, gName, msrp, bClass, bText) {
     $('#user-list-img').html(`<img src=${imgURL} height="150" />`);
     $('#user-list-game-name').html(`<h2 key=${gId}>${gName}</h2>`);
     $('#user-list-msrp').html(`MSRP: $${msrp}`);
@@ -166,7 +166,7 @@ function clearListingForm() {
 }
 
 function tearDownListingForm() {
-    modal.hide();
+    sellModal.hide();
     clearListingForm();
 }
 
@@ -290,14 +290,19 @@ $('#games-table').on('click', 'button.remove', (event) => {
     
 })
 
-// <---------------------Event handler for modal------------------------>
-const modal = $('.modal');
+// **************** Modals section ***********************
+
+const sellModal = $('#sell-modal');
 const modalBody = $('.modal-body');
-const listingForm = $('#listing-form');
 const close = $('.close');
 
+// <---------------Event handler for game details modal------------------------>
+
+// <---------------Event handler for listing modal------------------------>
+const listingForm = $('#listing-form');
+
 close.on('click', (event) => {
-    modal.hide();
+    sellModal.hide();
     clearListingForm();
 })
 
@@ -314,7 +319,7 @@ $('#above-games-table').on('click', '#create-listing-button', (event) => {
     const buttonText = 'Submit'
     createListingForm(gameImageURL, gameId, gameName, gameMSRP, 
                       buttonClass, buttonText);
-    modal.show();
+    sellModal.show();
 })
 
 // When user clicks button to edit listing, open modal with edit listing form
@@ -341,7 +346,7 @@ gamesTable.on('click', 'button.select-edit-listing', (event) => {
     listingForm.append(`<p class="list-details" id="user-list-delete">
                             <a href="/api/deactivate-listing">Keep game, remove listing</a>
                         </p>`);
-    modal.show();
+    sellModal.show();
 })
 
 

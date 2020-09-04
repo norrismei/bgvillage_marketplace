@@ -11,7 +11,7 @@ function displayListings(listings) {
             `<tr class="listing-row ${wishlistClass} ${recClass}" 
                  data-listing-id=${game.key}>
                 <td><img src=${game.image_url} height="50" /></td>
-                <td class="game-name">${game.name}</td>
+                <td class="list-game-name">${game.name}</td>
                 <td>${game.condition}</td>
                 <td>$${game.price}</td>
                 <td class="seller-username" 
@@ -83,7 +83,7 @@ const otherGames = $('#list-other-games');
 const close = $('.close');
 
 // Retrieve listing details when user clicks on game name
-listingsTable.on('click', '.game-name', (event) => {
+listingsTable.on('click', '.list-game-name', (event) => {
     const listing = $(event.target);
     const listingId = listing.parents().attr('data-listing-id');
     const seller = listing.siblings('.seller-username').attr('data-username'); 
