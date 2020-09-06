@@ -42,7 +42,8 @@ def format_msrp(game):
     msrp = game.msrp
 
     if msrp and msrp > 0:
-        return msrp
+        formatted_msrp = "{:.2f}".format(msrp)
+        return formatted_msrp
     else:
         return ""
 
@@ -132,7 +133,27 @@ def format_price(price):
     formatted_price = "{:.2f}".format(price)
 
     return formatted_price
-    
+
+
+def format_game_details(game):
+    """Takes in Game object and returns formatted basic game details"""
+
+    image_url = game.image_url
+    game_name = game.name
+    min_age = game.min_age
+    publish_year = game.publish_year
+    description = game.description
+    players = format_players(game)
+    playtime = format_playtime(game)
+    msrp = format_msrp(game)
+    primary_publisher = format_publishers(game)
+    designers = format_designers(game)
+    mechanics = format_mechanics(game)
+    categories = format_categories(game)
+
+    return (image_url, game_name, min_age, publish_year, description, players, 
+            playtime, msrp, primary_publisher, designers, mechanics, categories)
+
 
 if __name__ == '__main__':
     from server import app

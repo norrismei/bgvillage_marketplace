@@ -26,7 +26,7 @@ function addGameRows(games) {
                     </div>
                 </td>
                 <td><img src=${game.image_url} height="50" /></td>
-                <td class="game-name">${game.name}</td>
+                <td>${game.name}</td>
                 <td>${players}</td>
                 <td>${game.publisher}</td>
             </tr>`

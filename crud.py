@@ -91,6 +91,16 @@ def get_game_by_atlas_id(atlas_id):
         return None
 
 
+# def get_game_details(user_game):
+#     """Takes in UserGame and returns corresponding"""
+
+#     # url, name, min_age, min_players, max_players = db.session.query(Game.image_url, Game.name, Game.min_age, Game.min_players, Game.max_players).join(UserGame).filter(
+#     #                              UserGame.id==user_game.id).one()
+
+#     game = db.session.query(Game).select_from(Game).join(UserGame).join(GamePublisher).join(Publisher).filter(UserGame.id==user_game.id).one()
+
+#     return game
+
 
 def create_user_game(user_id, game_id, own=True):
     """Create and return an instance of game owned by user"""
@@ -211,7 +221,7 @@ def get_marketplace_listings(search_terms):
 
 
 def get_listing_details(listing_id):
-    """Takes in listing ID and returns game listing details"""
+    """Takes in listing ID and returns ListedGame object"""
 
     listed_game = db.session.query(ListedGame).filter_by(id=listing_id).one()
 

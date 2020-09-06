@@ -102,6 +102,33 @@ def get_game_set(games):
     return game_set
 
 
+def get_game_details(id):
+    """Takes in UserGame id and returns basic game details"""
+
+    user_game = crud.get_user_game_by_id(id)
+    game = user_game.game
+
+    (image_url, game_name, min_age, publish_year, 
+    description, players, playtime, msrp, primary_publisher, 
+    designers, mechanics, categories) = format_helper.format_game_details(game)
+
+    return {
+        "key": user_game.id,
+        "image_url": image_url,
+        "game_name": game_name,
+        "msrp": msrp,
+        "min_age": min_age,
+        "players": players,
+        "playtime": playtime,
+        "publisher": primary_publisher,
+        "designers": designers,
+        "publish_year": publish_year,
+        "game_description": description,
+        "mechanics": mechanics,
+        "categories": categories,
+    }
+    
+
 if __name__ == '__main__':
     from server import app
     model.connect_to_db(app)

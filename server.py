@@ -270,6 +270,15 @@ def show_user_own_games():
     return jsonify(own_games)
 
 
+@app.route('/api/user/own-games/details.json')
+def show_user_own_game_details():
+    """Return JSON for a specific UserGame's game details"""
+
+    user_game_id = request.args.get("user_game_id")
+
+    return helper.get_game_details(user_game_id)
+
+
 @app.route('/api/user/own-games/to-sell.json')
 def show_available_to_sell():
     """Return JSON for list of user's games available to sell"""

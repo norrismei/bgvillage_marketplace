@@ -76,31 +76,27 @@ def get_listing_details(listing_id, username):
     price = format_helper.format_price(listing.price) 
     comment = format_helper.format_comment(listing)
 
-    players = format_helper.format_players(game)
-    playtime = format_helper.format_playtime(game)
-    msrp = format_helper.format_msrp(game)
-    primary_publisher = format_helper.format_publishers(game)
-    designers = format_helper.format_designers(game)
-    mechanics = format_helper.format_mechanics(game)
-    categories = format_helper.format_categories(game)
+    (image_url, game_name, min_age, publish_year, 
+    description, players, playtime, msrp, primary_publisher, 
+    designers, mechanics, categories) = format_helper.format_game_details(game)
 
     return {
         "key": listing.id,
-        "image_url": listing.game.image_url,
-        "game_name": listing.game.name,
+        "image_url": image_url,
+        "game_name": game_name,
         "condition": listing.condition,
         "price": price,
         "msrp": msrp,
         "username": listing.user.username,
         "email": listing.user.email,
         "comment": comment,
-        "min_age": listing.game.min_age,
+        "min_age": min_age,
         "players": players,
         "playtime": playtime,
         "publisher": primary_publisher,
         "designers": designers,
-        "publish_year": listing.game.publish_year,
-        "game_description": listing.game.description,
+        "publish_year": publish_year,
+        "game_description": description,
         "mechanics": mechanics,
         "categories": categories,
         "other_games": selling_other_games

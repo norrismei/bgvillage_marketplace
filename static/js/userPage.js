@@ -39,10 +39,10 @@ function displayOwnView() {
                 selling = "Y"
             };
             gamesTable.append(
-                `<tr>
+                `<tr data-usergame-id=${game.key}>
                     <td>${selling}</td>
                     <td><img src=${game.image_url} height="50" /></td>
-                    <td>${game.name}</td>
+                    <td class="game-name">${game.name}</td>
                     <td>${players}</td>
                     <td>${playtime}</td>
                     <td>
@@ -140,7 +140,9 @@ function displaySellView() {
 function createListingForm(imgURL, gId, gName, msrp, bClass, bText) {
     $('#user-list-img').html(`<img src=${imgURL} height="150" />`);
     $('#user-list-game-name').html(`<h2 key=${gId}>${gName}</h2>`);
-    $('#user-list-msrp').html(`MSRP: $${msrp}`);
+    if (msrp) {
+        $('#user-list-msrp').html(`MSRP: ${msrp}`);
+    };
     $('#user-list-button').addClass(`${bClass}`);
     $('#user-list-button').html(`${bText}`);
 }
@@ -293,16 +295,59 @@ $('#games-table').on('click', 'button.remove', (event) => {
 // **************** Modals section ***********************
 
 const sellModal = $('#sell-modal');
+const ownModal = $('#own-modal')
+const modal = $('.modal');
 const modalBody = $('.modal-body');
 const close = $('.close');
 
 // <---------------Event handler for game details modal------------------------>
 
+gamesTable.on('click', '.game-name', (event) => {
+    const userGame = $(event.target);
+    const userGameId = userGame.parents().attr('data-usergame-id');
+    const data = {"user_game_id": userGameId};
+    $.get('/api/user/own-games/details.json', data, (response) => {
+        $('#user-game-img').html(`<img src=${response.image_url} height="150" />`);
+        $('#user-game-name').html(response.game_name);
+        if (response.msrp) {
+            $('#user-game-msrp').html(`MSRP: ${response.msrp}`);
+        }
+        if (response.min_age) {
+            $('#user-game-min-age').html(`Min age: ${response.min_age}`);
+        };
+        if (response.players) {
+            $('#user-game-players').html(`Players: ${response.players}`);
+        };
+        if (response.playtime) {
+            $('#user-game-playtime').html(`Playtime: ${response.playtime}`);
+        };
+        if (response.publisher) {
+            $('#user-game-publisher').html(`Publisher: ${response.publisher}`);
+        };
+        if (response.designers) {
+            $('#user-game-designers').html(`Designers: ${response.designers}`);
+        };
+        if (response.publish_year) {
+            $('#user-game-year').html(`Year Published: ${response.publish_year}`);
+        };    
+        // if (response.game_description) {
+        //     $('#list-description').html(response.game_description);
+        // }
+        if (response.mechanics) {
+            $('#user-game-mechanics').html(`Mechanics: ${response.mechanics}`);
+        };
+        if (response.categories) {
+            $('#user-game-categories').html(`Categories: ${response.categories}`);
+        };
+        ownModal.show();
+    })
+});
+
 // <---------------Event handler for listing modal------------------------>
 const listingForm = $('#listing-form');
 
 close.on('click', (event) => {
-    sellModal.hide();
+    modal.hide();
     clearListingForm();
 })
 
