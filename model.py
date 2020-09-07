@@ -19,16 +19,24 @@ def connect_to_db(flask_app, db_uri='postgresql:///bgvillage', echo=True):
 def create_example_data():
     """Create some sample data for tests"""
 
-    User.query.delete()
-
     david = User(username='noramp', fname='David', lname='Garibaldi', 
                 email='david@test.com', password='gloomhaven')
     chichi = User(username='thodas', fname='Chisholm', lname='Gentry', 
                 email='chisholm@test.com', password='18xx')
 
-    db.session.add_all([david, chichi])
+    game = Game(name='1800', description='A mini 18xx game, set in Colorado',
+                publish_year=2002, min_age=16, min_players=2, max_players=3,
+                min_playtime=90, max_playtime=90, 
+                image_url="https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1547142491052",
+                msrp=0, atlas_id='R33yfG3UsV')
+
+    db.session.add_all([david, chichi, game])
     db.session.commit()
 
+    chichi_game = UserGame(user_id=chichi.id, game_id=1, own=True)
+
+    db.session.add_all([chichi_game])
+    db.session.commit()
 
 class User(db.Model):
     """A user"""
