@@ -53,7 +53,18 @@ def count_mechs_categories(games):
 
 
 def get_top_three(sorted_lst):
-    """Take in sorted list of tuples and returns list of top 3 traits"""
+    """Take in sorted list of tuples and returns list of top 3 traits
+
+    >>> get_top_three([('Hand Management', 13), ('Dice Rolling', 10), ('Tile Placement', 8), ('Worker Placement', 6)])
+    ['Hand Management', 'Dice Rolling', 'Tile Placement']
+
+    >>> get_top_three([('Hand Management', 13), ('Dice Rolling', 10)])
+    ['Hand Management', 'Dice Rolling']
+
+    >>> get_top_three([])
+    []
+    
+    """
 
     top_three = []
 
@@ -107,5 +118,7 @@ def get_recs(listed_games, wanted_games, username):
 
 
 if __name__ == '__main__':
-    from server import app
-    model.connect_to_db(app)
+    from doctest import testmod
+    if testmod().failed == 0:
+        from server import app
+        model.connect_to_db(app)
