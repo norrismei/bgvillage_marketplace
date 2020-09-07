@@ -64,41 +64,15 @@ function displaySellView() {
             <form id="select-game-to-sell-form">
                 <select name="game" id="own-game-selector">
                 </select>
-                </input>
-                <button type="submit" id="create-listing-button">
+                <button type="submit" id="create-listing-button" disabled>
                     Create listing
                 </button>
             </form>
         </div>`
     );
-    // $('#above-games-table').html(
-    //     `<div>
-    //         <form id="listing-form">
-    //             <select name="game" id="own-game-selector">
-    //             </select>
-                // <select name="condition">
-                //     <option value="" disabled selected>Game Condition</option>
-                //     <option value="New">New</option>
-                //     <option value="Like New">Like New</option>
-                //     <option value="Very Good">Very Good</option>
-                //     <option value="Good">Good</option>
-                //     <option value="Acceptable">Acceptable</option>
-                // </select>
-                // <input type="text" 
-                //        name="price" 
-                //        placeholder="Enter Price">
-                // </input>
-                // <input type="text" 
-                //        name="comment" 
-                //        placeholder="Optional Comment">
-                // </input>
-    //             <button type="submit">Create listing</button>
-    //         </form>
-    //     </div>`
-    // );
     $.get('/api/user/own-games/to-sell.json', (response) => {
         $('#own-game-selector').html(
-                    '<option value="" disabled selected>Choose game</option');
+                    '<option value="" selected disabled>Choose game</option');
         for (const game of response) {
             $('#own-game-selector').append(
                     `<option value="${game.key}" data-msrp="${game.msrp}" data-img="${game.image_url}">
@@ -351,10 +325,18 @@ close.on('click', (event) => {
     clearListingForm();
 })
 
+// When user chooses game from the selector, create listing button is enabled.
+$('#above-games-table').on('change', '#own-game-selector', (event) => {
+    const createListingButton = $(event.target).siblings('#create-listing-button');
+    if ($(event.target).val() === "") {
+        createListingButton.attr('disabled', true);
+    } else { createListingButton.removeAttr('disabled'); }
+})
+
 // When user clicks button to create listing, open modal with create listing form
-$('#above-games-table').on('click', '#create-listing-button', (event) => {
+$('#above-games-table').on('submit', '#select-game-to-sell-form', (event) => {
     event.preventDefault();
-    const createListingButton = $(event.target);
+    const createListingButton = $(event.target).children('#create-listing-button');
     const gameSelector = createListingButton.siblings('#own-game-selector');
     const gameId = gameSelector.val();
     const gameImageURL = gameSelector.children(':selected').attr('data-img');
