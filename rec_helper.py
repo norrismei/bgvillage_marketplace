@@ -61,7 +61,7 @@ def get_top_three(sorted_lst):
         try:
             top_three.append(sorted_lst[i][0])
         except:
-            pass
+            break
 
     return top_three
 
