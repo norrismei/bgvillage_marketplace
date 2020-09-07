@@ -16,6 +16,20 @@ def connect_to_db(flask_app, db_uri='postgresql:///bgvillage', echo=True):
     print('Connected to the db!')
 
 
+def create_example_data():
+    """Create some sample data for tests"""
+
+    User.query.delete()
+
+    david = User(username='noramp', fname='David', lname='Garibaldi', 
+                email='david@test.com', password='gloomhaven')
+    chichi = User(username='thodas', fname='Chisholm', lname='Gentry', 
+                email='chisholm@test.com', password='18xx')
+
+    db.session.add_all([david, chichi])
+    db.session.commit()
+
+
 class User(db.Model):
     """A user"""
 
