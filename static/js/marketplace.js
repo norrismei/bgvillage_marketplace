@@ -25,7 +25,10 @@ function displayListings(listings) {
 function displaySearchResults(searchTerms) {
     $.get('/api/marketplace.json', {"search_terms": `${searchTerms}`}, (response) => {
         displayListings(response.games);
-        $('#rec-criteria').html(formatRecCriteria(response.rec_criteria));
+        if (response.rec_criteria) {
+            $('#view-rec').removeAttr('disabled');
+            $('#rec-criteria').html(formatRecCriteria(response.rec_criteria));
+        };
     });
 };
 
