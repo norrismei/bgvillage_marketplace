@@ -83,7 +83,6 @@ listingsTable.on('click', '.email-seller', (event) => {
 const modal = $('#listing-modal');
 const modalBody = $('.modal-body');
 const otherGames = $('#list-other-games');
-const close = $('.close');
 
 // Retrieve listing details when user clicks on game name
 listingsTable.on('click', '.game-name', (event) => {
@@ -168,17 +167,6 @@ $('#back-to-listings-search').on('click', 'button', (event) => {
     $('#view-selector option:first').prop('selected', true);
     displayAllListings();
 }) 
-
-
-// Non-working code to close modal window if clicking anywhere outside modal
-
-// modal.on('click', (event) => {
-//     console.log('Clicked on document');
-//     console.log(`Event target: ${event.target}`);
-//     if (event.target !== $('.modal-content')) {
-//         modal.hide();
-//     }
-// })
 
 // Initial loading of all Marketplace listings.
 displayAllListings()

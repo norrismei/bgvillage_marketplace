@@ -271,7 +271,6 @@ const sellModal = $('#sell-modal');
 const ownModal = $('#own-modal')
 const modal = $('.modal');
 const modalBody = $('.modal-body');
-const close = $('.close');
 
 // <---------------Event handler for game details modal------------------------>
 
@@ -312,15 +311,14 @@ gamesTable.on('click', '.game-name', (event) => {
         if (response.categories) {
             $('#user-game-categories').html(`Categories: ${response.categories}`);
         };
-        ownModal.show();
+        ownModal.modal({backdrop: true});
     })
 });
 
 // <---------------Event handler for listing modal------------------------>
 const listingForm = $('#listing-form');
 
-close.on('click', (event) => {
-    modal.hide();
+sellModal.on('hide.bs.modal', (event) => {
     clearListingForm();
 })
 
