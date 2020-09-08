@@ -182,9 +182,10 @@ def update_listed_game(user_game_id, condition, price, comment=None):
 def update_listed_game_to_false(user_game_id):
     """Finds ListedGame by user_games_id and updates Active boolean to false"""
 
-    listed_game = ListedGame.query.filter_by(user_games_id=user_game_id).one()
-    listed_game.active = False
-    db.session.commit()
+    listed_game = ListedGame.query.filter_by(user_games_id=user_game_id).first()
+    if listed_game:
+        listed_game.active = False
+        db.session.commit()
 
     return listed_game
 
