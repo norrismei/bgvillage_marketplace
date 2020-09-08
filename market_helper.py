@@ -53,14 +53,13 @@ def create_listings_dict(listings, wanted_games, rec_games, rec_criteria):
             "username": listed_game.user_game.user.username,
             "wishlist": wishlist,
             "recommended": recommended,
-            "rec_criteria": rec_criteria
             }
         )
 
     if rec_criteria:
         results["rec_criteria"] = rec_criteria
     else:
-        results["rec_criteria"] = ""
+        results["rec_criteria"] = []
 
     return results
 

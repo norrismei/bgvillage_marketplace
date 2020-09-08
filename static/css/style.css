@@ -22,7 +22,7 @@
     display: block;
 }
 
-.modal {
+/*.modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -50,6 +50,6 @@
 
 .close:hover {
     cursor: pointer;
-}
+}*/
 
 
