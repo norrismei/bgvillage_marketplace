@@ -11,7 +11,7 @@ function displayListings(listings) {
             `<tr class="listing-row ${wishlistClass} ${recClass}" 
                  data-listing-id=${game.key}>
                 <td><img src=${game.image_url} height="50" /></td>
-                <td class="game-name">${game.name}</td>
+                <td class="game-name"><button type="button data-toggle="modal" data-target"#listing-modal" data-backdrop="true">${game.name}</button></td>
                 <td>${game.condition}</td>
                 <td>$${game.price}</td>
                 <td class="seller-username" 
@@ -80,7 +80,7 @@ listingsTable.on('click', '.email-seller', (event) => {
 
 
 // <---------------------Event handler for modal------------------------>
-const modal = $('.modal');
+const modal = $('#listing-modal');
 const modalBody = $('.modal-body');
 const otherGames = $('#list-other-games');
 const close = $('.close');
@@ -88,8 +88,8 @@ const close = $('.close');
 // Retrieve listing details when user clicks on game name
 listingsTable.on('click', '.game-name', (event) => {
     const listing = $(event.target);
-    const listingId = listing.parents().attr('data-listing-id');
-    const seller = listing.siblings('.seller-username').attr('data-username'); 
+    const listingId = listing.parents().parents().attr('data-listing-id');
+    const seller = listing.parents().siblings('.seller-username').attr('data-username'); 
     const data = {"listing_id": listingId,
                   "username": seller}
     $.get('/api/listing/details.json', data, (response) => {
@@ -139,21 +139,15 @@ listingsTable.on('click', '.game-name', (event) => {
         if (response.categories) {
             $('#list-categories').html(`Categories: ${response.categories}`);
         };
-        modal.show();
+        modal.modal({backdrop: true});
     })
-})
-
-
-close.on('click', (event) => {
-    modal.hide();
-    $('.list-details').empty();
 })
 
 // Links to Marketplace listings filtered by username when button is clicked
 otherGames.on('click', '.view-other-games', (event) => {
     const username = $('.view-other-games').attr('data-username');
     $.get(`/api/marketplace/${username}.json`,response => {
-            modal.hide();
+            modal.modal('hide');
             $('.listings-search-field').hide();
             $('#back-to-listings-search').show();
             $('#rec-criteria').hide();
