@@ -142,7 +142,7 @@ function clearListingForm() {
 }
 
 function tearDownListingForm() {
-    sellModal.hide();
+    sellModal.modal('hide');
     clearListingForm();
 }
 
@@ -190,8 +190,7 @@ $('#own-button').on('click', () => {
     displayOwnView();
 });
 
-// After clicking on sell button, show form to create game listing, 
-// followed by table showing games user has listed for sale
+// After clicking on sell button, show table with games user has listed for sale
 $('#sell-button').on('click', () => {
     displaySellView();
 });
@@ -346,7 +345,7 @@ $('#above-games-table').on('submit', '#select-game-to-sell-form', (event) => {
     const buttonText = 'Submit'
     createListingForm(gameImageURL, gameId, gameName, gameMSRP, 
                       buttonClass, buttonText);
-    sellModal.show();
+    sellModal.modal({backdrop: true});
 })
 
 // When user clicks button to edit listing, open modal with edit listing form
@@ -373,14 +372,13 @@ gamesTable.on('click', 'button.select-edit-listing', (event) => {
     listingForm.append(`<p class="list-details" id="user-list-delete">
                             <a href="/api/deactivate-listing">Keep game, remove listing</a>
                         </p>`);
-    sellModal.show();
+    sellModal.modal({backdrop: true});
 })
 
 
 // When user fills out form and clicks on button to submit, send POST request to 
 // server to create or edit ListedGame in database depending on the button class
 listingForm.submit((event) => {
-    console.log('Event was clicked')
     event.preventDefault();
     const data = createListingFormData();
     if ($('#user-list-button').hasClass('create-listing')) {

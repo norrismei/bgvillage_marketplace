@@ -11,7 +11,7 @@ function displayListings(listings) {
             `<tr class="listing-row ${wishlistClass} ${recClass}" 
                  data-listing-id=${game.key}>
                 <td><img src=${game.image_url} height="50" /></td>
-                <td class="game-name"><button type="button data-toggle="modal" data-target"#listing-modal" data-backdrop="true">${game.name}</button></td>
+                <td class="game-name">${game.name}</td>
                 <td>${game.condition}</td>
                 <td>$${game.price}</td>
                 <td class="seller-username" 
@@ -88,8 +88,8 @@ const close = $('.close');
 // Retrieve listing details when user clicks on game name
 listingsTable.on('click', '.game-name', (event) => {
     const listing = $(event.target);
-    const listingId = listing.parents().parents().attr('data-listing-id');
-    const seller = listing.parents().siblings('.seller-username').attr('data-username'); 
+    const listingId = listing.parents().attr('data-listing-id');
+    const seller = listing.siblings('.seller-username').attr('data-username'); 
     const data = {"listing_id": listingId,
                   "username": seller}
     $.get('/api/listing/details.json', data, (response) => {

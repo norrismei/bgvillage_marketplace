@@ -42,39 +42,43 @@
   </div>
 </div>
 
-<div class="modal" id="sell-modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <div class="modal-body">
-      <form id="listing-form" action="/api/create-listing">
-        <p class="list-details" id="user-list-img"></p>
-        <h2 class="list-details" id="user-list-game-name"></h2>
-        <p class="list-details" id="user-list-msrp"></p>
-        <p class="list-details" id="user-list-condition">
-          <select name="condition" id="listing-condition" required>
-            <option value="" disabled selected>Game Condition</option>
-            <option value="New">New</option>
-            <option value="Like New">Like New</option>
-            <option value="Very Good">Very Good</option>
-            <option value="Good">Good</option>
-            <option value="Acceptable">Acceptable</option>
-          </select>
-        </p>
-        <p class="list-details" id="user-list-price">
-          <input type="text" 
-                 name="price" 
-                 id="listing-price"
-                 placeholder="Enter Price"
-                 required>
-          </input>
-        </p>
-        <p class="list-details" id="user-list-comment">
-          <textarea name="comment" id="listing-comment" form="#listing-form" placeholder="Optional comment"></textarea>
-        </p>
-        <p class="list-details">
-          <button type="submit" id="user-list-button"></button>
-        </p>
-      </form>
+<div class="modal" id="sell-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal">
+          <span class="close">&times;</span>
+        </button>
+        <form id="listing-form" action="/api/create-listing">
+          <p class="list-details" id="user-list-img"></p>
+          <h2 class="list-details" id="user-list-game-name"></h2>
+          <p class="list-details" id="user-list-msrp"></p>
+          <p class="list-details" id="user-list-condition">
+            <select name="condition" id="listing-condition" required>
+              <option value="" disabled selected>Game Condition</option>
+              <option value="New">New</option>
+              <option value="Like New">Like New</option>
+              <option value="Very Good">Very Good</option>
+              <option value="Good">Good</option>
+              <option value="Acceptable">Acceptable</option>
+            </select>
+          </p>
+          <p class="list-details" id="user-list-price">
+            <input type="text" 
+                   name="price" 
+                   id="listing-price"
+                   placeholder="Enter Price"
+                   required>
+            </input>
+          </p>
+          <p class="list-details" id="user-list-comment">
+            <textarea name="comment" id="listing-comment" form="#listing-form" placeholder="Optional comment"></textarea>
+          </p>
+          <p class="list-details">
+            <button type="submit" id="user-list-button"></button>
+          </p>
+        </form>
+      </div>
     </div>
   </div>
 </div>
