@@ -22,4 +22,15 @@
     display: block;
 }
 
+.hide {
+    display: none;
+}
 
+.nav-link {
+    font-size: 1.25rem;
+}
+
+.meeple-icon {
+    height: 1.5em; 
+    width: 1.5em;
+}
