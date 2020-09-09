@@ -22,34 +22,4 @@
     display: block;
 }
 
-/*.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    padding-top: 100px;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
-.modal-content {
-    background-color: white;
-    width: 80%;
-    margin: auto;
-    padding: 5px;
-}
-
-.close {
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover {
-    cursor: pointer;
-}*/
-
 
