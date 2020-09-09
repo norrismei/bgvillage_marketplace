@@ -15,7 +15,7 @@ function addGameRows(games) {
             `<tr class="game-row">
                 <td>
                     <div class="dropdown">
-                        <button type="button" class="btn btn-outline-dark btn-sm dropdown-button" 
+                        <button type="button" class="btn btn-outline-dark btn-block text-nowrap dropdown-button" 
                                 data-atlas-id="${game.key}">
                             <svg width=".75em" height=".75em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                               <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -23,9 +23,9 @@ function addGameRows(games) {
                             </svg> 
                             Add Game
                         </button>
-                        <div class="add-dropdown-content">
-                            <div class="add-option add-to-own">to Own</div>
-                            <div class="add-option add-to-wishlist">to Wishlist</div>
+                        <div class="add-dropdown-content dropdown-menu">
+                            <div class="add-option add-to-own dropdown-item">to Own</div>
+                            <div class="add-option add-to-wishlist dropdown-item">to Wishlist</div>
                         </div>
                     </div>
                 </td>
@@ -37,6 +37,23 @@ function addGameRows(games) {
         );
     };
   };
+
+function handleAdd(addOption, addButton) {
+    addOption.parents('.add-dropdown-content').toggleClass('show');
+    addButton.html(
+        `<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </svg>
+        Added!`);
+    setTimeout(()=> {
+        addButton.html(
+            `<svg width=".75em" height=".75em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg> 
+            Add Game`);
+    }, 3000);
+}
 
 // Initial loading of All Games page. Preloads with this search.
 $.get('/api/games/search.json', {"search_terms": "%"}, (response) => {
@@ -69,6 +86,7 @@ $('#games-results').on('click', 'button', (event) => {
 // Handles the event, depending on which option user clicks
 $('#games-results').on('click', '.add-option', (event) => {
     const addOption = $(event.target);
+    const addButton = addOption.parents().siblings('button');
     const addAtlasId = addOption.parents('.add-dropdown-content').
                         siblings('.dropdown-button').attr('data-atlas-id');
     const addName = addOption.parents('.add-dropdown-content').
@@ -78,18 +96,14 @@ $('#games-results').on('click', '.add-option', (event) => {
         $.post('/api/add-game', {'atlas_id': addAtlasId,
                                  'name': addName, 
                                  'add_type': 'own'}, (res) => {
-            alert(res);
-            // Close the open dropdown
-            addOption.parents('.add-dropdown-content').toggleClass('show');
+            handleAdd(addOption, addButton);
         });
     };
     if (addOption.hasClass('add-to-wishlist')) {
         $.post('/api/add-game', {'atlas_id': addAtlasId, 
                                  'name': addName,
                                  'add_type': 'wishlist'}, (res) => {
-            alert(res);
-            // Close the open dropdown
-            addOption.parents('.add-dropdown-content').toggleClass('show');
+            handleAdd(addOption, addButton);
         });
     };
 })

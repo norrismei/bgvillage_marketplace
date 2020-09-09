@@ -67,11 +67,15 @@ function displaySellView() {
     $('#above-games-table').html(
         `<div>
             <form id="select-game-to-sell-form">
-                <select name="game" id="own-game-selector">
-                </select>
-                <button type="submit" id="create-listing-button" class="btn btn-primary" disabled>
-                    Create listing
-                </button>
+                <div class="form-row">
+                    <div class="col-3">
+                        <select name="game" class="custom-select" id="own-game-selector">
+                        </select>
+                    </div>
+                    <button type="submit" id="create-listing-button" class="btn btn-primary" disabled>
+                        Create listing
+                    </button>
+                </div>
             </form>
         </div>`
     );
@@ -348,7 +352,7 @@ $('#above-games-table').on('change', '#own-game-selector', (event) => {
 $('#above-games-table').on('submit', '#select-game-to-sell-form', (event) => {
     event.preventDefault();
     const createListingButton = $(event.target).children('#create-listing-button');
-    const gameSelector = createListingButton.siblings('#own-game-selector');
+    const gameSelector = createListingButton.siblings().children('#own-game-selector');
     const gameId = gameSelector.val();
     const gameImageURL = gameSelector.children(':selected').attr('data-img');
     const gameName = gameSelector.children(':selected').text();
