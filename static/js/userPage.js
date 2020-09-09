@@ -36,7 +36,9 @@ function displayOwnView() {
             };
             let selling = ""
             if (game.selling) {
-                selling = "Y"
+                selling = `<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                            </svg>`
             };
             gamesTable.append(
                 `<tr data-usergame-id=${game.key}>
@@ -46,9 +48,12 @@ function displayOwnView() {
                     <td>${players}</td>
                     <td>${playtime}</td>
                     <td>
-                        <button class="remove from-own" 
+                        <button type="button" class="btn remove from-own" 
                                 data-game-id=${game.key}>
-                            Remove
+                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg>
                         </button>
                     </td>
                 </tr>`
@@ -64,7 +69,7 @@ function displaySellView() {
             <form id="select-game-to-sell-form">
                 <select name="game" id="own-game-selector">
                 </select>
-                <button type="submit" id="create-listing-button" disabled>
+                <button type="submit" id="create-listing-button" class="btn btn-primary" disabled>
                     Create listing
                 </button>
             </form>
@@ -101,8 +106,11 @@ function displaySellView() {
                         data-msrp="${game.msrp}">${game.price}</td>
                     <td class="list-row-comment">${game.comment}</td>
                     <td>
-                        <button class="select-edit-listing" data-game-id="${game.key}">
-                            Edit
+                        <button type="button" class="btn select-edit-listing" data-game-id=${response.key}>
+                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg>
                         </button>
                     </td>
                 </tr>`
@@ -159,8 +167,11 @@ function createListing(data) {
                         data-msrp=${response.msrp}>${response.price}</td>
                     <td class="list-row-comment">${response.comment}</td>
                     <td>
-                        <button class="select-edit-listing" data-game-id=${response.key}>
-                            Edit
+                        <button type="button" class="btn select-edit-listing" data-game-id=${response.key}>
+                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg>
                         </button>
                     </td>
                 </tr>`
@@ -232,9 +243,12 @@ $('#wishlist-button').on('click', () => {
                     <td>${players}</td>
                     <td>${playtime}</td>
                     <td>
-                        <button class="remove from-wishlist" 
+                        <button type="button" class="btn remove from-wishlist" 
                                 data-game-id=${game.key}>
-                            Remove
+                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg>
                         </button>
                     </td>
                 </tr>`
@@ -248,7 +262,8 @@ $('#wishlist-button').on('click', () => {
 // the parent element and move the button selector to second parameter of .on()
 // method.
 $('#games-table').on('click', 'button.remove', (event) => {
-    const removeButton = $(event.target);
+    console.log(event.target)
+    const removeButton = $(event.target).closest('button');
     const removeButtonId = removeButton.attr('data-game-id');
     if (removeButton.hasClass('from-own')) {
         $.post('/api/remove-game', {'user_game_id': removeButtonId,
@@ -339,7 +354,7 @@ $('#above-games-table').on('submit', '#select-game-to-sell-form', (event) => {
     const gameImageURL = gameSelector.children(':selected').attr('data-img');
     const gameName = gameSelector.children(':selected').text();
     const gameMSRP = gameSelector.children(':selected').attr('data-msrp');
-    const buttonClass = 'create-listing'
+    const buttonClass = 'btn btn-primary create-listing'
     const buttonText = 'Submit'
     createListingForm(gameImageURL, gameId, gameName, gameMSRP, 
                       buttonClass, buttonText);
@@ -349,13 +364,13 @@ $('#above-games-table').on('submit', '#select-game-to-sell-form', (event) => {
 // When user clicks button to edit listing, open modal with edit listing form
 gamesTable.on('click', 'button.select-edit-listing', (event) => {
     event.preventDefault();
-    const editListingButton = $(event.target);
+    const editListingButton = $(event.target).closest('button');
     const gameId = editListingButton.attr('data-game-id');
     const gameImageURL = editListingButton.parent().siblings(
                          '.list-row-img').children('img').attr('src');
     const gameName = editListingButton.parent().siblings('.list-row-name').html();
     const msrp = editListingButton.parent().siblings('.list-row-price').attr('data-msrp');
-    const buttonClass = 'edit-listing'
+    const buttonClass = 'btn btn-primary edit-listing'
     const buttonText = 'Save'
     createListingForm(gameImageURL, gameId, gameName, msrp, 
                       buttonClass, buttonText);

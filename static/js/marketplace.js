@@ -16,7 +16,13 @@ function displayListings(listings) {
                 <td>$${game.price}</td>
                 <td class="seller-username" 
                     data-username=${game.username}>${game.username}</td>
-                <td><button class="email-seller">Email</button></td>
+                <td>
+                    <button type="button" class="btn email-seller">
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-envelope" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                        </svg>
+                    </button>
+                </td>
             </tr>`
         );
     };
@@ -71,8 +77,8 @@ viewOption.on('change', (event) => {
 // Event handler for Email contact button
 listingsTable.on('click', '.email-seller', (event) => {
     const listing = $(event.target);
-    const game = listing.parent().siblings('.game-name').html();
-    const seller = listing.parent().siblings('.seller-username').html();
+    const game = listing.closest('td').siblings('.game-name').html();
+    const seller = listing.closest('td').siblings('.seller-username').html();
     $.get('/api/user/email.json', {'username': seller}, (response) => {
         document.location = `mailto:${response}?subject=${game}`;
     })
@@ -101,12 +107,21 @@ listingsTable.on('click', '.game-name', (event) => {
         }
         $('#list-email').html(`
             <a href="mailto:${response.email}?subject=${response.game_name}">
-                <button>Email seller</button>
+                <button type="button" class="btn btn-outline-dark">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                    </svg>
+                    Email seller
+                </button>
             </a>`)
         if (response.other_games) {
             $('#list-other-games').html(
-                `<button class="view-other-games" data-username=${
-                    response.username}>View all listings from user</button>`);
+                `<button type="button" class="btn btn-outline-dark view-other-games" data-username=${response.username}>
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-lines-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                    View seller's listings
+                </button>`);
         };
         if (response.comment) {
             $('#list-comment').html(`Comment: ${response.comment}`);
