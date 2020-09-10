@@ -4,16 +4,26 @@ const gamesTable = $('#games-table');
 
 function displayOwnView() {
     $('#above-games-table').html(
-        '<a href="/games">Search for games to add</a>'
+        `<a href="/games">
+            <svg width=".75em" height=".75em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+              <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg> Search for games to add
+        </a>`
     );
 
     gamesTable.html(
-            `<th>Sell</th>
-             <th>Image</th>
-             <th>Name</th>
-             <th>Players</th>
-             <th>Playtime</th>
-             <th>Remove</th>`
+            `<thead class="thead-dark">
+                <tr>
+                    <th scope="col" class="text-center">Sell</th>
+                    <th scope="col" class="text-center">Image</th>
+                    <th scope="col" class="text-center">Name</th>
+                    <th scope="col" class="text-center">Players</th>
+                    <th scope="col" class="text-center">Playtime</th>
+                    <th scope="col" class="text-center">Remove</th>
+                </tr>
+            </thead>
+            <tbody>`
         );
 
     $.get('/api/user/own-games.json', (response) => {
@@ -42,12 +52,12 @@ function displayOwnView() {
             };
             gamesTable.append(
                 `<tr data-usergame-id=${game.key}>
-                    <td>${selling}</td>
-                    <td><img src=${game.image_url} height="50" /></td>
-                    <td class="game-name">${game.name}</td>
-                    <td>${players}</td>
-                    <td>${playtime}</td>
-                    <td>
+                    <td class="align-middle text-center">${selling}</td>
+                    <td class="align-middle d-flex justify-content-center"><img src=${game.image_url} height="50" /></td>
+                    <td class="game-name align-middle text-center">${game.name}</td>
+                    <td class="align-middle text-center">${players}</td>
+                    <td class="align-middle text-center">${playtime}</td>
+                    <td class="align-middle text-center">
                         <button type="button" class="btn remove from-own" 
                                 data-game-id=${game.key}>
                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -60,22 +70,18 @@ function displayOwnView() {
             );
         };
     });
+    gamesTable.append(`</tbody>`);
 }
 
 
 function displaySellView() {
     $('#above-games-table').html(
         `<div>
-            <form id="select-game-to-sell-form">
-                <div class="form-row">
-                    <div class="col-3">
-                        <select name="game" class="custom-select" id="own-game-selector">
-                        </select>
-                    </div>
-                    <button type="submit" id="create-listing-button" class="btn btn-primary" disabled>
-                        Create listing
-                    </button>
-                </div>
+            <form id="select-game-to-sell-form" class="form-inline justify-content-center">
+                <select name="game" class="custom-select col-4 mr-2" id="own-game-selector">
+                </select>
+                <button type="submit" id="create-listing-button" class="btn btn-primary" disabled>
+                    Create listing
             </form>
         </div>`
     );
@@ -90,28 +96,33 @@ function displaySellView() {
         };
     });
     gamesTable.html(
-        `<th>Image</th>
-         <th>Name</th>
-         <th>Condition</th>
-         <th>Price</th>
-         <th>Listing Comment</th>
-         <th>Edit</th>`
+        `<thead class="thead-dark">
+            <tr>
+                <th scope="col" class="text-center">Image</th>
+                <th scope="col" class="text-center">Name</th>
+                <th scope="col" class="text-center">Condition</th>
+                <th scope="col" class="text-center">Price</th>
+                <th scope="col" class="text-center">Listing Comment</th>
+                <th scope="col" class="text-center">Edit</th>
+            </tr>
+        </thead>
+        <tbody>`
     );
     $.get('/api/user/listed-games.json', (response) => {
         for (const game of response) {
             gamesTable.append(
                 `<tr id="list-row-${game.key}">
-                    <td class="list-row-img" width="20%">
+                    <td class="list-row-img align-middle d-flex justify-content-center" width="20%">
                         <img src="${game.image_url}" height="50"/>
                     </td>
-                    <td class="list-row-name">${game.name}</td>
-                    <td class="list-row-condition">${game.condition}</td>
-                    <td class="list-row-price" 
+                    <td class="list-row-name align-middle text-center">${game.name}</td>
+                    <td class="list-row-condition align-middle text-center">${game.condition}</td>
+                    <td class="list-row-price align-middle text-center" 
                         data-msrp="${game.msrp}">${game.price}</td>
-                    <td class="list-row-comment">${game.comment}</td>
-                    <td>
+                    <td class="list-row-comment align-middle text-center">${game.comment}</td>
+                    <td class="align-middle text-center">
                         <button type="button" class="btn select-edit-listing" data-game-id=${game.key}>
-                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" xmlns="http://www.w3.org/2000/svg">
                               <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                               <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                             </svg>
@@ -121,6 +132,7 @@ function displaySellView() {
             );
         };
     });
+    gamesTable.append(`</tbody>`);
 }
 
 function createListingForm(imgURL, gId, gName, msrp, bClass, bText) {
@@ -161,24 +173,26 @@ function tearDownListingForm() {
 function createListing(data) {
     $.post("/api/list-game", data, (response) => {
         gamesTable.append(
-                `<tr id="list-row-${response.key}">
-                    <td class="list-row-img" width="20%">
-                        <img src=${response.image_url} height="50"/>
-                    </td>
-                    <td class="list-row-name">${response.name}</td>
-                    <td class="list-row-condition">${response.condition}</td>
-                    <td class="list-row-price" 
-                        data-msrp="${response.msrp}"">${response.price}</td>
-                    <td class="list-row-comment">${response.comment}</td>
-                    <td>
-                        <button type="button" class="btn select-edit-listing" data-game-id="${response.key}">
-                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                            </svg>
-                        </button>
-                    </td>
-                </tr>`
+                `<tbody>
+                    <tr id="list-row-${response.key}">
+                        <td class="list-row-img align-middle d-flex justify-content-center" width="20%">
+                            <img src=${response.image_url} height="50"/>
+                        </td>
+                        <td class="list-row-name align-middle text-center">${response.name}</td>
+                        <td class="list-row-condition align-middle text-center">${response.condition}</td>
+                        <td class="list-row-price align-middle text-center" 
+                            data-msrp="${response.msrp}"">${response.price}</td>
+                        <td class="list-row-comment align-middle text-center">${response.comment}</td>
+                        <td class="align-middle text-center">
+                            <button type="button" class="btn select-edit-listing" data-game-id="${response.key}">
+                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>`
         );
         $('#own-game-selector').children(':selected').remove();
         $('#own-game-selector option:first').prop('selected', true);
@@ -214,14 +228,24 @@ $('#sell-button').on('click', () => {
 // Show the user's wishlist upon clicking on Wishlist button
 $('#wishlist-button').on('click', () => {
     $('#above-games-table').html(
-        '<a href="/games">Search for games to add</a>'
+        `<a href="/games">
+            <svg width=".75em" height=".75em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+              <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg> Search for games to add
+        </a>`
     );
     gamesTable.html(
-        `<th>Image</th>
-         <th>Name</th>
-         <th>Players</th>
-         <th>Playtime</th>
-         <th>Remove</th>`
+        `<thead class="thead-dark">
+            <tr>
+                <th scope="col" class="text-center">Image</th>
+                <th scope="col" class="text-center">Name</th>
+                <th scope="col" class="text-center">Players</th>
+                <th scope="col" class="text-center">Playtime</th>
+                <th scope="col" class="text-center">Remove</th>
+            </tr>
+        </thead>
+        <tbody>`
     )
     $.get('/api/user/wanted-games.json', (response) => {
         for (const game of response) {
@@ -242,11 +266,11 @@ $('#wishlist-button').on('click', () => {
             };
             gamesTable.append(
                 `<tr>
-                    <td><img src=${game.image_url} height="50" /></td>
-                    <td>${game.name}</td>
-                    <td>${players}</td>
-                    <td>${playtime}</td>
-                    <td>
+                    <td class="align-middle d-flex justify-content-center"><img src=${game.image_url} height="50" /></td>
+                    <td class="align-middle text-center">${game.name}</td>
+                    <td class="align-middle text-center">${players}</td>
+                    <td class="align-middle text-center">${playtime}</td>
+                    <td class="align-middle text-center">
                         <button type="button" class="btn remove from-wishlist" 
                                 data-game-id=${game.key}>
                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -259,6 +283,7 @@ $('#wishlist-button').on('click', () => {
             );
         };
     });
+    gamesTable.append(`</tbody>`);
 });
 
 // An example of event delegation. If we selected the buttons, which are
@@ -352,7 +377,7 @@ $('#above-games-table').on('change', '#own-game-selector', (event) => {
 $('#above-games-table').on('submit', '#select-game-to-sell-form', (event) => {
     event.preventDefault();
     const createListingButton = $(event.target).children('#create-listing-button');
-    const gameSelector = createListingButton.siblings().children('#own-game-selector');
+    const gameSelector = createListingButton.siblings('#own-game-selector');
     const gameId = gameSelector.val();
     const gameImageURL = gameSelector.children(':selected').attr('data-img');
     const gameName = gameSelector.children(':selected').text();

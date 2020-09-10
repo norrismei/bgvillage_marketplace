@@ -2,6 +2,7 @@
 
 // Add rows of games retrieved from API underneath our table header
 function addGameRows(games) {
+    $('.loader').hide();
     for (const game of games) {
         let players = [];
         if (game.min_players) {
@@ -13,10 +14,10 @@ function addGameRows(games) {
         };
         $('#games-results').append(
             `<tr class="game-row">
-                <td>
+                <td class="align-middle">
                     <div class="dropdown">
-                        <button type="button" class="btn btn-outline-dark btn-block text-nowrap dropdown-button" 
-                                data-atlas-id="${game.key}">
+                        <button type="button" class="btn btn-outline-primary btn-block text-nowrap dropdown-button" 
+                                data-toggle="dropdown" data-atlas-id="${game.key}">
                             <svg width=".75em" height=".75em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                               <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                               <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
@@ -29,17 +30,17 @@ function addGameRows(games) {
                         </div>
                     </div>
                 </td>
-                <td><img src=${game.image_url} height="50" /></td>
-                <td>${game.name}</td>
-                <td>${players}</td>
-                <td>${game.publisher}</td>
+                <td class="align-middle d-flex justify-content-center"><img src=${game.image_url} height="50" /></td>
+                <td class="align-middle text-center">${game.name}</td>
+                <td class="align-middle text-center">${players}</td>
+                <td class="align-middle text-center">${game.publisher}</td>
             </tr>`
         );
     };
   };
 
-function handleAdd(addOption, addButton) {
-    addOption.parents('.add-dropdown-content').toggleClass('show');
+function handleAdd(addButton) {
+    $('.add-dropdown-content.show').toggleClass('show');
     addButton.html(
         `<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
@@ -65,11 +66,15 @@ $.get('/api/games/search.json', {"search_terms": "%"}, (response) => {
 // Refreshing of displayed results upon submitting a search for a game
 $('#games-search-form').submit((event) => {
     event.preventDefault();
-    const searchTerms = $('#game-search-terms').val();
+    $('.game-row').remove();
+    $('.loader').show();
+    let searchTerms = $('#game-search-terms').val();
+    if (searchTerms === "") {
+        searchTerms = "%"
+    };
     $.get('/api/games/search.json', {"search_terms": searchTerms}, (response) => {
-        $('.game-row').remove();
         addGameRows(response);
-    })
+    });
 })
 
 // An example of event delegation. If we selected the buttons, which are
@@ -78,9 +83,8 @@ $('#games-search-form').submit((event) => {
 // method.
 
 // Show drop-down menu when clicking on Add Game
-$('#games-results').on('click', 'button', (event) => {
-    const addButton = $(event.target);
-    addButton.next("div").toggleClass("show");
+$('#games-results').on('click', '.dropdown-button', (event) => {
+    $(event.target).find('.add-dropdown-content').toggleClass('show');
 })
 
 // Handles the event, depending on which option user clicks
@@ -96,14 +100,14 @@ $('#games-results').on('click', '.add-option', (event) => {
         $.post('/api/add-game', {'atlas_id': addAtlasId,
                                  'name': addName, 
                                  'add_type': 'own'}, (res) => {
-            handleAdd(addOption, addButton);
+            handleAdd(addButton);
         });
     };
     if (addOption.hasClass('add-to-wishlist')) {
         $.post('/api/add-game', {'atlas_id': addAtlasId, 
                                  'name': addName,
                                  'add_type': 'wishlist'}, (res) => {
-            handleAdd(addOption, addButton);
+            handleAdd(addButton);
         });
     };
 })

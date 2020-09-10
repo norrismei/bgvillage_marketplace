@@ -1,8 +1,64 @@
-.game-name {
-    text-decoration: underline;
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #1d3234;
 }
 
-.dropdown {
+h1, h2 {
+    font-family: 'Grandstander', cursive;
+    font-weight: 600;
+    font-size: 2.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+input {
+    border-radius: 15px;
+}
+
+a {
+    color: #E04700;
+}
+
+a:hover {
+    color: #FF7433;
+    text-decoration: none;
+}
+
+.navbar-brand {
+    font-family: 'Grandstander', cursive;
+    font-weight: 800;
+    font-size: 2.25rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+.navbar-light .navbar-brand {
+    color: #1D3234;
+}
+
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: #E04700;
+    font-weight: 700;
+}
+
+.table {
+    width: 60%;
+    margin: auto;
+}
+
+.game-name {
+    color: #E04700;
+}
+
+.game-name:hover {
+    cursor: pointer;
+    color: #FF7433;
+}
+
+/*.dropdown {
     position: relative;
     display: inline-block;
 }
@@ -16,7 +72,7 @@
 .add-dropdown-content div:hover {
     background-color: #ddd;
 }
-
+*/
 
 .show {
     display: block;
@@ -26,11 +82,146 @@
     display: none;
 }
 
+.add-dropdown-content:hover {
+    cursor: pointer;
+}
+
 .nav-link {
     font-size: 1.25rem;
 }
 
+.house-svg {
+    height: 1.5em;
+    width: 2.0em;
+}
+
 .meeple-icon {
-    height: 1.5em; 
-    width: 1.5em;
+    width: 2em;
+    fill: #1D3234;
+}
+
+.dice-svg, .coins-svg {
+    height: 2em; 
+    width: 2em;
+}
+
+.bi-pencil-square {
+    fill: #E04700;
+}
+
+.bi-pencil-square:hover {
+    fill: #FF7433;
+}
+
+.navbar {
+    background-color: #FCAB10!important;
+}
+
+.btn-primary {
+    background-color: #E04700;
+    border-color: #E04700;
+    border-radius: 15px;
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: #E04700;
+    border-color: #E04700;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #FF7433;
+    border-color: #FF7433;
+}
+
+.btn-outline-primary {
+    color: #E04700;
+    border-color: #E04700;
+}
+
+.btn-outline-primary:hover {
+    background-color: #E04700;
+    border-color: #E04700;
+}
+
+.btn-light {
+    color: #212529;
+    background-color: #D3D5D9;
+    border-color: #D3D5D9;
+    border-top-color: rgb(211, 213, 217);
+    border-right-color: rgb(211, 213, 217);
+    border-bottom-color: rgb(211, 213, 217);
+    border-left-color: rgb(211, 213, 217);
+}
+
+.btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active {
+    color: #fff;
+    background-color: #E04700;
+    border-color: #E04700;
+}
+
+.show>.btn-light.dropdown-toggle {
+    color: #fff;
+    background-color: #FF7433;
+    border-color: #FF7433;
+}
+
+.btn-light:hover {
+    color: #fff;
+    background-color: #E04700;
+    border-color: #E04700;
+}
+
+#games-search, #listings-search {
+    margin-bottom: 25px;
+}
+
+#view-selector-container {
+    width: 60%;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+#home-toggle-container {
+    width: 60%;
+    margin: auto;
+    text-align: center;
+}
+
+#above-games-table {
+    width: 60%;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+div#rec-criteria {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #E04700;
+}
+
+.btn.disabled, .btn:disabled {
+    opacity: .50;
+}
+
+.loader {
+  border: 12px solid #D3D5D9; 
+  border-top: 12px solid #E04700; 
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 2s linear infinite;
+  margin: auto;
+  margin-top: 25px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
