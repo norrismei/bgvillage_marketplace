@@ -139,7 +139,7 @@ function createListingForm(imgURL, gId, gName, msrp, bClass, bText) {
     $('#user-list-img').html(`<img src=${imgURL} height="150" />`);
     $('#user-list-game-name').html(`<h2 key=${gId}>${gName}</h2>`);
     if (msrp) {
-        $('#user-list-msrp').html(`MSRP: ${msrp}`);
+        $('#user-list-msrp').html(`<span class="list-label">MSRP:</span> ${msrp}`);
     };
     $('#user-list-button').addClass(`${bClass}`);
     $('#user-list-button').html(`${bText}`);

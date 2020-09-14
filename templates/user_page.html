@@ -122,11 +122,13 @@
           <span class="close">&times;</span>
         </button>
         <form id="listing-form" action="/api/create-listing">
-          <p class="list-details" id="user-list-img"></p>
+          <div class="row d-flex justify-content-center">
+            <p class="list-details" id="user-list-img"></p>
+          </div>
           <p class="list-details" id="user-list-game-name"></p>
           <p class="list-details" id="user-list-msrp"></p>
           <p class="list-details" id="user-list-condition">
-            <select name="condition" id="listing-condition" required>
+            <select name="condition" class="form-control col-5" id="listing-condition" required>
               <option value="" disabled selected>Game Condition</option>
               <option value="New">New</option>
               <option value="Like New">Like New</option>
@@ -140,11 +142,12 @@
                    name="price" 
                    id="listing-price"
                    placeholder="Enter Price"
+                   class="form-control col-4"
                    required>
             </input>
           </p>
           <p class="list-details" id="user-list-comment">
-            <textarea name="comment" id="listing-comment" form="#listing-form" placeholder="Optional comment"></textarea>
+            <textarea name="comment" class="form-control" id="listing-comment" form="#listing-form" placeholder="Optional comment"></textarea>
           </p>
           <p class="list-details">
             <button type="submit" id="user-list-button"></button>
