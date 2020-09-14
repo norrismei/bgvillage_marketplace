@@ -28,7 +28,7 @@ def format_playtime(game):
 
     playtime = []
     if min_playtime:
-        playtime = min_playtime
+        playtime = f"{min_playtime} mins"
         if max_playtime and (max_playtime != min_playtime):
             playtime = f"{min_playtime}-{max_playtime} mins"
         return playtime

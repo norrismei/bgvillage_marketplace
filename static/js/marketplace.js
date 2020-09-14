@@ -100,10 +100,10 @@ listingsTable.on('click', '.game-name', (event) => {
     $.get('/api/listing/details.json', data, (response) => {
         $('#list-img').html(`<img src=${response.image_url} height="150" />`);
         $('#list-game-name').html(response.game_name);
-        $('#list-condition').html(`Condition: ${response.condition}`);
-        $('#list-price').html(`Price: ${response.price}`);
+        $('#list-condition').html(`<span class="list-label">Condition:</span> ${response.condition}`);
+        $('#list-price').html(`<span class="list-label">Price:</span> ${response.price}`);
         if (response.msrp) {
-            $('#list-msrp').html(`MSRP: ${response.msrp}`);
+            $('#list-msrp').html(`<span class="list-label">MSRP:</span> ${response.msrp}`);
         }
         $('#list-email').html(`
             <a href="mailto:${response.email}?subject=${response.game_name}">
@@ -124,34 +124,34 @@ listingsTable.on('click', '.game-name', (event) => {
                 </button>`);
         };
         if (response.comment) {
-            $('#list-comment').html(`Comment: ${response.comment}`);
+            $('#list-comment').html(`<span class="list-label">Comment:</span> ${response.comment}`);
         };
         if (response.min_age) {
-            $('#list-min-age').html(`Min age: ${response.min_age}`);
+            $('#list-min-age').html(`<span class="list-label">Min age:</span> ${response.min_age}`);
         };
         if (response.players) {
-            $('#list-players').html(`Players: ${response.players}`);
+            $('#list-players').html(`<span class="list-label">Players:</span> ${response.players}`);
         };
         if (response.playtime) {
-            $('#list-playtime').html(`Playtime: ${response.playtime}`);
+            $('#list-playtime').html(`<span class="list-label">Playtime:</span> ${response.playtime}`);
         };
         if (response.publisher) {
-            $('#list-publisher').html(`Publisher: ${response.publisher}`);
+            $('#list-publisher').html(`<span class="list-label">Publisher:</span> ${response.publisher}`);
         };
         if (response.designers) {
-            $('#list-designers').html(`Designers: ${response.designers}`);
+            $('#list-designers').html(`<span class="list-label">Designers:</span> ${response.designers}`);
         };
         if (response.publish_year) {
-            $('#list-year').html(`Year Published: ${response.publish_year}`);
+            $('#list-year').html(`<span class="list-label">Year Published:</span> ${response.publish_year}`);
         };    
-        // if (response.game_description) {
-        //     $('#list-description').html(response.game_description);
-        // }
+        if (response.game_description) {
+            $('#list-description').html(`<span class="list-label">Description:</span><br>${response.game_description}`);
+        }
         if (response.mechanics) {
-            $('#list-mechanics').html(`Mechanics: ${response.mechanics}`);
+            $('#list-mechanics').html(`<span class="list-label">Mechanics:</span> ${response.mechanics}`);
         };
         if (response.categories) {
-            $('#list-categories').html(`Categories: ${response.categories}`);
+            $('#list-categories').html(`<span class="list-label">Categories:</span> ${response.categories}`);
         };
         modal.modal({backdrop: true});
     })
