@@ -20,7 +20,9 @@ def analyze_games(games):
     mech_counts, cat_counts = count_mechs_categories(games)
 
     top_mechs = get_top_three(mech_counts)
+    print(top_mechs)
     top_cats = get_top_three(cat_counts)
+    print(top_cats)
 
     return top_mechs, top_cats
 
@@ -83,20 +85,15 @@ def find_game_matches(games, mechanics, categories):
     rec_ids = set([])
     criteria = set([])
 
-    print(f"Categories: {categories}")
-
     for game in games:
         for mechanic in game.mechanics:
             if mechanic.name in mechanics:
                 rec_ids.add(game.id)
                 criteria.add(mechanic.name)
-                print(f"added mech: {mechanic.name} criteria {criteria}")
         for category in game.categories:
-            print(category.name)
             if category.name in categories:
                 rec_ids.add(game.id)
                 criteria.add(category.name)
-                print(f"added category: {category.name} criteria {criteria}")
     return rec_ids, list(criteria)
 
 
