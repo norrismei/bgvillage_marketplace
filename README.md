@@ -43,4 +43,9 @@ Users can choose from a dropdown which of their owned games to list for sale. A 
 #### Find Wishlist Matches and Recommended Games
 In the Marketplace, user can see all games being sold and filter to see only ones matching their wishlist or listings for recommended games. To recommend games, the app's algorithm analyzes the games the user owns or wishes to own, finds the top three mechanics and categories for a total of 6 traits, and finds matches in the marketplace that have at least one of these traits, not including any games the user already owns or wishes to own. The matched traits are shown along with the results. 
 
+![alt text](https://github.com/norrismei/bgvillage_marketplace/blob/master/static/img/marketplace_modal.gif "Viewing listing details")
+
+#### View Listing Details
+To learn more about a game listing, user can click on the game name. A modal appears with the listing comment, if any, along with standard game details. If the seller has any other games listed in the Marketplace, a button will appear for the user to filter all the marketplace listings by that seller. If user is interested in contacting the seller, they can click on the button to open up a new email in their default email client, with the seller email address in the TO field and the game name in the email subject prepopulated.
+
 ## <a name="future"></a>Future Development
