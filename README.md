@@ -28,4 +28,9 @@ When I first learned Python, I discovered coding was not unlike learning the rul
 #### Board Game Shelf
 In Board Game Village, each user has a Shelf to keep track of games they own, games for sale, and games they wish to buy. Using Javascript, I added event handlers that listen for a click on the buttons. They make an AJAX call to a server route, which is set up using Flask as the web framework and written in Python. The route makes a query to my database using SQLAlchemy ORM, and returns the data in JSON. The result is the page can quickly update the parts that have changed without reloading the whole page.
 
+![alt text](https://github.com/norrismei/bgvillage_marketplace/blob/master/static/img/add_game.gif "Adding game to Wishlist")
+
+#### Add Games
+To add games to the Board Game Shelf, users can search for a game by name. A call is made to a server route that makes a request to the Board Game Atlas API. It can take a few moments to get the response, so I included a loader icon. When I decide to add agame, another request is made to the server to check if the game details already exist in the database. If not, it’ll get it from the API to store. I decided to do it this way because I wanted users to be able to search all games, but I didn’t want to waste space storing data about games that no one’s doing anything.
+
 ## <a name="future"></a>Future Development
