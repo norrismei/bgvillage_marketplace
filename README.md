@@ -38,4 +38,9 @@ To add games to the Board Game Shelf, users can search for a game by name. A cal
 #### Create/Edit Listing
 Users can choose from a dropdown which of their owned games to list for sale. A modal will open for the user to input the game's condition and price and an optional comment. Once listed, a game listing can be edited or if the user changes their mind and wants to keep the game, they can remove the listing. If a game is sold, the user should remove the game from their collection, which will also remove the listing.
 
+![alt text](https://github.com/norrismei/bgvillage_marketplace/blob/master/static/img/create_listing.gif "Creating game listing")
+
+#### Find Wishlist Matches and Recommended Games
+In the Marketplace, user can see all games being sold and filter to see only ones matching their wishlist or listings for recommended games. To recommend games, the app's algorithm analyzes the games the user owns or wishes to own, finds the top three mechanics and categories for a total of 6 traits, and finds matches in the marketplace that have at least one of these traits, not including any games the user already owns or wishes to own. The matched traits are shown along with the results. 
+
 ## <a name="future"></a>Future Development
