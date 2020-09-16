@@ -8,6 +8,7 @@ When I first learned Python, I discovered coding was not unlike learning the rul
 * [Tech Stack](#tech-stack)
 * [Features](#features)
 * [Future Development](#future)
+* [Installation](#install)
 
 ## <a name="tech-stack"></a>Tech Stack
 * Python
@@ -49,3 +50,43 @@ In the Marketplace, user can see all games being sold and filter to see only one
 To learn more about a game listing, user can click on the game name. A modal appears with the listing comment, if any, along with standard game details. If the seller has any other games listed in the Marketplace, a button will appear for the user to filter all the marketplace listings by that seller. If user is interested in contacting the seller, they can click on the button to open up a new email in their default email client, with the seller email address in the TO field and the game name in the email subject prepopulated.
 
 ## <a name="future"></a>Future Development
+The next planned feature for Board Game Village is a Tavern for creating and finding board game meet-ups.
+
+## <a name="install"></a>Installation
+To run Board Game Village Marketplace on your machine:
+
+1) Install PostgreSQL
+
+Clone or fork this repo:
+```
+https://github.com/norrismei/bgvillage_marketplace
+```
+
+Create and activate a virtual environment inside your Board Game Village directory:
+```
+virtualenv env
+source env/bin/activate
+```
+
+Install the dependencies:
+```
+pip install -r requirements.txt
+```
+
+Sign up to use the [Board Game Atlas API](https://www.boardgameatlas.com/api/docs)
+
+Set up the database:
+
+```
+createdb bgvillage
+python3 model.py
+python3 seed_database.py
+```
+
+Run the app:
+
+```
+python3 server.py
+```
+
+You can now navigate to 'localhost:5000/' to access Board Game Village Marketplace.
