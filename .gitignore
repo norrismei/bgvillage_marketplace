@@ -3,3 +3,4 @@ __pycache__/
 templates/.DS_Store
 static/.DS_Store
 .DS_Store
+secrets.sh
