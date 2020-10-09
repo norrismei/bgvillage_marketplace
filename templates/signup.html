@@ -14,54 +14,74 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-4 mx-auto text-center">
+    <div class="col-6 mx-auto text-right">
       <form action="/process-sign-up" method="POST" id="signup-form">
 
-        <div id="email-field" class="form-group">
-          <label for="email-input">Email: </label>
-          <input type="email" name="email" id="email-input" value="{{ email }}" required />
-          {% if email_warning %}
-            An account already exists with that email
-          {% endif %}
+        <div id="email-field" class="form-group row">
+          <label for="email-input" class="col-sm-4 col-form-label">Email: </label>
+          <div class="col-sm-8">
+            <input type="email" name="email" id="email-input" class="col" value="{{ email }}" required />
+            {% if email_warning %}
+              An account already exists with that email
+            {% endif %}
+          </div>
         </div>
       
-        <div class="form-group">
-          <label for="first-name-input">First Name: </label>
-          <input type="text" name="fname" id="first-name-input" value="{{ fname }}" required>
+        <div class="form-group row">
+          <label for="first-name-input" class="col-sm-4 col-form-label">First Name: </label>
+          <div class="col-sm-8">
+            <input type="text" name="fname" id="first-name-input" class="col" value="{{ fname }}" required>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="last-name-input">Last Name: </label>
-          <input type="text" name="lname" id="last-name-input" value="{{ lname }}" required>
+        <div class="form-group row">
+          <label for="last-name-input" class="col-sm-4 col-form-label">Last Name: </label>
+          <div class="col-sm-8">
+            <input type="text" name="lname" id="last-name-input" class="col" value="{{ lname }}" required>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="birthdate">Birthdate: </label>
-          <input type="date" name="birthdate" id="birthdate" value="{{ birthdate }}">
+        <div class="form-group row">
+          <label for="birthdate" class="col-sm-4 col-form-label">Birthdate: </label>
+          <div class="col-sm-8">
+            <input type="date" name="birthdate" id="birthdate" class="col" value="{{ birthdate }}">
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="username-input">Username: </label>
-          <input type="text" name="username" id="username-input" value="{{ username }}" required>
-          {% if username_warning %}
-            This username is already taken
-          {% endif %}
+        <div class="form-group row">
+          <label for="username-input" class="col-sm-4 col-form-label">Username: </label>
+          <div class="col-sm-8">
+            <input type="text" name="username" id="username-input" class="col" value="{{ username }}" required>
+            {% if username_warning %}
+              This username is already taken
+            {% endif %}
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="password-input">Password: </label>
-          <input type="password" name="password" id="password-input" required>
-          {% if password_warning %}
-            Entered passwords did not match
-          {% endif %}
+        <div class="form-group row">
+          <label for="password-input" class="col-sm-4 col-form-label">Password: </label>
+          <div class="col-sm-8">
+            <input type="password" name="password" id="password-input" class="col" required>
+            {% if password_warning %}
+              Entered passwords did not match
+            {% endif %}
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="repeat-password-input">Re-type Password: </label>
-          <input type="password" name="repeat-password" id="repeat-password-input" required>
+        <div class="form-group row">
+          <label for="repeat-password-input" class="col-sm-4 col-form-label">Re-type Password: </label>
+          <div class="col-sm-8">
+            <input type="password" name="repeat-password" id="repeat-password-input" class="col" required>
+          </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <div class="form-group row">
+          <div class="col mx-auto text-center">
+            <button type="submit" class="btn btn-primary">
+              Sign Up
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   </div>

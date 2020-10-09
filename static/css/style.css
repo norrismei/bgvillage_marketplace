@@ -52,6 +52,10 @@ a:hover {
     margin-top: .5rem;
 }
 
+#signup-container {
+    margin-top: 5rem;
+}
+
 .table {
     width: 60%;
     margin: auto;
