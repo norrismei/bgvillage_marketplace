@@ -7,56 +7,65 @@
 
 {% block body %}
 
-<h1>Join the Village</h1>
-
-<form action="/process-sign-up" method="POST" id="signup-form">
-
-  <div id="email-field">
-    <label for="email-input">Email: </label>
-    <input type="email" name="email" id="email-input" value="{{ email }}" required>
-    {% if email_warning %}
-      An account already exists with that email
-    {% endif %}
+<div class="container" id="signup-container">
+  <div class="row">
+    <div class="col">
+      <h1>Join the Village</h1>
+    </div>
   </div>
- 
-  <div>
-    <label for="first-name-input">First Name: </label>
-    <input type="text" name="fname" id="first-name-input" value="{{ fname }}" required>
-  </div>
+  <div class="row">
+    <div class="col-4 mx-auto text-center">
+      <form action="/process-sign-up" method="POST" id="signup-form">
 
-  <div>
-    <label for="last-name-input">Last Name: </label>
-    <input type="text" name="lname" id="last-name-input" value="{{ lname }}" required>
-  </div>
+        <div id="email-field" class="form-group">
+          <label for="email-input">Email: </label>
+          <input type="email" name="email" id="email-input" value="{{ email }}" required />
+          {% if email_warning %}
+            An account already exists with that email
+          {% endif %}
+        </div>
+      
+        <div class="form-group">
+          <label for="first-name-input">First Name: </label>
+          <input type="text" name="fname" id="first-name-input" value="{{ fname }}" required>
+        </div>
 
-  <div>
-    <label for="birthdate">Birthdate: </label>
-    <input type="date" name="birthdate" id="birthdate" value="{{ birthdate }}">
-  </div>
+        <div class="form-group">
+          <label for="last-name-input">Last Name: </label>
+          <input type="text" name="lname" id="last-name-input" value="{{ lname }}" required>
+        </div>
 
-  <div>
-    <label for="username-input">Username: </label>
-    <input type="text" name="username" id="username-input" value="{{ username }}" required>
-    {% if username_warning %}
-      This username is already taken
-    {% endif %}
-  </div>
+        <div class="form-group">
+          <label for="birthdate">Birthdate: </label>
+          <input type="date" name="birthdate" id="birthdate" value="{{ birthdate }}">
+        </div>
 
-  <div>
-    <label for="password-input">Password: </label>
-    <input type="password" name="password" id="password-input" required>
-    {% if password_warning %}
-      Entered passwords did not match
-    {% endif %}
-  </div>
+        <div class="form-group">
+          <label for="username-input">Username: </label>
+          <input type="text" name="username" id="username-input" value="{{ username }}" required>
+          {% if username_warning %}
+            This username is already taken
+          {% endif %}
+        </div>
 
-  <div>
-    <label for="repeat-password-input">Re-type Password: </label>
-    <input type="password" name="repeat-password" id="repeat-password-input" required>
-  </div>
+        <div class="form-group">
+          <label for="password-input">Password: </label>
+          <input type="password" name="password" id="password-input" required>
+          {% if password_warning %}
+            Entered passwords did not match
+          {% endif %}
+        </div>
 
-  <button type="submit">Sign Up</button>
-</form>
+        <div class="form-group">
+          <label for="repeat-password-input">Re-type Password: </label>
+          <input type="password" name="repeat-password" id="repeat-password-input" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</div>
 
 {# Bootstrap JS and Popper.js tags #}
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
