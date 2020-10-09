@@ -44,6 +44,14 @@ a:hover {
     font-weight: 700;
 }
 
+#login-container {
+    margin-top: 10rem;
+}
+
+#login-signup-link {
+    margin-top: .5rem;
+}
+
 .table {
     width: 60%;
     margin: auto;

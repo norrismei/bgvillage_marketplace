@@ -359,4 +359,9 @@ def show_user_want_games():
 
 if __name__ == '__main__':
     model.connect_to_db(app)
+
+    # to run Flask app in dev environment
+    # app.run(host='0.0.0.0', debug=True)
+
+    # to run Flask app in prod environment
     app.run()

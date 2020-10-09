@@ -6,16 +6,46 @@
 
 
 {% block body %}
-<h1>Enter Board Game Village</h1>
+{# <h1>Enter Board Game Village</h1>
 
-<form action="/handle-login" method="POST">
+<form action="/handle-login" method="POST" class="justify-content-center">
   <div>
-    <input type="text" name="username" placeholder="enter username">
+    <input type="text" name="username" placeholder="enter username" 
+    class="col-3">
   </div>
   <div>
-    <input type="password" name="password" placeholder="enter password">
+    <input type="password" name="password" placeholder="enter password"
+    class="col-3">
   </div>
-  <button type="submit">Login</button>
+  <button type="submit" class="btn btn-primary">Login</button>
 </form>
-<a href="/sign-up">Sign Up</a>
+<a href="/sign-up">Sign Up</a> #}
+
+<div class="container" id="login-container">
+    <div class="row">
+        <div class="col">
+            <h1>Enter Board Game Village</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4 mx-auto text-center">
+            <form action="/handle-login" method="POST">
+                <div class="form-group">
+                    <input type="text" name="username" placeholder="enter username" class="col">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="enter password" class="col">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+    <div class="row" id="login-signup-link">
+        <div class="col-4 mx-auto text-center">
+            <a href="/sign-up">Sign Up</a>
+
+        </div>
+    </div>
+</div>
+
 {% endblock %}
