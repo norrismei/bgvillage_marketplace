@@ -2,10 +2,9 @@
 
 from flask import (Flask, render_template, request, flash, session,
                    redirect, jsonify)
+
 import model
-
 import crud
-
 import helper
 import login_signup_helper
 import listing_helper
@@ -20,13 +19,6 @@ app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
-
-# @app.route('/', defaults={'path': ''})
-# @app.route('/<path:path>')
-# def catch_all(path):
-#     """View application's homepage. Catches anything that isn't defined route"""
-
-#     return render_template('root.html')
 
 @app.route('/login')
 def show_login():
@@ -60,7 +52,6 @@ def handle_login():
 def show_sign_up():
     """View sign up form"""
 
-
     return render_template('signup.html', 
                             email_warning=False,
                             username_warning=False,
@@ -76,12 +67,15 @@ def show_sign_up():
 def handle_sign_up():
     """Create new user and redirects to user page"""
 
+    # Check if email already associated with an account
     email = request.form.get('email')
     email_warning = login_signup_helper.check_email(email)
 
+    # Check if username already associated with an account
     username = request.form.get('username')
     username_warning = login_signup_helper.check_username(username)
 
+    # Check if passwords match
     pw = request.form.get('password')
     repeat_pw = request.form.get('repeat-password')
     pw_warning = login_signup_helper.check_if_not_same(pw, repeat_pw)
@@ -90,6 +84,7 @@ def handle_sign_up():
     lname = request.form.get('lname')
     birthdate = request.form.get('birthdate')
 
+    # If there's an issue, display warning
     if email_warning or username_warning or pw_warning:
         return render_template('signup.html', 
                                 email_warning=email_warning,
@@ -101,6 +96,7 @@ def handle_sign_up():
                                 lname=lname,
                                 birthdate=birthdate)
 
+    # If signup successful, log in session and send to user page
     user = crud.create_user(username, fname, lname, email, pw, birthdate)
     session['current_user'] = username
     session['current_user_id'] = user.id
@@ -158,7 +154,7 @@ def show_user_page(username):
 
 @app.route('/games')
 def show_all_games():
-    """View all games from database"""
+    """View search for games to add"""
 
     if 'current_user' not in session:
         flash('Please log in first')
@@ -169,7 +165,7 @@ def show_all_games():
 
 @app.route('/marketplace')
 def show_all_listings():
-    """View all games from database"""
+    """View all game listings from database"""
 
     if 'current_user' not in session:
         flash('Please log in first')
@@ -180,7 +176,7 @@ def show_all_listings():
 
 @app.route('/api/add-game', methods=['POST'])
 def add_game_to_database():
-    """Add a UserGame"""
+    """Creates a UserGame"""
 
     user_id = session['current_user_id']
 
@@ -194,12 +190,12 @@ def add_game_to_database():
     else:
         status = atlas_api_helper.add_game_to_database(add_type, game_name, 
                                                        user_id)
-
     return status
 
 
 @app.route('/api/list-game', methods=['POST'])
 def list_game():
+    """Creates a ListedGame from UserGame"""
 
     user_game_id = request.form.get("game")
     condition = request.form.get("condition")
@@ -208,11 +204,12 @@ def list_game():
 
     listed_game = listing_helper.list_game(user_game_id, condition, price, comment)
 
-    return listed_game
+    return jsonify(listed_game)
 
 
 @app.route('/api/update-listing', methods=['POST'])
 def update_listing():
+    """Edits details of ListedGame"""
 
     user_game_id = request.form.get("game")
     condition = request.form.get("condition")
@@ -222,17 +219,18 @@ def update_listing():
     updated_game = listing_helper.update_user_listed_game(user_game_id, condition,
                                                           price, comment)
     
-    return updated_game
+    return jsonify(updated_game)
 
 
 @app.route('/api/deactivate-listing', methods=['POST'])
 def deactivate_listing():
+    """Changes active Boolean to false on ListedGames table"""
 
     user_game_id = request.form.get("user_game_id")
 
     deactivated_listing = listing_helper.deactivate_listing(user_game_id)
 
-    return deactivated_listing
+    return jsonify(deactivated_listing)
 
 
 @app.route('/api/remove-game', methods=['POST'])
@@ -265,9 +263,7 @@ def show_user_own_games():
 
     username = session['current_user']
 
-    own_games = helper.get_user_own_games(username)
-
-    return jsonify(own_games)
+    return jsonify(helper.get_user_own_games(username))
 
 
 @app.route('/api/user/own-games/details.json')
@@ -276,7 +272,7 @@ def show_user_own_game_details():
 
     user_game_id = request.args.get("user_game_id")
 
-    return helper.get_game_details(user_game_id)
+    return jsonify(helper.get_game_details(user_game_id))
 
 
 @app.route('/api/user/own-games/to-sell.json')
@@ -285,9 +281,7 @@ def show_available_to_sell():
 
     username = session['current_user']
 
-    able_to_sell = listing_helper.get_user_games_able_to_sell(username)
-
-    return jsonify(able_to_sell)
+    return jsonify(listing_helper.get_user_games_able_to_sell(username))
 
 
 @app.route('/api/user/listed-games.json')
@@ -296,9 +290,7 @@ def show_user_listed_games():
 
     username = session['current_user']
 
-    listed_games = listing_helper.get_user_listed_games(username)
-
-    return jsonify(listed_games)
+    return jsonify(listing_helper.get_user_listed_games(username))
 
 
 @app.route('/api/marketplace.json')
@@ -334,7 +326,7 @@ def get_listing_details():
     listing_id = request.args.get("listing_id") 
     username = request.args.get("username")
 
-    return market_helper.get_listing_details(listing_id, username)
+    return jsonify(market_helper.get_listing_details(listing_id, username))
 
 
 @app.route('/api/user/email.json')
@@ -343,7 +335,7 @@ def lookup_seller_email():
 
     username = request.args.get("username")
 
-    return crud.get_email_by_username(username)
+    return jsonify(crud.get_email_by_username(username))
 
 
 @app.route('/api/user/wanted-games.json')
@@ -352,9 +344,7 @@ def show_user_want_games():
 
     username = session['current_user']
 
-    wanted_games = helper.get_user_wanted_games(username)
-
-    return jsonify(wanted_games)
+    return jsonify(helper.get_user_wanted_games(username))
 
 
 if __name__ == '__main__':
@@ -363,5 +353,5 @@ if __name__ == '__main__':
     # to run Flask app in dev environment
     # app.run(host='0.0.0.0', debug=True)
 
-    # # to run Flask app in prod environment
+    # # # to run Flask app in prod environment
     app.run()
