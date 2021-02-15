@@ -60,9 +60,11 @@ def add_game_to_database(add_type, name, user_id, atlas_id=None):
         # If not in db, get object from Atlas API and save details in 
         # Game, GameMechanic, Category, GameCategory, Publisher, GamePublisher, 
         #Designer, and GameDesigner tables
-        payload = {'ids': atlas_id,
+        atlas_id_array = atlas_id + ","
+        payload = {'ids': atlas_id_array,
                    'client_id': 'ZRKfcqdFcV'}
         response = requests.get('https://api.boardgameatlas.com/api/search', params=payload)
+        print(response)
         new_game_response = response.json()
         new_game_data = new_game_response["games"][0]
 
